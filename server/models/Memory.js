@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const memorySchema = new mongoose.Schema({
   title: String,
+  imgURL: String,
   _owner: { type: Schema.Types.ObjectId, ref: 'User' },
   viewed: false,
   tranquility: false,

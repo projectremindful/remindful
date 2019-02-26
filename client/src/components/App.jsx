@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
 import logo from '../logo.svg';
+import AddMemory from './pages/AddMemory';
 
 class App extends Component {
   constructor(props) {
@@ -31,12 +32,14 @@ class App extends Component {
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
           <NavLink to="/secret">Secret</NavLink>
+          <NavLink to="/AddMemory">Add Memory</NavLink>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/secret" component={Secret} />
+          <Route path="/AddMemory" component={AddMemory} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>
