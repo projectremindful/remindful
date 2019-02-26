@@ -6,7 +6,14 @@ const userSchema = new Schema({
   email: String,
   password: String,
   profileUrl: String,
-  preferences: [],
+  tranquility: false,
+  empowerment: false,
+  amusement: false,
+  inspiration: false,
+  selfGrowth: false,
+  motivation: false,
+  nostalgia: false,
+  datePreference: {enum: ["daily", "weekly", "fortnightly"]}
 }, {
     timestamps: {
       createdAt: 'created_at',
