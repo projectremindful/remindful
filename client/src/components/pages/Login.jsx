@@ -22,7 +22,7 @@ class Login extends Component {
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!', result)
-        this.props.history.push("/allmemories") // Redirect to the home page
+        this.props.history.push("/all-memories") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err.toString() }))
   }
