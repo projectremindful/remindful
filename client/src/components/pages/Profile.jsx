@@ -15,7 +15,7 @@ export default class Profile extends Component {
       inspiration: null,
       selfGrowth: null,
       motivation: null,
-      nostalgia: null,
+      nostalgia: true,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -104,6 +104,7 @@ export default class Profile extends Component {
               type="switch" id="nostalgia" 
               name="nostalgia" 
               label="nostalgia"
+              disabled={false}
             />
             <br/>      
             <Button outline color="success" onClick={this.handleClick}>Save</Button>
