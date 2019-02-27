@@ -7,6 +7,7 @@ import Reminder from './pages/Reminder';
 import Signup from './pages/Signup';
 import api from '../api';
 import logo from '../logo.svg';
+import AddMemory from './pages/AddMemory';
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class App extends Component {
           {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
           {api.isLoggedIn() && <NavLink to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</NavLink>}
           {api.isLoggedIn() && <NavLink to="/allMemories">My memories</NavLink>}
+          {api.isLoggedIn() && <NavLink to="/AddMemory">Add Memory</NavLink>}
           
         </header>
         <Switch>
@@ -40,6 +42,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/allMemories" component={AllMemories} />
           <Route path="/reminder/:id" component={Reminder} />
+          <Route path="/AddMemory" component={AddMemory} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>
