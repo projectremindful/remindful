@@ -9,14 +9,14 @@ class AddMemory extends Component {
         this.state = {
           title: "",
           notes: "",
-          imageUrl: ""
+          imgUrl: ""
         };
         this.service = new Service();
     }
     
     handleChange = e => {  
-        const { title, value } = e.target;
-        this.setState({ [title]: value });
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     }
 
     // this method handles just the file upload
@@ -24,14 +24,14 @@ class AddMemory extends Component {
         console.log("The file to be uploaded is: ", e.target.files[0]);
 
         const uploadData = new FormData();
-        // imageUrl => this name has to be the same as in the model since we pass
+        // imgUrl => this name has to be the same as in the model since we pass
         // req.body to .create() method when creating a new memory in '/api/memories/create' POST route
-        uploadData.append("imageUrl", e.target.files[0]);
+        uploadData.append("imgUrl", e.target.files[0]);
         this.service.handleUpload(uploadData)
         .then(response => {
             // console.log('response is: ', response);
             // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
-            this.setState({ imageUrl: response.secure_url });
+            this.setState({ imgUrl: response.secure_url });
           })
           .catch(err => {
             console.log("Error while uploading the file: ", err);
@@ -44,7 +44,7 @@ class AddMemory extends Component {
         this.service.saveNewMemory(this.state)
         .then(res => {
             console.log('added: ', res);
-            // here you would redirect to some other page 
+            alert("Image successfully uploaded");
         })
         .catch(err => {
             console.log("Error while adding the memory: ", err);
@@ -62,15 +62,21 @@ class AddMemory extends Component {
                     name="title" 
                     value={ this.state.title } 
                     onChange={ e => this.handleChange(e)} />
+                    <br />
+                    <br />
                 <label>Notes</label>
                 <textarea 
                     type="text" 
                     name="notes" 
                     value={ this.state.notes } 
                     onChange={ e => this.handleChange(e)} />
+                    <br />
+                    <br />
                 <input 
                     type="file" 
-                    onChange={(e) => this.handleFileUpload(e)} /> 
+                    onChange={(e) => this.handleFileUpload(e)} />
+                    <br />
+                    <br /> 
                 <button type="submit">Save new memory</button>
             </form>
           </div>
