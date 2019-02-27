@@ -22,6 +22,13 @@ let users = [
   }
 ]
 
+let memories = [
+  {
+    title: "holiday1",
+    pictureURL: '/images/holiday.'
+  }
+]
+
 User.deleteMany()
   .then(() => {
     return User.create(users)

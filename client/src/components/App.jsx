@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Route, Link, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import Home from './pages/Home';
-import Secret from './pages/Secret';
+import AllMemories from './pages/AllMemories';
 import Login from './pages/Login';
+import Reminder from './pages/Reminder';
 import Signup from './pages/Signup';
 import api from '../api';
 import logo from '../images/logoonly.png';
+import AddMemory from './pages/AddMemory';
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +37,13 @@ class App extends Component {
             </Link>
           )} */}
           {/* <NavLink to="/secret">Secret</NavLink> */}
+          {api.isLoggedIn() && (
+            <NavLink to="/" onClick={e => this.handleLogoutClick(e)}>
+              Logout
+            </NavLink>
+          )}
+          {api.isLoggedIn() && <NavLink to="/allMemories">My memories</NavLink>}
+          {api.isLoggedIn() && <NavLink to="/AddMemory">Add Memory</NavLink>}
         </header>
         <img src={logo} className="App-logo" alt="logo" />
         <div class="spinner">
@@ -49,7 +58,9 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
-          {/* <Route path="/secret" component={Secret} /> */}
+          <Route path="/allMemories" component={AllMemories} />
+          <Route path="/reminder/:id" component={Reminder} />
+          <Route path="/AddMemory" component={AddMemory} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

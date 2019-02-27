@@ -10,5 +10,12 @@
   },
   "engines": {
     "node": "8.9.4"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cloudinary": "^1.13.2",
+    "cors": "^2.8.5",
+    "multer": "^1.4.1",
+    "multer-storage-cloudinary": "^2.2.1"
   }
 }
