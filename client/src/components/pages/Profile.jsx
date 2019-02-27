@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../../api';
-import { Button, CustomInput } from 'reactstrap'
+import { Button, CustomInput, Container, Row, Col } from 'reactstrap'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -47,12 +47,16 @@ export default class Profile extends Component {
   render() {
     return this.state.username ? 
     ( // when user information has loaded render this
-      <div>
-        <div>
-          <img style={{height:"50px"}} src={this.state.profileUrl} alt="profile pic"/>
-          <h2>{this.state.username}'s profile</h2>
+      <Container>
+        <Row>
+          <Col sm="3">
+          <img style={{height:"100px"}} src={this.state.profileUrl} alt="profile pic"/>
+          </Col>
+          <Col sm="9" align="left">
+          <h4>{this.state.username}'s profile</h4>
           <p>And the rest of his user information here</p>
-        </div>
+          </Col>
+        </Row>
         <hr/>
         <h2>Your Memory Preferences</h2>
           <div>
@@ -108,7 +112,7 @@ export default class Profile extends Component {
             <br/>      
             <Button outline color="success" onClick={this.handleClick}>Save</Button>
           </div>   
-      </div>
+      </Container>
     ) : // if user information has not yet loaded render this
     (
       <div>Loading</div>
