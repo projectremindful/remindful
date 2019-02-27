@@ -32,7 +32,6 @@ class App extends Component {
           <Route path="/add-memory" component={AddMemory} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-        
       </div>
     );
   }
