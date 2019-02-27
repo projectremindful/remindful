@@ -36,7 +36,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="Signup">
+      <div className="forms">
         <h2>Signup</h2><br />
         <Form>
           <FormGroup row>

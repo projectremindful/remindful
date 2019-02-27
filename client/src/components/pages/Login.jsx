@@ -30,7 +30,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
+      <div className="forms">
         <h2>Login</h2><br />
         <Form>
           <FormGroup row>
