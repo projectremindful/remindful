@@ -104,7 +104,6 @@ export default class Profile extends Component {
               type="switch" id="nostalgia" 
               name="nostalgia" 
               label="nostalgia"
-              disabled={false}
             />
             <br/>      
             <Button outline color="success" onClick={this.handleClick}>Save</Button>
