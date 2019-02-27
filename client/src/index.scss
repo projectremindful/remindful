@@ -1,6 +1,8 @@
 // --------------------
 // Definition of variables
 $primary: #32c3ff;
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
 
 // ----------------------------------------
 // To install Boostrap:
@@ -29,13 +31,14 @@ h2 {
   display: inline-block;
   background-color: #5776e9;
   color: white;
+
 }
 
 .info.info-danger {
   background-color: #e73f3f;
 }
 
-img {
+.App-logo {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -47,6 +50,7 @@ img {
 // Style for App component
 .App {
   text-align: center;
+
 
   .App-header {
     background-color: #14343f;
@@ -75,6 +79,7 @@ img {
 .Home {
   p {
     font-size: 1.2em;
+
   }
 }
 
