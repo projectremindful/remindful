@@ -10,6 +10,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
+
         <img src={logo} className="App-logo" alt="logo" />
         <div className="spinner">
           <div className="bounce1" />

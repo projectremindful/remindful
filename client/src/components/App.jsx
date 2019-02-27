@@ -7,7 +7,7 @@ import Reminder from './pages/Reminder';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import AddMemory from './pages/AddMemory';
-import Navbar from './Navbar';
+import NavBar from './NavBar';
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <NavBar />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />

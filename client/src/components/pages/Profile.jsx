@@ -8,6 +8,7 @@ export default class Profile extends Component {
     this.state = {
       _id: "",
       username: '',
+      email: "",
       profileUrl: "",
       tranquility: null,
       empowerment: null,
@@ -37,10 +38,8 @@ export default class Profile extends Component {
       motivation: this.state.motivation,
       nostalgia: this.state.nostalgia,
     }
-    // console.log(this.state._id, preferences)
     api.updateUserPreferences(this.state._id, preferences)
     .then(res => {
-      console.log('after the api', res)
     })
   }
 
@@ -49,12 +48,12 @@ export default class Profile extends Component {
     ( // when user information has loaded render this
       <Container>
         <Row>
-          <Col sm="3">
+          <Col xs="4">
           <img style={{height:"100px"}} src={this.state.profileUrl} alt="profile pic"/>
           </Col>
-          <Col sm="9" align="left">
-          <h4>{this.state.username}'s profile</h4>
-          <p>And the rest of his user information here</p>
+          <Col xs="8" align="left">
+          <h4>{this.state.username}</h4>
+          <p>{this.state.email}</p>
           </Col>
         </Row>
         <hr/>
@@ -125,6 +124,7 @@ export default class Profile extends Component {
       this.setState({
         _id: user._id,
         username: user.username,
+        email: user.email,
         profileUrl: user.profileUrl,
         tranquility: user.tranquility,
         empowerment: user.empowerment,

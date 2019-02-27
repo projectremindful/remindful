@@ -9,7 +9,8 @@ class Signup extends Component {
       username: "",
       name: "",
       password: "",
-      message: null
+      message: null,
+      email: ""
     }
   }
 
@@ -25,6 +26,7 @@ class Signup extends Component {
       username: this.state.username,
       name: this.state.name,
       password: this.state.password,
+      email: this.state.email
     }
     api.signup(data)
       .then(result => {
