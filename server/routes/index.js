@@ -3,12 +3,9 @@ const { isLoggedIn } = require('../middlewares')
 const router = express.Router();
 const User = require("../models/User")
 
-router.get('/allMemories', isLoggedIn, (req, res, next) => {
-  User.findById(req.user.id)
-  .then(user => {
-    res.json(user);
-  })
-  .catch(err => next(err))
+router.get('/my-profile', isLoggedIn, (req, res, next) => {
+  req.user.password = undefined
+  res.json(req.user);
 });
 
 router.get('')
