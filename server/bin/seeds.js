@@ -15,17 +15,24 @@ let users = [
   {
     username: "alice",
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
+    tranquility: false,
+    empowerment: false,
+    amusement: false,
+    inspiration: false,
+    selfGrowth: false,
+    motivation: false,
+    nostalgia: false,
   },
   {
     username: "bob",
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
-  }
-]
-
-let memories = [
-  {
-    title: "holiday1",
-    pictureURL: '/images/holiday.'
+    tranquility: false,
+    empowerment: false,
+    amusement: false,
+    inspiration: false,
+    selfGrowth: false,
+    motivation: false,
+    nostalgia: false,
   }
 ]
 

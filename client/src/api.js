@@ -52,5 +52,12 @@ export default {
       .get('/logout')
   },
 
+  getProfile() {
+    return service.get('/my-profile')
+    .then(res => {
+      return res.data
+    })
+  }
+
   
 }

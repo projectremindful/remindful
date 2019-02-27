@@ -6,7 +6,7 @@ const userSchema = new Schema(
     username: String,
     email: String,
     password: String,
-    profileUrl: String,
+    profileUrl: {type: String, default: "https://i.imgur.com/tdi3NGa.png"},
     tranquility: false,
     empowerment: false,
     amusement: false,

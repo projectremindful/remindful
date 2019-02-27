@@ -21,8 +21,8 @@ class Login extends Component {
     e.preventDefault()
     api.login(this.state.username, this.state.password)
       .then(result => {
-        console.log('SUCCESS!')
-        this.props.history.push("/") // Redirect to the home page
+        console.log('SUCCESS!', result)
+        this.props.history.push("/all-memories") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err.toString() }))
   }

@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const memorySchema = new mongoose.Schema({
+const memorySchema = new Schema({
   title: String,
-  imgURL: String,
+  imgUrl: String,
   _owner: { type: Schema.Types.ObjectId, ref: 'User' },
   viewed: false,
   tranquility: false,

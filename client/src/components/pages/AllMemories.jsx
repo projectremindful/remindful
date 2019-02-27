@@ -9,10 +9,13 @@ class AllMemories extends Component {
     }
   }
   render() {
+    
     return (
       <div>
         <p>AllMemories.jsx -  displaying AllMemories 
+          
         </p>
+
       </div>
     );
   }
