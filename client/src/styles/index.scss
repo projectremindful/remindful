@@ -177,3 +177,11 @@ h2 {
 .pt-page-ontop {
 	z-index: 999;
 }
+
+.Signup,.Login {
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+

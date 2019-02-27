@@ -37,7 +37,7 @@ class Signup extends Component {
   render() {
     return (
       <div className="Signup">
-        <h2>Signup</h2>
+        <h2>Signup</h2><br />
         <Form>
           <FormGroup row>
           <Label for="username" sm={2}>Username:</Label>
