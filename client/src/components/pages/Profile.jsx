@@ -15,7 +15,7 @@ export default class Profile extends Component {
       inspiration: null,
       selfGrowth: null,
       motivation: null,
-      nostalgia: null,
+      nostalgia: true,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
