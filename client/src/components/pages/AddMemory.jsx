@@ -82,7 +82,7 @@ class AddMemory extends Component {
                 </FormGroup>
                 <FormGroup row>
                 <Col sm={10}>
-                <Input 
+                <Input
                 type="file" 
                 onChange={(e) => this.handleFileUpload(e)} />
                 </Col>

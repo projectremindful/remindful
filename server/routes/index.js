@@ -12,6 +12,8 @@ router.get('/my-profile', isLoggedIn, (req, res, next) => {
 //update user preferences
 router.put('/user/:id', (req,res,next) => {
   User.findByIdAndUpdate(req.params.id, {
+      username: req.body.username,
+      email: req.body.email,
       tranquility: req.body.tranquility ,
       empowerment: req.body.empowerment ,
       amusement: req.body.amusement ,
@@ -47,6 +49,20 @@ router.post('/memories/create', (req, res, next) => {
       res.status(200).json(aNewMemory);
   })
   .catch( err => next(err) )
+})
+
+router.post('/profile/edit', (req, res, next) => {
+  // console.log('body: ', req.body); ==> here we can see that all
+  // the fields have the same names as the ones in the model so we can simply pass
+  // req.body to the .update() method
+  
+  User.update(req.body)
+  .then(function (success) {
+    res.json();
+  })
+  .catch(function (err) {
+      res.status(404).send(err);
+  });
 })
 
 router.get('')

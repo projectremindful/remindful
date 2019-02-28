@@ -24,6 +24,12 @@ class Service {
       .then(res => res.data)
       .catch(this.errorHandler);
   }
+
+  saveNewProfilePicture = newProfilePicture => {
+    return this.service.post('/profile/edit', newProfilePicture)
+      .then(res => res.data)
+      .catch(this.errorHandler);
+  }
 }
 
 export default Service;
