@@ -48,7 +48,6 @@ export default class Profile extends Component {
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
-    // req.body to .create() method when creating a new profile picture in '/api/memories/create' POST route
     uploadData.append("imgUrl", e.target.files[0]);
     this.service
       .handleUpload(uploadData)

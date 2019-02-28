@@ -43,13 +43,9 @@ router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
 });
 
 router.post("/memories/create", (req, res, next) => {
-  // console.log('body: ', req.body); ==> here we can see that all
-  // the fields have the same names as the ones in the model so we can simply pass
-  // req.body to the .create() method
-
   Memory.create(req.body)
-    .then(aNewMemory => {
-      // console.log('Created new memory: ', aNewMemory);
+    .then(newMemory => {
+      console.log('Created new memory: ', newMemory);
       res.status(200).json(aNewMemory);
     })
     .catch(err => next(err));
