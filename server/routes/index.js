@@ -28,7 +28,7 @@ router.put('/user/:id', (req,res,next) => {
   })
 })
 
-router.get('/allMemories/:_owner', isLoggedIn, (req, res, next) => {
+router.get('/all-memories/:_owner', isLoggedIn, (req, res, next) => {
   Memory.find()
   .then(memoriesFromDB => {
     res.status(200).json(memoriesFromDB)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import api from '../api';
 import {
   Collapse,
@@ -7,6 +7,11 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
+  NavLink,
+  // UncontrolledDropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem,
   NavItem,
 } from 'reactstrap';
 import userLogo from '../images/user.png'
@@ -35,30 +40,32 @@ export default class NavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="lg">
+        <Navbar color="light" light >
           <NavbarToggler onClick={this.toggle} />
+          
+          
           <NavItem>
             <NavbarBrand href="/"> <img src={logo} alt="home"/></NavbarBrand>
-            <NavbarBrand href="/add-memory"> <img src={addLogo} alt="addlogo"/></NavbarBrand>
-            <NavbarBrand href="/profile"> <img src={userLogo} alt="userlogo"/></NavbarBrand>
+            {api.isLoggedIn() && <NavbarBrand href="/add-memory"> <img src={addLogo} alt="addlogo"/></NavbarBrand>}
+            {api.isLoggedIn() && <NavbarBrand href="/profile"> <img src={userLogo} alt="userlogo"/></NavbarBrand>}
           </NavItem>
           
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="md-auto" navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
-                {!api.isLoggedIn() && <NavLink style={{textAlign: "left"}} to="/signup">Signup</NavLink>} 
+              {!api.isLoggedIn() && <NavLink  href="/signup">Signup</NavLink>}
               </NavItem>
               <NavItem>
-               {!api.isLoggedIn() && <NavLink to="/login" >Login</NavLink>}
+               {!api.isLoggedIn() && <NavLink href="/login" >Login</NavLink>}
               </NavItem>
               <NavItem>
-                {api.isLoggedIn() && (<NavLink to="/logout" onClick={e => this.handleLogoutClick(e)}>Logout</NavLink>)}
+                {api.isLoggedIn() && <NavLink href="/logout" onClick={e => this.handleLogoutClick(e)}>Logout</NavLink>}
               </NavItem>
               <NavItem>
-                {api.isLoggedIn() && <NavLink to="/allMemories">My memories</NavLink>}
+                {api.isLoggedIn() && <NavLink href="/all-memories">My memories</NavLink>}
               </NavItem>
               <NavItem>
-                {api.isLoggedIn() && <NavLink to="/addMemory">Add Memory</NavLink>}
+                {api.isLoggedIn() && <NavLink href="/add-memory">Add Memory</NavLink>}
               </NavItem>
             </Nav>
           </Collapse>

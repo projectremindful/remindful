@@ -27,9 +27,9 @@ class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
-          <Route path="/allMemories" component={AllMemories} />
+          <Route path="/all-memories" component={AllMemories} />
           <Route path="/reminder/:id" component={Reminder} />
-          <Route path="/addMemory" component={AddMemory} />
+          <Route path="/add-memory" component={AddMemory} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>
