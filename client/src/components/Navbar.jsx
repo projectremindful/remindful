@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { NavLink } from 'react-router-dom';
 import api from '../api';
 import {
   Collapse,
@@ -8,10 +7,6 @@ import {
   NavbarBrand,
   Nav,
   NavLink,
-  // UncontrolledDropdown,
-  // DropdownToggle,
-  // DropdownMenu,
-  // DropdownItem,
   NavItem,
 } from 'reactstrap';
 import userLogo from '../images/user.png'
@@ -27,6 +22,7 @@ export default class NavBar extends Component {
     }
     this.toggle = this.toggle.bind(this);
   }
+  
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -41,15 +37,12 @@ export default class NavBar extends Component {
     return (
       <div>
         <Navbar color="light" light >
-          <NavbarToggler onClick={this.toggle} />
-          
-          
+          <NavbarToggler onClick={this.toggle} />         
           <NavItem>
             <NavbarBrand href="/"> <img src={logo} alt="home"/></NavbarBrand>
             {api.isLoggedIn() && <NavbarBrand href="/add-memory"> <img src={addLogo} alt="addlogo"/></NavbarBrand>}
             {api.isLoggedIn() && <NavbarBrand href="/profile"> <img src={userLogo} alt="userlogo"/></NavbarBrand>}
-          </NavItem>
-          
+          </NavItem>       
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
