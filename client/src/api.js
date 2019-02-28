@@ -57,6 +57,14 @@ export default {
     .then(res => {
       return res.data
     })
+  },
+
+  updateUserPreferences(userId, preferences) {
+    return service.put(`user/${userId}`, preferences)
+    .then(res => {
+      return res.data
+      // console.log('Im in the api method',res)    
+    })
   }
 
   

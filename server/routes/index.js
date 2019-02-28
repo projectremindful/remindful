@@ -9,6 +9,24 @@ router.get('/my-profile', isLoggedIn, (req, res, next) => {
   res.json(req.user);
 });
 
+//update user preferences
+router.put('/user/:id', (req,res,next) => {
+  User.findByIdAndUpdate(req.params.id, {
+      tranquility: req.body.tranquility ,
+      empowerment: req.body.empowerment ,
+      amusement: req.body.amusement ,
+      inspiration: req.body.inspiration ,
+      selfGrowth: req.body.selfGrowth ,
+      motivation: req.body.motivation ,
+      nostalgia: req.body.nostalgia ,
+  }, {new: true})
+  .then(user => {
+    res.json({
+      message: "user preferences updated",
+      userPrefs : user
+    })
+  })
+})
 
 router.get('/allMemories/:_owner', isLoggedIn, (req, res, next) => {
   Memory.find()
