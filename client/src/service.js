@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 class Service {
   constructor() {
     let service = axios.create({
-      baseURL: 'http://localhost:5000/api',
+      baseURL: "http://localhost:5000/api"
     });
     this.service = service;
   }
@@ -14,22 +14,25 @@ class Service {
   };
 
   handleUpload = theFile => {
-    return this.service.post('/upload', theFile)
+    return this.service
+      .post("/upload", theFile)
       .then(res => res.data)
       .catch(this.errorHandler);
-  }
+  };
 
   saveNewMemory = newMemory => {
-    return this.service.post('/memories/create', newMemory)
+    return this.service
+      .post("/memories/create", newMemory)
       .then(res => res.data)
       .catch(this.errorHandler);
-  }
+  };
 
-  saveNewProfilePicture = newProfilePicture => {
-    return this.service.post('/profile/edit', newProfilePicture)
+  updateProfile = body => {
+    return this.service
+      .post("/profile/edit", body)
       .then(res => res.data)
       .catch(this.errorHandler);
-  }
+  };
 }
 
 export default Service;
