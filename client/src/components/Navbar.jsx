@@ -39,7 +39,7 @@ export default class NavBar extends Component {
           <NavbarToggler onClick={this.toggle} />
           <NavItem>
             <NavbarBrand href="/"> <img src={logo} alt="home"/></NavbarBrand>
-            <NavbarBrand href="/add-memory"> <img src={addLogo} alt="addlogo"/></NavbarBrand>
+            <NavbarBrand href="/addMemory"> <img src={addLogo} alt="addlogo"/></NavbarBrand>
             <NavbarBrand href="/profile"> <img src={userLogo} alt="userlogo"/></NavbarBrand>
           </NavItem>
           
