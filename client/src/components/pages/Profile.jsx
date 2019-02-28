@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import api from '../../api';
 import { Button, CustomInput, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 
@@ -7,12 +7,12 @@ import Service from '../../service';
 
 export default class Profile extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      _id: "",
+      _id: '',
       username: '',
-      email: "",
-      profileUrl: "",
+      email: '',
+      profileUrl: '',
       tranquility: null,
       empowerment: null,
       amusement: null,
@@ -20,16 +20,16 @@ export default class Profile extends Component {
       selfGrowth: null,
       motivation: null,
       nostalgia: true,
-    }
+    };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(key) {
     this.setState(prevState => ({
-      [key] : !prevState[key]
-    }))
+      [key]: !prevState[key]
+    }));
   }
 
   // this method handles just the file upload
@@ -75,24 +75,26 @@ export default class Profile extends Component {
       inspiration: this.state.inspiration,
       selfGrowth: this.state.selfGrowth,
       motivation: this.state.motivation,
-      nostalgia: this.state.nostalgia,
-    }
-    api.updateUserPreferences(this.state._id, preferences)
-    .then(res => {
-    })
+      nostalgia: this.state.nostalgia
+    };
+    api.updateUserPreferences(this.state._id, preferences).then(res => {});
   }
 
   render() {
     return this.state.username ? 
     ( // when user information has loaded render this
       <Container className="forms">
-        <Row>
+        <Row style={{ margin: '30px 0' }}>
           <Col xs="4">
-          <img style={{height:"100px"}} src={this.state.profileUrl} alt="profile pic"/>
+            <img
+              style={{ height: '100px' }}
+              src={this.state.profileUrl}
+              alt="profile pic"
+            />
           </Col>
           <Col xs="8" align="left">
-          <h4>{this.state.username}</h4>
-          <p>{this.state.email}</p>
+            <h4>{this.state.username}</h4>
+            <p>{this.state.email}</p>
           </Col>
         </Row>
         <hr/>
@@ -193,15 +195,14 @@ export default class Profile extends Component {
             <Button outline color="success" onClick={this.handleClick}>Save</Button>
           </div>   
       </Container>
-    ) : // if user information has not yet loaded render this
-    (
+    ) : (
+      // if user information has not yet loaded render this
       <div>Loading</div>
-    )
+    );
   }
 
   componentDidMount() {
-    api.getProfile()
-    .then(user => {
+    api.getProfile().then(user => {
       this.setState({
         _id: user._id,
         username: user.username,
@@ -213,10 +214,8 @@ export default class Profile extends Component {
         inspiration: user.inspiration,
         selfGrowth: user.selfGrowth,
         motivation: user.motivation,
-        nostalgia: user.nostalgia,
-        })
-    })
+        nostalgia: user.nostalgia
+      });
+    });
   }
-
 }
-

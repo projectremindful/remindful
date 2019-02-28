@@ -1,11 +1,11 @@
 const express = require('express');
-const { isLoggedIn } = require('../middlewares')
+const { isLoggedIn } = require('../middlewares');
 const router = express.Router();
 const Memory = require('../models/Memory');
-const User = require("../models/User")
+const User = require('../models/User');
 
 router.get('/my-profile', isLoggedIn, (req, res, next) => {
-  req.user.password = undefined
+  req.user.password = undefined;
   res.json(req.user);
 });
 
@@ -24,32 +24,32 @@ router.put('/user/:id', (req,res,next) => {
   }, {new: true})
   .then(user => {
     res.json({
-      message: "user preferences updated",
-      userPrefs : user
-    })
-  })
-})
+      message: 'user preferences updated',
+      userPrefs: user
+    });
+  });
+});
 
-router.get('/allMemories/:_owner', isLoggedIn, (req, res, next) => {
+router.get('/all-memories/:_owner', isLoggedIn, (req, res, next) => {
   Memory.find()
-  .then(memoriesFromDB => {
-    res.status(200).json(memoriesFromDB)
-  })
-  .catch(err => next(err))
-})
+    .then(memoriesFromDB => {
+      res.status(200).json(memoriesFromDB);
+    })
+    .catch(err => next(err));
+});
 
 router.post('/memories/create', (req, res, next) => {
   // console.log('body: ', req.body); ==> here we can see that all
   // the fields have the same names as the ones in the model so we can simply pass
   // req.body to the .create() method
-  
+
   Memory.create(req.body)
-  .then( aNewMemory => {
+    .then(aNewMemory => {
       // console.log('Created new memory: ', aNewMemory);
       res.status(200).json(aNewMemory);
-  })
-  .catch( err => next(err) )
-})
+    })
+    .catch(err => next(err));
+});
 
 router.post('/profile/edit', (req, res, next) => {
   // console.log('body: ', req.body); ==> here we can see that all
@@ -66,15 +66,16 @@ router.post('/profile/edit', (req, res, next) => {
 })
 
 router.get('')
+router.get('/memories', (req, res, next) => {
+  Memory.find().then(memories => {
+    res.json(memories);
+  });
+});
 
 module.exports = router;
-
-
-
-
 
 // all are prefixed with api/ (from app.js)
 // post /memory               - creates a memory
 // get /profile-details/:id   - retrieves user data
 // get /allMemories/:_owner   - retrieves all memories from a particular user
-// get /reminder/:id            - retrieves one memory 
+// get /reminder/:id            - retrieves one memory

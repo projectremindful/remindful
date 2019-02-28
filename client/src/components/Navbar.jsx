@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { Component } from 'react';
 import api from '../api';
 import {
   Collapse,
@@ -7,27 +6,29 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
+  NavLink,
+  NavItem
 } from 'reactstrap';
-import userLogo from '../images/user.png'
-import addLogo from '../images/plus-button.png'
-import logo from '../images/house-outline.png'
-
+import userLogo from '../images/user.png';
+import addLogo from '../images/plus-button.png';
+import logo from '../images/house-outline.png';
+import { NavLink as NLink } from 'react-router-dom';
 
 export default class NavBar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isOpen: false
-    }
+    };
     this.toggle = this.toggle.bind(this);
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
-  
+
   handleLogoutClick(e) {
     api.logout();
   }
@@ -35,35 +36,71 @@ export default class NavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="lg">
+        <Navbar expand="md" color="light" light>
           <NavbarToggler onClick={this.toggle} />
           <NavItem>
-            <NavbarBrand href="/"> <img src={logo} alt="home"/></NavbarBrand>
-            <NavbarBrand href="/addMemory"> <img src={addLogo} alt="addlogo"/></NavbarBrand>
-            <NavbarBrand href="/profile"> <img src={userLogo} alt="userlogo"/></NavbarBrand>
+            <NavbarBrand tag={NLink} to="/">
+              {' '}
+              <img src={logo} alt="home" />
+            </NavbarBrand>
+            {api.isLoggedIn() && (
+              <NavbarBrand tag={NLink} to="/add-memory">
+                {' '}
+                <img src={addLogo} alt="addlogo" />
+              </NavbarBrand>
+            )}
+            {api.isLoggedIn() && (
+              <NavbarBrand tag={NLink} to="/profile">
+                {' '}
+                <img src={userLogo} alt="userlogo" />
+              </NavbarBrand>
+            )}
           </NavItem>
-          
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="md-auto" navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
-                {!api.isLoggedIn() && <NavLink style={{textAlign: "left"}} to="/signup">Signup</NavLink>} 
+                {!api.isLoggedIn() && (
+                  <NavLink tag={NLink} to="/signup">
+                    Signup
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
-               {!api.isLoggedIn() && <NavLink to="/login" >Login</NavLink>}
+                {!api.isLoggedIn() && (
+                  <NavLink tag={NLink} to="/login">
+                    Login
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
-                {api.isLoggedIn() && (<NavLink to="/logout" onClick={e => this.handleLogoutClick(e)}>Logout</NavLink>)}
+                {api.isLoggedIn() && (
+                  <NavLink
+                    tag={NLink}
+                    to="/logout"
+                    onClick={e => this.handleLogoutClick(e)}
+                  >
+                    Logout
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
-                {api.isLoggedIn() && <NavLink to="/allMemories">My memories</NavLink>}
+                {api.isLoggedIn() && (
+                  <NavLink tag={NLink} to="/all-memories">
+                    My memories
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem>
-                {api.isLoggedIn() && <NavLink to="/addMemory">Add Memory</NavLink>}
+                {api.isLoggedIn() && (
+                  <NavLink tag={NLink} to="/add-memory">
+                    Add Memory
+                  </NavLink>
+                )}
               </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
       </div>
-    )
+    );
   }
 }
