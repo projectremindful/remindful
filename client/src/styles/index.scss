@@ -7,8 +7,30 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #FDF2E9;
-  background-color: #14343f;
+  color: #fdf2e9;
+  background-image: linear-gradient(to bottom, #14343f, #3a8186 100vh);
+  min-height: 100vh;
+}
+
+.App {
+  // background-image: linear-gradient(#14343f, #3a8186);
+}
+
+h2 {
+  font-family: sans-serif;
+}
+
+.info {
+  margin: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #5776e9;
+  color: white;
+}
+
+.info.info-danger {
+  background-color: #e73f3f;
 }
 
 .App-logo {
@@ -17,6 +39,23 @@ body {
   left: 50%;
   margin-top: -200px;
   margin-left: -70px;
+}
+
+// --------------------
+// Style for Home component
+.Home {
+  p {
+    font-size: 1.2em;
+  }
+}
+
+// --------------------
+// Style for Secret component
+.Secret {
+  .result {
+    font-size: 1.2em;
+    color: $primary;
+  }
 }
 
 .spinner {
@@ -70,39 +109,6 @@ body {
 }
 
 // slider transition
-
-.pt-perspective {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	perspective: 1200px;
-	transform-style: preserve-3d;
-}
-
-.pt-page {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	visibility: hidden;
-	overflow: hidden;
-	backface-visibility: hidden;
-	transform: translate3d(0, 0, 0);
-}
-
-.pt-page-current,
-.no-js .pt-page {
-	visibility: visible;
-}
-
-.no-js body {
-	overflow: auto;
-}
-
-.pt-page-ontop {
-	z-index: 999;
-}
 
 .forms {
   padding: 100px 200px 100px 80px;
