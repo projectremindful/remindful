@@ -3,22 +3,12 @@
 $primary: #32c3ff;
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
-// ----------------------------------------
-// To install Boostrap:
-// 1) Run in the client folder: $ npm i bootstrap
-// 2) Import bootstrap with the following line
-//  @import 'bootstrap/scss/bootstrap';
-// ----------------------------------------
-
-// --------------------
-// Style reusable for all components
-
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   color: #fdf2e9;
-  background-image: linear-gradient(top, #14343f, #3a8186 100vh);
+  background-image: linear-gradient(to bottom, #14343f, #3a8186 100vh);
   min-height: 100vh;
 }
 

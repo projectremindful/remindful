@@ -7,7 +7,7 @@ import Reminder from './pages/Reminder';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import AddMemory from './pages/AddMemory.jsx';
-import Navbar from './Navbar.jsx';
+import NavBar from './Navbar.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -21,15 +21,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <NavBar />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
-          <Route path="/allMemories" component={AllMemories} />
+          <Route path="/all-memories" component={AllMemories} />
           <Route path="/reminder/:id" component={Reminder} />
-          <Route path="/addMemory" component={AddMemory} />
+          <Route path="/add-memory" component={AddMemory} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

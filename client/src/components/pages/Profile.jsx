@@ -45,7 +45,7 @@ export default class Profile extends Component {
     return this.state.username ? (
       // when user information has loaded render this
       <Container>
-        <Row>
+        <Row style={{ margin: '30px 0' }}>
           <Col xs="4">
             <img
               style={{ height: '100px' }}
