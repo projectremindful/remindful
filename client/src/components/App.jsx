@@ -7,7 +7,7 @@ import Reminder from './pages/Reminder';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import AddMemory from './pages/AddMemory.jsx';
-import NavBar from './NavBar';
+import NavBar from './NavBar.jsx';
 
 class App extends Component {
   constructor(props) {
