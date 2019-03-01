@@ -36,7 +36,12 @@ export default class NavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar expand="md" color="light" light>
+        <Navbar
+          // style={{ visibility: 'hidden' }}
+          expand="md"
+          color="light"
+          light
+        >
           <NavbarToggler onClick={this.toggle} />
           <NavItem>
             <NavbarBrand tag={NLink} to="/">
@@ -86,7 +91,7 @@ export default class NavBar extends Component {
               <NavItem>
                 {api.isLoggedIn() && (
                   <NavLink tag={NLink} to="/all-memories">
-                    My memories
+                    Memory Gallery
                   </NavLink>
                 )}
               </NavItem>
