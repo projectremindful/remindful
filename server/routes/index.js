@@ -14,7 +14,7 @@ router.get('/my-profile', isLoggedIn, (req, res, next) => {
 });
 
 //update user preferences
-router.put("/user/:id", (req, res, next) => {
+router.put("/user/:id", isLoggedIn, (req, res, next) => {
   User.findByIdAndUpdate(
     req.params.id,
     {
@@ -40,23 +40,13 @@ router.put("/user/:id", (req, res, next) => {
 
 router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
   Memory.find()
+    .populate("_owner")
     .then(memoriesFromDB => {
       res.status(200).json(memoriesFromDB);
     })
     .catch(err => next(err));
 });
 
-router.post('/memories/create', (req, res, next) => {
-  // console.log('body: ', req.body); ==> here we can see that all
-  // the fields have the same names as the ones in the model so we can simply pass
-  // req.body to the .create() method
-  Memory.create(req.body)
-    .then(newMemory => {
-      console.log('Created new memory: ', newMemory);
-      res.status(200).json(aNewMemory);
-  })
-  .catch( err => next(err) )
-})
 
 //-----NOTIFICATIONS PUSH API ROUTES_____
 // api that saves subscription data for chrome to the database
@@ -99,6 +89,16 @@ router.get('/send-notification', (req, res) => {
     console.log('message sent from index.js', message )
   })
 })
+router.post("/memories/create", isLoggedIn, (req, res, next) => {
+  let _owner = req.user._id;
+  req.body._owner = _owner;
+  Memory.create(req.body)
+    .then(newMemory => {
+      console.log("Created new memory: ", newMemory, _owner);
+      res.status(200).json(newMemory);
+    })
+    .catch(err => next(err));
+});
 
 router.post("/profile/edit", isLoggedIn, (req, res, next) => {
   // console.log('body: ', req.body); ==> here we can see that all

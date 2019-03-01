@@ -10,7 +10,7 @@ export default class MemoryCard extends Component {
         }}
         onClick={this.props.onSelect}
       >
-        <h3>MemoryCard</h3>
+        <h3>Memory</h3>
         <img src={this.props.memory.imgUrl} alt="" />
         <pre>{JSON.stringify(this.props.memory, null, 2)}</pre>
       </div>
