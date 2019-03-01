@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import logo from '../../images/logoonly.png';
+import logo from '../../images/logoonly (1).png';
 
 class Home extends Component {
   constructor(props) {
@@ -9,11 +9,9 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <div className="spinner">
-          <div className="bounce1" />
-          <div className="bounce2" />
-          <div className="bounce3" />
+        <img src={logo} className="App-logo" alt="logo" />
+        <div className="content">
+          <p />
         </div>
       </div>
     );
