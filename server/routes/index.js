@@ -1,19 +1,22 @@
-const express = require('express');
-const { isLoggedIn } = require('../middlewares');
+const express = require("express");
+const { isLoggedIn } = require("../middlewares");
 const router = express.Router();
-const Memory = require('../models/Memory');
-const User = require('../models/User');
+const Memory = require("../models/Memory");
+const User = require("../models/User");
 
-router.get('/my-profile', isLoggedIn, (req, res, next) => {
+router.get("/my-profile", isLoggedIn, (req, res, next) => {
   req.user.password = undefined;
   res.json(req.user);
 });
 
 //update user preferences
-router.put('/user/:id', (req, res, next) => {
+router.put("/user/:id", (req, res, next) => {
   User.findByIdAndUpdate(
     req.params.id,
     {
+      username: req.body.username,
+      email: req.body.email,
+      profileUrl: req.body.profileUrl,
       tranquility: req.body.tranquility,
       empowerment: req.body.empowerment,
       amusement: req.body.amusement,
@@ -25,13 +28,13 @@ router.put('/user/:id', (req, res, next) => {
     { new: true }
   ).then(user => {
     res.json({
-      message: 'user preferences updated',
+      message: "user preferences updated",
       userPrefs: user
     });
   });
 });
 
-router.get('/all-memories/:_owner', isLoggedIn, (req, res, next) => {
+router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
   Memory.find()
     .then(memoriesFromDB => {
       res.status(200).json(memoriesFromDB);
@@ -39,20 +42,33 @@ router.get('/all-memories/:_owner', isLoggedIn, (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post('/memories/create', (req, res, next) => {
-  // console.log('body: ', req.body); ==> here we can see that all
-  // the fields have the same names as the ones in the model so we can simply pass
-  // req.body to the .create() method
-
+router.post("/memories/create", (req, res, next) => {
   Memory.create(req.body)
-    .then(aNewMemory => {
-      // console.log('Created new memory: ', aNewMemory);
+    .then(newMemory => {
+      console.log('Created new memory: ', newMemory);
       res.status(200).json(aNewMemory);
     })
     .catch(err => next(err));
 });
 
-router.get('/memories', (req, res, next) => {
+router.post("/profile/edit", isLoggedIn, (req, res, next) => {
+  // console.log('body: ', req.body); ==> here we can see that all
+  // the fields have the same names as the ones in the model so we can simply pass
+  // req.body to the .update() method
+
+  console.log(req.body);
+
+  User.findByIdAndUpdate(req.user._id, req.body)
+    .then(function(success) {
+      res.json();
+    })
+    .catch(function(err) {
+      res.status(404).send(err);
+    });
+});
+
+router.get("");
+router.get("/memories", (req, res, next) => {
   Memory.find().then(memories => {
     res.json(memories);
   });
