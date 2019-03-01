@@ -19,7 +19,7 @@ export default class MemoryCard extends Component {
     return (
       <div
         style={{
-          border: "2px solid black",
+          // border: "2px solid black",
           // opacity: this.props.isSelected ? 1 : 0.5,
           margin: "10px"
         }}
