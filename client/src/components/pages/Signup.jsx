@@ -14,6 +14,44 @@ class Signup extends Component {
     }
   }
 
+  //--METHODS FOR RGISTERING SERVICE WORKER AND ALLOWING NOTIFICATIONS-----
+  // checks that there is a service worker and push API, logs an error if not
+  check = () => { 
+    if (!("serviceWorker" in navigator)) {
+      throw new Error("No Service Worker support!");
+    }
+    if (!("PushManager" in window)) {
+      throw new Error("No Push API Support!");
+    }
+  };
+  
+  // registers service.js as our service worker
+  registerServiceWorker = async () => { 
+    console.log('registering service worker')
+    const swRegistration = await navigator.serviceWorker.register("service.js");
+    return swRegistration;
+  };
+  
+  // sends a pop up message asking the user to allow notifications
+  requestNotificationPermission = async () => { 
+    console.log("requesting permission to send notifications")
+    const permission = await window.Notification.requestPermission();
+    // value of permission from the user can be 'granted', 'default', 'denied'
+    if (permission !== "granted") {
+      throw new Error("Permission not granted for Notification");
+    }
+    console.log('permission status is', permission);
+  };
+  
+  // function to call the above three methods on button click by the user
+  main = async () => { 
+    console.log("main() called on button click");
+    this.check();
+    const swRegistration = await this.registerServiceWorker();
+    const permission = await this.requestNotificationPermission();
+  };
+
+  //------METHODS FOR SIGNUP------
   handleInputChange(stateFieldName, event) {
     this.setState({
       [stateFieldName]: event.target.value
@@ -28,9 +66,10 @@ class Signup extends Component {
       password: this.state.password,
       email: this.state.email
     }
+    this.main()
     api.signup(data)
       .then(result => {
-        console.log('SUCCESS!')
+        console.log('SIGNUP SUCCESS!')
         this.props.history.push("/") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err.toString() }))

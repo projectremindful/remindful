@@ -33,6 +33,7 @@ export default class NavBar extends Component {
     api.logout();
   }
 
+  
   render() {
     return (
       <div>

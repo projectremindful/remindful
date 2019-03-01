@@ -15,13 +15,13 @@ class App extends Component {
     this.state = {
       countries: []
     };
-    // api.loadUser();
   }
-
+  
   render() {
     return (
       <div className="App">
         <NavBar />
+        
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
