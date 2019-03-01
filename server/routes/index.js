@@ -5,12 +5,13 @@ const Memory = require("../models/Memory");
 const User = require("../models/User");
 
 router.get("/my-profile", isLoggedIn, (req, res, next) => {
+  console.log(req.user);
   req.user.password = undefined;
   res.json(req.user);
 });
 
 //update user preferences
-router.put("/user/:id", (req, res, next) => {
+router.put("/user/:id", isLoggedIn, (req, res, next) => {
   User.findByIdAndUpdate(
     req.params.id,
     {
@@ -36,17 +37,20 @@ router.put("/user/:id", (req, res, next) => {
 
 router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
   Memory.find()
+    .populate("_owner")
     .then(memoriesFromDB => {
       res.status(200).json(memoriesFromDB);
     })
     .catch(err => next(err));
 });
 
-router.post("/memories/create", (req, res, next) => {
+router.post("/memories/create", isLoggedIn, (req, res, next) => {
+  let _owner = req.user._id;
+  req.body._owner = _owner;
   Memory.create(req.body)
     .then(newMemory => {
-      console.log('Created new memory: ', newMemory);
-      res.status(200).json(aNewMemory);
+      console.log("Created new memory: ", newMemory, _owner);
+      res.status(200).json(newMemory);
     })
     .catch(err => next(err));
 });

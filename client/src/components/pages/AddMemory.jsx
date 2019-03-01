@@ -10,7 +10,8 @@ class AddMemory extends Component {
     this.state = {
       title: "",
       notes: "",
-      imgUrl: ""
+      imgUrl: "",
+      _owner: ""
     };
     this.service = new Service();
   }
