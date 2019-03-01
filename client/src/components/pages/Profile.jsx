@@ -1,15 +1,28 @@
-import React, { Component } from 'react';
-import api from '../../api';
-import { Button, CustomInput, Container, Row, Col } from 'reactstrap';
+import React, { Component } from "react";
+import api from "../../api";
+import {
+  Button,
+  CustomInput,
+  Container,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
+
+// import the service file since we need it to send (and get) the data to(from) server
+import Service from "../../service";
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: '',
-      username: '',
-      email: '',
-      profileUrl: '',
+      _id: "",
+      username: "",
+      email: "",
+      profileUrl: "",
       tranquility: null,
       empowerment: null,
       amusement: null,
@@ -18,18 +31,56 @@ export default class Profile extends Component {
       motivation: null,
       nostalgia: true
     };
+    this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange(key) {
-    this.setState(prevState => ({
-      [key]: !prevState[key]
-    }));
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
+  // this method handles just the file upload
+  handleFileUpload = e => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    // imgUrl => this name has to be the same as in the model since we pass
+    uploadData.append("imgUrl", e.target.files[0]);
+    this.service
+      .handleUpload(uploadData)
+      .then(response => {
+        // console.log('response is: ', response);
+        // after the console.log we can see that response carries 'secure_url' which we can use to update the state
+        this.setState({ profileUrl: response.secure_url });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
+  };
+
+  // this method submits the form
+  handleSubmit = e => {
+    e.preventDefault();
+    this.service
+      .updateProfile(this.state)
+      .then(res => {
+        console.log("added: ", res);
+        alert("Profile Picture successfully uploaded");
+      })
+      .catch(err => {
+        console.log("Error while updating Profile Picture: ", err);
+      });
+  };
+
   handleClick() {
+    console.log("clicked");
     const preferences = {
+      username: this.state.username,
+      email: this.state.email,
+      profileUrl: this.state.profileUrl,
       tranquility: this.state.tranquility,
       empowerment: this.state.empowerment,
       amusement: this.state.amusement,
@@ -44,11 +95,11 @@ export default class Profile extends Component {
   render() {
     return this.state.username ? (
       // when user information has loaded render this
-      <Container>
-        <Row style={{ margin: '30px 0' }}>
+      <Container className="forms">
+        <Row style={{ margin: "30px 0" }}>
           <Col xs="4">
             <img
-              style={{ height: '100px' }}
+              style={{ height: "100px" }}
               src={this.state.profileUrl}
               alt="profile pic"
             />
@@ -59,11 +110,64 @@ export default class Profile extends Component {
           </Col>
         </Row>
         <hr />
-        <h2>Your Memory Preferences</h2>
+        <h4 className="p-2">Edit your Details</h4>
+        <Form onSubmit={e => this.handleSubmit(e)}>
+          <FormGroup row>
+            <Label for="username" sm={2} size="sm">
+              Username
+            </Label>
+            <Col sm={10}>
+              <Input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Enter new Username"
+                value={this.state.username}
+                onChange={e => this.handleChange(e)}
+                bsSize="sm"
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="email" sm={2} size="sm">
+              Email
+            </Label>
+            <Col sm={10}>
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter new Email"
+                value={this.state.email}
+                onChange={e => this.handleChange(e)}
+                bsSize="sm"
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="profileUrl" sm={2} size="sm">
+              Upload Profile Picture
+            </Label>
+            <Col sm={10}>
+              <Input
+                type="file"
+                name="profileUrl"
+                id="file"
+                onChange={e => this.handleFileUpload(e)}
+                bsSize="sm"
+              />
+            </Col>
+          </FormGroup>
+          <Button outline color="success" onClick={this.handleClick}>
+            Submit Changes
+          </Button>
+        </Form>
+        <hr />
+        <h4 className="p-2">Your Memory Preferences</h4>
         <div>
           <CustomInput
             checked={this.state.tranquility}
-            onChange={e => this.handleChange('tranquility')}
+            onChange={e => this.handleChange("tranquility")}
             type="switch"
             id="tranquility"
             name="tranquility"
@@ -71,7 +175,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.empowerment}
-            onChange={e => this.handleChange('empowerment')}
+            onChange={e => this.handleChange("empowerment")}
             type="switch"
             id="empowerment"
             name="empowerment"
@@ -79,7 +183,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.amusement}
-            onChange={e => this.handleChange('amusement')}
+            onChange={e => this.handleChange("amusement")}
             type="switch"
             id="amusement"
             name="amusement"
@@ -87,7 +191,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.inspiration}
-            onChange={e => this.handleChange('inspiration')}
+            onChange={e => this.handleChange("inspiration")}
             type="switch"
             id="inspiration"
             name="inspiration"
@@ -95,7 +199,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.selfGrowth}
-            onChange={e => this.handleChange('selfGrowth')}
+            onChange={e => this.handleChange("selfGrowth")}
             type="switch"
             id="selfGrowth"
             name="selfGrowth"
@@ -103,7 +207,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.motivation}
-            onChange={e => this.handleChange('motivation')}
+            onChange={e => this.handleChange("motivation")}
             type="switch"
             id="motivation"
             name="motivation"
@@ -111,7 +215,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.nostalgia}
-            onChange={e => this.handleChange('nostalgia')}
+            onChange={e => this.handleChange("nostalgia")}
             type="switch"
             id="nostalgia"
             name="nostalgia"

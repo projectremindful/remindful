@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import AllMemories from './pages/AllMemories';
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 import Reminder from './pages/Reminder';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
@@ -26,6 +27,7 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
+          <Route path="/logout" component={Logout} />
           <Route path="/profile" component={Profile} />
           <Route path="/all-memories" component={AllMemories} />
           <Route path="/reminder/:id" component={Reminder} />
