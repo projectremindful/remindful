@@ -38,15 +38,6 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
   });
 });
 
-router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
-  Memory.find()
-    .populate("_owner")
-    .then(memoriesFromDB => {
-      res.status(200).json(memoriesFromDB);
-    })
-    .catch(err => next(err));
-});
-
 
 //-----NOTIFICATIONS PUSH API ROUTES_____
 // api that saves subscription data for chrome to the database
@@ -100,6 +91,16 @@ router.post("/memories/create", isLoggedIn, (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.delete("/memory/:id", isLoggedIn, (req, res, next) => {
+  Memory.findByIdAndDelete(req.params.id)
+  .then(function(success) {
+    res.json();
+  })
+  .catch(function(err) {
+    res.status(404).send(err);
+  });
+});
+
 router.post("/profile/edit", isLoggedIn, (req, res, next) => {
   // console.log('body: ', req.body); ==> here we can see that all
   // the fields have the same names as the ones in the model so we can simply pass
@@ -107,7 +108,7 @@ router.post("/profile/edit", isLoggedIn, (req, res, next) => {
 
   console.log(req.body);
 
-  User.findByIdAndUpdate(req.user._id, req.body)
+    User.findByIdAndUpdate(req.user._id, req.body)
     .then(function(success) {
       res.json();
     })
@@ -116,12 +117,24 @@ router.post("/profile/edit", isLoggedIn, (req, res, next) => {
     });
 });
 
-router.get("");
-router.get("/memories", (req, res, next) => {
-  Memory.find().then(memories => {
+router.get("/memories", isLoggedIn, (req, res, next) => {
+  Memory.find()
+  .populate("_owner")
+  .then(memories => {
     res.json(memories);
-  });
+  })
+  .catch(err => next(err));
 });
+
+// router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
+//   Memory.find()
+//     .populate("_owner")
+//     .then(memoriesFromDB => {
+//       res.status(200).json(memoriesFromDB);
+//     })
+//     .catch(err => next(err));
+// });
+
 
 module.exports = router;
 

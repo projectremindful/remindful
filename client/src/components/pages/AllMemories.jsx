@@ -19,10 +19,11 @@ class AllMemories extends Component {
   render() {
     return (
       <div>
-        <h1>All Memories</h1>
+        <h1 className="m-4">Your Memory Gallery</h1>
         <hr />
         selectedMemoryId = {this.state.selectedMemoryId}
         <hr />
+        <div className="allMemories">
         {this.state.memories.map(memory => (
           <MemoryCard
             key={memory._id}
@@ -34,6 +35,7 @@ class AllMemories extends Component {
             onSelect={() => this.selectMemoryCard(memory._id)}
           />
         ))}
+        </div>
       </div>
     );
   }

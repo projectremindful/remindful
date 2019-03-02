@@ -34,6 +34,10 @@ class Service {
       .then(res => res.data)
       .catch(this.errorHandler);
   };
+
+  delete = id => {
+    return this.service.delete("/memory/" + id);
+  };
 }
 
 export default Service;
