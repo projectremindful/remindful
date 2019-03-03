@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import React, { Component } from 'react';
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 // import the service file since we need it to send (and get) the data to(from) server
-import Service from "../../service";
+import Service from '../../service';
 
 class AddMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      notes: "",
-      imgUrl: "",
-      _owner: ""
+      title: '',
+      date: '',
+      notes: '',
+      imgUrl: '',
+      _owner: ''
     };
     this.service = new Service();
   }
@@ -23,12 +24,12 @@ class AddMemory extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log('The file to be uploaded is: ', e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
     // req.body to .create() method when creating a new memory in '/api/memories/create' POST route
-    uploadData.append("imgUrl", e.target.files[0]);
+    uploadData.append('imgUrl', e.target.files[0]);
     this.service
       .handleUpload(uploadData)
       .then(response => {
@@ -37,7 +38,7 @@ class AddMemory extends Component {
         this.setState({ imgUrl: response.secure_url });
       })
       .catch(err => {
-        console.log("Error while uploading the file: ", err);
+        console.log('Error while uploading the file: ', err);
       });
   };
 
@@ -47,11 +48,11 @@ class AddMemory extends Component {
     this.service
       .saveNewMemory(this.state)
       .then(res => {
-        console.log("added: ", res);
-        alert("Image successfully uploaded");
+        console.log('added: ', res);
+        alert('Image successfully uploaded');
       })
       .catch(err => {
-        console.log("Error while adding the memory: ", err);
+        console.log('Error while adding the memory: ', err);
       });
   };
 
@@ -71,6 +72,21 @@ class AddMemory extends Component {
                 name="title"
                 placeholder="Memory Title"
                 value={this.state.title}
+                onChange={e => this.handleChange(e)}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="title" sm={2} className="pr-4">
+              Date
+            </Label>
+            <Col sm={10}>
+              <Input
+                className="p-2"
+                type="text"
+                name="date"
+                placeholder="Ex. February 2019"
+                value={this.state.date}
                 onChange={e => this.handleChange(e)}
               />
             </Col>

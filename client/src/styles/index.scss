@@ -1,7 +1,7 @@
 // --------------------
 // Definition of variables
 $primary: #32c3ff;
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
 body {
   margin: 0;
@@ -113,7 +113,7 @@ h2 {
   align-content: center;
 }
 
-.allMemories {
+.memoryGallery {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -122,21 +122,21 @@ h2 {
 
 .logout {
   font-family: 'Open Sans Condensed', sans-serif;
-  text-align:center;
-  line-height:2em;
-  padding-top:70px;
-  letter-spacing: .5em;
+  text-align: center;
+  line-height: 2em;
+  padding-top: 70px;
+  letter-spacing: 0.5em;
   text-shadow: 0.5em 0.5em 1em #9cb8b3;
 }
 
 div.show-image {
   position: relative;
-  float:left;
-  margin:5px;
+  float: left;
+  margin: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-div.show-image:hover img{
+div.show-image:hover img {
   // opacity:0.8;
   transform: scale(1.1);
 }
@@ -144,8 +144,8 @@ div.show-image:hover input {
   display: block;
 }
 div.show-image input {
-  position:absolute;
-  display:none;
+  position: absolute;
+  display: none;
   opacity: 0.8;
 }
 
@@ -157,6 +157,6 @@ div.show-image input.delete {
   border-radius: 10px;
   font-size: 0.8em;
   padding: 2px;
-  top:0;
-  left:86%;
+  top: 0;
+  left: 86%;
 }

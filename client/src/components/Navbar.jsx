@@ -33,7 +33,6 @@ export default class NavBar extends Component {
     api.logout();
   }
 
-  
   render() {
     return (
       <div>
@@ -91,7 +90,7 @@ export default class NavBar extends Component {
               </NavItem>
               <NavItem>
                 {api.isLoggedIn() && (
-                  <NavLink tag={NLink} to="/all-memories">
+                  <NavLink tag={NLink} to="/memory-gallery">
                     Memory Gallery
                   </NavLink>
                 )}
