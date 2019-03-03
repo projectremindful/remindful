@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import MemoryCard from '../MemoryCard';
+import { Link } from 'react-router'
 // import api from '../../api';
 
 class AllMemories extends Component {
@@ -8,7 +9,7 @@ class AllMemories extends Component {
     super(props);
     this.state = {
       memories: [],
-      selectedMemoryId: null
+      selectedMemoryId: null,
     };
   }
   selectMemoryCard(memoryId) {
@@ -32,7 +33,8 @@ class AllMemories extends Component {
               this.state.selectedMemoryId === memory._id
             }
             memory={memory}
-            onSelect={() => this.selectMemoryCard(memory._id)}
+            onSelect={() => this.selectMemoryCard(memory._id)
+            }
           />
         ))}
         </div>
