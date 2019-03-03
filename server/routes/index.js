@@ -67,6 +67,7 @@ webpush.setVapidDetails(
 const retreiveMemory = () => {
   User.findById(req.user._id)
   .then(user => {
+    // ifuser.date < / > date now .. carry on - or maybe a user.find using the mongo query
     Memories.find() //  need to add in loads of memories
     .then((memories, user) => {
       const selectedMemories = memories.filter(memory => {
@@ -79,12 +80,11 @@ const retreiveMemory = () => {
 }
 
 
-
 //function to send the notification to the subscribed device
 const sendNotification = (subscription, dataToSend='') => {
   webpush.sendNotification(subscription, dataToSend)
   .then((res)=> {console.log('sent webpush, with the result: ', res)})
-  .catch(() => {console.log("error in webpush.sendNotification")})
+  .catch((err) => {console.log("error in webpush.sendNotification", err)})
 }
 
 // route to test send notification. Gets subscription
@@ -92,16 +92,21 @@ const sendNotification = (subscription, dataToSend='') => {
 router.get('/send-notification', (req, res) => {
 
   // cycles through all users
-  // for each user finds the memory that they should recieve a notification about
+  // is it time for them to recieve a notification? y/n
+  // if y - for each user find the memory that they should recieve a notification about
   // find the subscription for that user by _owner
   // use sendNotification(subscription, body) with that subscription.
 
-  const body = "hello world"
+
+  // get a list of user ids who should get a notification now
+  // select the right memory url for each user
+  var id = "5c7bd0fb202b004810d9e1b3"
+  const body = `http://localhost:3000/reminder/${id}` // puts the url to the selected reminder into the push notification body 
   Subscription.find().populate("_owner")
   .then(subscriptions => {
     subscriptions.forEach((subs) => {
-      subs._owner.username.includes("tom") // add in logic about who to send a notifications to --- later make it based on a date / timestamp - set it from user settings e.g. this subscription / user reminder date/time is x - then when herokue is runnign the api every minutes when the current date adn time is greater than the value stored in teh user / subscripton ...send thenotification.
-      if (subs.test) {sendNotification(subs, body)}
+      if (subs._owner.username.includes("Snow")) // add in logic about who to send a notifications to --- later make it based on a date / timestamp - set it from user settings e.g. this subscription / user reminder date/time is x - then when herokue is runnign the api every minutes when the current date adn time is greater than the value stored in teh user / subscripton ...send thenotification.
+      {sendNotification(subs, body)}  // if (subs.test) {}
     })
   })
   res.json({}) // sends empty response
@@ -165,9 +170,3 @@ router.get("/memories", isLoggedIn, (req, res, next) => {
 
 
 module.exports = router;
-
-// all are prefixed with api/ (from app.js)
-// post /memory               - creates a memory
-// get /profile-details/:id   - retrieves user data
-// get /allMemories/:_owner   - retrieves all memories from a particular user
-// get /reminder/:id            - retrieves one memory

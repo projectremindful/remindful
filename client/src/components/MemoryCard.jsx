@@ -26,7 +26,7 @@ export default class MemoryCard extends Component {
         onClick={this.props.onSelect}
       >
         <h3>{this.props.memory.title}</h3>
-        <div class="show-image">
+        <div className="show-image">
           <img
             src={this.props.memory.imgUrl}
             alt=""
@@ -35,7 +35,7 @@ export default class MemoryCard extends Component {
             }}
           />
           <input
-            class="delete"
+            className="delete"
             type="button"
             value="Delete"
             onClick={() => this.delete()}
