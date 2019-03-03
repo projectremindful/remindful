@@ -18,6 +18,7 @@ const saveSubscription = async subscription => {
   console.log('saving subscription in public service.js')
   const SERVER_URL = 'http://localhost:5000/api/save-subscription'
   const response = await fetch(SERVER_URL, {
+    credentials: 'include',
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -47,6 +48,7 @@ self.addEventListener("activate", async () => {
 // listens for a push event and then calls the method to send a local notification with the information passed with teh push 
 // through "event"
 self.addEventListener("push", function(event) {
+  console.log(event.data)
   if (event.data) {
     console.log("Push event!! ", event.data.text());
     showLocalNotification("Yolo", event.data.text(),  self.registration);
@@ -55,10 +57,15 @@ self.addEventListener("push", function(event) {
   }
 });
 
+// "yolo", 
+// local host:3000
+// hello world
+
 // method that sends a local notification with the options for the content and other things 
 const showLocalNotification = (title, body, swRegistration) => {
+  console.log("and the body is", body)
   const options = {
-    body
+    body,
     // here you can add more properties like icon, image, vibrate, etc.
   };
   swRegistration.showNotification(title, options);
