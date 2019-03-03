@@ -65,11 +65,12 @@ class Signup extends Component {
       name: this.state.name,
       password: this.state.password,
       email: this.state.email
-    }
-    this.main()
+    }    
     api.signup(data)
       .then(result => {
         console.log('SIGNUP SUCCESS!')
+        // running main() only after user is logged in
+        this.main()
         this.props.history.push("/") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err.toString() }))
