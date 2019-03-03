@@ -10,9 +10,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <img src={logo} className="App-logo" alt="logo" />
-        <div className="content">
-          <p />
-        </div>
+        <div className="content" />
       </div>
     );
   }
