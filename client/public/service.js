@@ -82,6 +82,7 @@ const showLocalNotification = (title, body, swRegistration) => {
 self.addEventListener('notificationclose', function(e) {
   console.log("got the EE:  ", e)
   var notification = e.notification;
+  // notification.close();
   var primaryKey = notification.data.primaryKey;
   console.log('Closed notification: ' + primaryKey);
 });

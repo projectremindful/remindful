@@ -23,23 +23,32 @@ export default class Profile extends Component {
       username: "",
       email: "",
       profileUrl: "",
-      tranquility: null,
-      empowerment: null,
-      amusement: null,
-      inspiration: null,
-      selfGrowth: null,
-      motivation: null,
-      nostalgia: true
+      tranquility: false,
+      empowerment: false,
+      amusement: false,
+      inspiration: false,
+      selfGrowth: false,
+      motivation: false,
+      nostalgia: false
     };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handlePrefChange = this.handlePrefChange.bind(this)
   }
 
   handleChange(e) {
+    console.log(this.state.username)
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  handlePrefChange(name) {
+    console.log(this.state.tranquility)
+    this.setState(prevState => ({
+      [name] : !prevState[name]
+    }));
   }
 
   // this method handles just the file upload
@@ -167,7 +176,7 @@ export default class Profile extends Component {
         <div>
           <CustomInput
             checked={this.state.tranquility}
-            onChange={e => this.handleChange("tranquility")}
+            onChange={e => this.handlePrefChange('tranquility')}
             type="switch"
             id="tranquility"
             name="tranquility"
@@ -175,7 +184,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.empowerment}
-            onChange={e => this.handleChange("empowerment")}
+            onChange={e => this.handlePrefChange("empowerment")}
             type="switch"
             id="empowerment"
             name="empowerment"
@@ -183,7 +192,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.amusement}
-            onChange={e => this.handleChange("amusement")}
+            onChange={e => this.handlePrefChange("amusement")}
             type="switch"
             id="amusement"
             name="amusement"
@@ -191,7 +200,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.inspiration}
-            onChange={e => this.handleChange("inspiration")}
+            onChange={e => this.handlePrefChange("inspiration")}
             type="switch"
             id="inspiration"
             name="inspiration"
@@ -199,7 +208,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.selfGrowth}
-            onChange={e => this.handleChange("selfGrowth")}
+            onChange={e => this.handlePrefChange("selfGrowth")}
             type="switch"
             id="selfGrowth"
             name="selfGrowth"
@@ -207,7 +216,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.motivation}
-            onChange={e => this.handleChange("motivation")}
+            onChange={e => this.handlePrefChange("motivation")}
             type="switch"
             id="motivation"
             name="motivation"
@@ -215,7 +224,7 @@ export default class Profile extends Component {
           />
           <CustomInput
             checked={this.state.nostalgia}
-            onChange={e => this.handleChange("nostalgia")}
+            onChange={e => this.handlePrefChange("nostalgia")}
             type="switch"
             id="nostalgia"
             name="nostalgia"
@@ -235,6 +244,7 @@ export default class Profile extends Component {
 
   componentDidMount() {
     api.getProfile().then(user => {
+      console.log("componenentdidmount", user.tranquility)
       this.setState({
         _id: user._id,
         username: user.username,
