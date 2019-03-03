@@ -3,7 +3,7 @@ import api from '../../api';
 import MemoryCard from '../MemoryCard';
 // import api from '../../api';
 
-class AllMemories extends Component {
+class MemoryGallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,22 +19,22 @@ class AllMemories extends Component {
   render() {
     return (
       <div>
-        <h1 className="m-4">Your Memory Gallery</h1>
+        <h1 className="m-4">Memory Gallery</h1>
         <hr />
         selectedMemoryId = {this.state.selectedMemoryId}
         <hr />
-        <div className="allMemories">
-        {this.state.memories.map(memory => (
-          <MemoryCard
-            key={memory._id}
-            isSelected={
-              !this.state.selectedMemoryId ||
-              this.state.selectedMemoryId === memory._id
-            }
-            memory={memory}
-            onSelect={() => this.selectMemoryCard(memory._id)}
-          />
-        ))}
+        <div className="memoryGallery">
+          {this.state.memories.map(memory => (
+            <MemoryCard
+              key={memory._id}
+              isSelected={
+                !this.state.selectedMemoryId ||
+                this.state.selectedMemoryId === memory._id
+              }
+              memory={memory}
+              onSelect={() => this.selectMemoryCard(memory._id)}
+            />
+          ))}
         </div>
       </div>
     );
@@ -46,4 +46,4 @@ class AllMemories extends Component {
   }
 }
 
-export default AllMemories;
+export default MemoryGallery;
