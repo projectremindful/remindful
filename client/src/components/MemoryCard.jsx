@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Service from "../service";
-import ReactModal from 'react-modal';
+// import Modal from 'react-modal';
 import Modal from './Modal.js';
+import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 // Modal.setAppElement('#yourAppElement');
 
@@ -10,6 +12,7 @@ export default class MemoryCard extends Component {
   constructor(props) {
     super(props);
 
+    
     this.delete = this.delete.bind(this);
     this.service = new Service();
     this.state = {
@@ -33,30 +36,13 @@ export default class MemoryCard extends Component {
       .catch(err => console.log(err));
   }
 
-  render() {
-    // const {
-    //   onCloseRequest,
-    //   children,
-    //   classes,
-    // } = this.props;
-    
-    return (
-      // <div className={classes.modalOverlay}>
-      //   <div
-      //     className={classes.modal}
-      //     ref={node => (this.modal = node)}
-      //   >
-      //     <div className={classes.modalContent}>
-      //       {children}
-      //     </div>
-      //   </div>
+  nextPath(path) {
+    this.props.history.push(path);
+  }
 
-      //   <button
-      //     type="button"
-      //     className={classes.closeButton}
-      //     onClick={onCloseRequest}
-      //   />
-      // </div>
+
+  render() {
+    return (
   
       <div
         style={{
@@ -99,7 +85,9 @@ export default class MemoryCard extends Component {
           src={this.props.memory.imgUrl} 
           alt="" 
           className="modal-content" />
-          
+          {/* <Link variant="outline-info" to="/reminder/:id"
+          >Set Reminder</Link> */}
+       
         </React.Fragment>
 
       </Modal>
