@@ -16,12 +16,20 @@ onChange = reminderDate => this.setState({ reminderDate })
   render() {
     return (
       <div>
+      <img
+            id="reminderImg"
+            src={this.props.imgUrl}
+            alt=""
+          />
+      <div className="reminderContainer col py-3 px-lg-5 border bg-light">
+      <p>When would you like to be reminded of this moment?</p>
         <DateTimePicker
           onChange={this.onChange}
           value={this.state.reminderDate}
         />
-        <p>Reminder.jsx - view of a single memory for reflection </p>
-        <p>This memory's id is ... {this.state.memoryId}</p>
+        
+        {/* <p>This memory's id is ... {this.state.memoryId}</p> */}
+      </div>
       </div>
     )
   }
