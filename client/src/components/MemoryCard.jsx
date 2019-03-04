@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import Service from "../service";
-// import Modal from 'react-modal';
 import Modal from './Modal.js';
-import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
-// Modal.setAppElement('#yourAppElement');
 
 
 export default class MemoryCard extends Component {
@@ -17,10 +13,7 @@ export default class MemoryCard extends Component {
     this.service = new Service();
     this.state = {
       showModal: false
-      //modalIsOpen: false
     };
-
- 
   }
  
   toggleModal = () => {
@@ -85,8 +78,8 @@ export default class MemoryCard extends Component {
           src={this.props.memory.imgUrl} 
           alt="" 
           className="modal-content" />
-          {/* <Link variant="outline-info" to="/reminder/:id"
-          >Set Reminder</Link> */}
+          <Link variant="outline-info" to="/reminder/:id"
+          >Set Reminder</Link>
        
         </React.Fragment>
 

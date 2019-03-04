@@ -7,8 +7,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #ffffff;
-  background-image: #fff;
+  color: black;
+  background-color: white;
   min-height: 100vh;
   color: black;
 }
@@ -59,11 +59,13 @@ h2 {
 
 .content {
   width: 100%;
-  background-color: white;
+  height: 300px;
+  background-color: black;
   color: black;
 }
 
 .navbar {
+  background-color: black;
   animation-delay: 2s;
   animation: mymove 3s;
 }
@@ -88,10 +90,8 @@ h2 {
 
 // --------------------
 // Style for Home component
-.Home {
+.Home-image {
   background-image: linear-gradient(to bottom, #14343f, #3a8186 100vh);
-  padding: 0;
-  margin: 0;
   height: 800px;
   display: flex;
   align-items: center;
