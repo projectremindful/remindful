@@ -1,31 +1,29 @@
-import React, { Component } from "react";
-import Service from "../service";
+import React, { Component } from 'react';
+import Service from '../service';
 import Modal from './Modal.js';
 import { Link } from 'react-router-dom';
-
 
 export default class MemoryCard extends Component {
   constructor(props) {
     super(props);
 
-    
     this.delete = this.delete.bind(this);
     this.service = new Service();
     this.state = {
       showModal: false
     };
   }
- 
+
   toggleModal = () => {
     this.setState({
       showModal: !this.state.showModal
     });
-  }
+  };
 
   delete() {
     this.service
       .delete(this.props.memory._id)
-      .then(console.log("Deleted"))
+      .then(console.log('Deleted'))
       .catch(err => console.log(err));
   }
 
@@ -33,62 +31,54 @@ export default class MemoryCard extends Component {
     this.props.history.push(path);
   }
 
-
   render() {
     return (
-  
       <div
         style={{
           // border: "2px solid black",
           // opacity: this.props.isSelected ? 1 : 0.5,
-          margin: "10px"
+          margin: '10px'
         }}
         onClick={this.props.onSelect}
       >
-
         <h3>{this.props.memory.title}</h3>
-       
-        
+        <h3>{this.props.memory.date}</h3>
+
         <div className="show-image">
-      
           <img
             id="memImg"
             src={this.props.memory.imgUrl}
             onClick={this.toggleModal}
             alt=""
             style={{
-              height: "250px"
+              height: '250px'
             }}
           />
-          
+
           <input
             className="delete"
             type="button"
             value="Delete"
             onClick={() => this.delete()}
           />
-          </div>
-            <Modal
+        </div>
+        <Modal
           show={this.state.showModal}
           closeCallback={this.toggleModal}
           customClass="custom_modal_class"
         >
-        <React.Fragment>
-          <img 
-          src={this.props.memory.imgUrl} 
-          alt="" 
-          className="modal-content" />
-          <Link variant="outline-info" to="/reminder/:id"
-          >Set Reminder</Link>
-       
-        </React.Fragment>
+          <React.Fragment>
+            <img
+              src={this.props.memory.imgUrl}
+              alt=""
+              className="modal-content"
+            />
+            <Link variant="outline-info" to="/reminder/:id">
+              Set Reminder
+            </Link>
+          </React.Fragment>
+        </Modal>
 
-      </Modal>
-          
-        
-
-       
-    
         {/* <!-- Modal -->
         <div
           className="modal fade"
@@ -115,13 +105,12 @@ export default class MemoryCard extends Component {
         <img className="modal-content" id="img01" />
         <div id="caption"></div>
         </div>    */}
-                {/* <pre>{JSON.stringify(this.props.memory, null, 2)}</pre> */}
-              {/* </div>
+        {/* <pre>{JSON.stringify(this.props.memory, null, 2)}</pre> */}
+        {/* </div>
             </div>
           </div>
         </div> */}
       </div>
     );
   }
-
 }
