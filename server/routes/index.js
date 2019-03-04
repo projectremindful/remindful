@@ -24,12 +24,16 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
       chosenMemory: req.body.chosenMemory
     },
     { new: true }
-  ).then(user => {
-    res.json({
-      message: "user preferences updated",
-      userPrefs: user
+  )
+    .then(user => {
+      res.json({
+        message: "user preferences updated",
+        userPrefs: user
+      });
+    })
+    .catch(error => {
+      console.log("error in put user/id api: ", error);
     });
-  });
 });
 
 //-----NOTIFICATIONS PUSH API ROUTES_____
@@ -46,9 +50,14 @@ router.post("/save-subscription", (req, res) => {
     expirationTime,
     keys: { p256dh, auth }
   });
-  return newSubscription.save().then(result => {
-    console.log("Success at saving subscription", result);
-  });
+  return newSubscription
+    .save()
+    .then(result => {
+      console.log("Success at saving subscription", result);
+    })
+    .catch(err => {
+      console.log("error in save-subscription apiL: ", err);
+    });
 });
 
 // Our servers registration keys saved to an object

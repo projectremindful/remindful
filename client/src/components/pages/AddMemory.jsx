@@ -3,6 +3,7 @@ import {
   Col,
   CustomInput,
   Button,
+  FormFeedback,
   Form,
   FormGroup,
   Label,
@@ -92,7 +93,11 @@ class AddMemory extends Component {
                 placeholder="Memory Title"
                 value={this.state.title}
                 onChange={e => this.handleChange(e)}
+                invalid={false}
               />
+              <FormFeedback invalid>
+                Please give your memory a title
+              </FormFeedback>
             </Col>
           </FormGroup>
           <FormGroup row>

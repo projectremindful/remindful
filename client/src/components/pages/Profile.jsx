@@ -78,13 +78,21 @@ export default class Profile extends Component {
   };
 
   handleClick() {
-    var preferences = this.state.preference;
+    var preferences = {
+      username: this.state.username,
+      email: this.state.email,
+      profileUrl: this.state.profileUrl,
+      preference: this.state.preference,
+      chosenMemory: null
+    };
     api
       .getUserMemories()
       .then(memories => {
+        if (memories.length === 0) return preferences;
         var filteredMemories = memories.filter(memory => {
-          return memory[preferences] && !memory.viewed;
+          return memory[preferences.preference] && !memory.viewed;
         });
+        if (filteredMemories.length === 0) return preferences;
         var rand = Math.floor(Math.random() * filteredMemories.length);
         var chosenMemory = filteredMemories[rand]._id;
         return (preferences = {
@@ -101,7 +109,7 @@ export default class Profile extends Component {
   }
 
   render() {
-    return this.state.username ? (
+    return true ? (
       // when user information has loaded render this
       <Container className="forms">
         <Row style={{ margin: "30px 0" }}>
