@@ -9,9 +9,7 @@ import {
   NavLink,
   NavItem
 } from 'reactstrap';
-import userLogo from '../images/user.png';
-import addLogo from '../images/plus-button.png';
-import logo from '../images/house-outline.png';
+import logo from '../images/Remindful.png';
 import { NavLink as NLink } from 'react-router-dom';
 
 export default class NavBar extends Component {
@@ -35,77 +33,69 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar
-          // style={{ visibility: 'hidden' }}
-          expand="md"
-          color="light"
-          light
-        >
-          <NavbarToggler onClick={this.toggle} />
-          <NavItem>
-            <NavbarBrand tag={NLink} to="/">
-              {' '}
-              <img src={logo} alt="home" />
-            </NavbarBrand>
-            {api.isLoggedIn() && (
+      <Navbar className="navbar" expand="md" color="white" light>
+        <NavbarToggler onClick={this.toggle} />
+        <NavItem>
+          <NavbarBrand tag={NLink} to="/">
+            {' '}
+            <img src={logo} alt="logo" />
+          </NavbarBrand>
+          {/* {api.isLoggedIn() && (
               <NavbarBrand tag={NLink} to="/add-memory">
                 {' '}
                 <img src={addLogo} alt="addlogo" />
               </NavbarBrand>
-            )}
+            )} */}
+        </NavItem>
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className="ml-auto" navbar>
             {api.isLoggedIn() && (
-              <NavbarBrand tag={NLink} to="/profile">
-                {' '}
-                <img src={userLogo} alt="userlogo" />
-              </NavbarBrand>
+              <NavLink tag={NLink} to="/profile">
+                Profile
+              </NavLink>
             )}
-          </NavItem>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                {!api.isLoggedIn() && (
-                  <NavLink tag={NLink} to="/signup">
-                    Signup
-                  </NavLink>
-                )}
-              </NavItem>
-              <NavItem>
-                {!api.isLoggedIn() && (
-                  <NavLink tag={NLink} to="/login">
-                    Login
-                  </NavLink>
-                )}
-              </NavItem>
-              <NavItem>
-                {api.isLoggedIn() && (
-                  <NavLink
-                    tag={NLink}
-                    to="/logout"
-                    onClick={e => this.handleLogoutClick(e)}
-                  >
-                    Logout
-                  </NavLink>
-                )}
-              </NavItem>
-              <NavItem>
-                {api.isLoggedIn() && (
-                  <NavLink tag={NLink} to="/memory-gallery">
-                    Memory Gallery
-                  </NavLink>
-                )}
-              </NavItem>
-              <NavItem>
-                {api.isLoggedIn() && (
-                  <NavLink tag={NLink} to="/add-memory">
-                    Add Memory
-                  </NavLink>
-                )}
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+            <NavItem>
+              {!api.isLoggedIn() && (
+                <NavLink tag={NLink} to="/signup">
+                  Signup
+                </NavLink>
+              )}
+            </NavItem>
+            <NavItem>
+              {!api.isLoggedIn() && (
+                <NavLink tag={NLink} to="/login">
+                  Login
+                </NavLink>
+              )}
+            </NavItem>
+            <NavItem>
+              {api.isLoggedIn() && (
+                <NavLink
+                  tag={NLink}
+                  to="/logout"
+                  onClick={e => this.handleLogoutClick(e)}
+                >
+                  Logout
+                </NavLink>
+              )}
+            </NavItem>
+            <NavItem>
+              {api.isLoggedIn() && (
+                <NavLink tag={NLink} to="/memory-gallery">
+                  Memory Gallery
+                </NavLink>
+              )}
+            </NavItem>
+          </Nav>
+          <div className="add-memory">
+            {api.isLoggedIn() && (
+              <NavLink tag={NLink} to="/add-memory">
+                Add Memory
+              </NavLink>
+            )}
+          </div>
+        </Collapse>
+      </Navbar>
     );
   }
 }
