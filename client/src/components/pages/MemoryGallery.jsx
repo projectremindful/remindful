@@ -22,9 +22,7 @@ class MemoryGallery extends Component {
 
       <div>
         <h1 className="m-4">Memory Gallery</h1>
-        <hr />
         selectedMemoryId = {this.state.selectedMemoryId}
-        <hr />
         <div className="memoryGallery">
           {this.state.memories.map(memory => (
             <MemoryCard
