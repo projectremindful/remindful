@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import api from '../../api';
-import MemoryCard from '../MemoryCard';
+import React, { Component } from "react";
+import api from "../../api";
+import MemoryCard from "../MemoryCard";
 // import api from '../../api';
 
 class MemoryGallery extends Component {
@@ -40,7 +40,7 @@ class MemoryGallery extends Component {
     );
   }
   componentDidMount() {
-    api.getMemories().then(memories => {
+    api.getUserMemories().then(memories => {
       this.setState({ memories });
     });
   }

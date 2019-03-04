@@ -88,8 +88,8 @@ router.get("/send-notification", (req, res) => {
     .populate("_owner")
     .then(subscriptions => {
       subscriptions.forEach(sub => {
-        const memoryId = "chosenMemory"; // create new field in user model and generate chosen memory when setting preferences
-        const body = `http://localhost:3000/reminder/${memoryId}`;
+        // const memoryId = "chosenMemory"; // create new field in user model and generate chosen memory when setting preferences
+        const body = `http://localhost:3000/reminder/${sub._owner.email}`;
         console.log("TCL: body", body);
         sendNotification(sub, body);
         // call chosen memory method again somehow after viewing memory to update
@@ -136,7 +136,7 @@ router.post("/profile/edit", isLoggedIn, (req, res, next) => {
 });
 
 router.get("/memories", isLoggedIn, (req, res, next) => {
-  Memory.find()
+  Memory.find({ _owner: req.user._id })
     .populate("_owner")
     .then(memories => {
       res.json(memories);
