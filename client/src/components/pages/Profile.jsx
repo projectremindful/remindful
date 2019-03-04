@@ -174,42 +174,48 @@ export default class Profile extends Component {
               />
             </Col>
           </FormGroup>
+          <FormGroup row>
+            <Col sm={10}>
+              <Label>What would you like to get out of using Remindful?</Label>
+              <CustomInput
+                checked={this.state.preference === "reflection"}
+                onChange={e => this.handlePrefChange("reflection")}
+                type="switch"
+                id="reflection"
+                name="reflection"
+                label="To reflect on my experiences"
+              />
+              <CustomInput
+                checked={this.state.preference === "motivation"}
+                onChange={e => this.handlePrefChange("motivation")}
+                type="switch"
+                id="motivation"
+                name="motivation"
+                label="For motivation"
+              />
+              <CustomInput
+                checked={this.state.preference === "nostalgia"}
+                onChange={e => this.handlePrefChange("nostalgia")}
+                type="switch"
+                id="nostalgia"
+                name="nostalgia"
+                label="To enjoy happy memories"
+              />
+            </Col>
+          </FormGroup>
           <Button outline color="success" onClick={this.handleClick}>
             Submit Changes
           </Button>
         </Form>
-        <hr />
-        <h4 className="p-2">Your Memory Preferences</h4>
-        <div>
-          <CustomInput
-            checked={this.state.preference === "reflection"}
-            onChange={e => this.handlePrefChange("reflection")}
-            type="switch"
-            id="reflection"
-            name="reflection"
-            label="reflection"
-          />
-          <CustomInput
-            checked={this.state.preference === "motivation"}
-            onChange={e => this.handlePrefChange("motivation")}
-            type="switch"
-            id="motivation"
-            name="motivation"
-            label="motivation"
-          />
-          <CustomInput
-            checked={this.state.preference === "nostalgia"}
-            onChange={e => this.handlePrefChange("nostalgia")}
-            type="switch"
-            id="nostalgia"
-            name="nostalgia"
-            label="nostalgia"
-          />
+        {/* <hr /> */}
+        {/* <h4 className="p-2">Your Memory Preferences</h4> */}
+        {/* <div>
+        
           <br />
           <Button outline color="success" onClick={this.handleClick}>
             Save
           </Button>
-        </div>
+        </div> */}
       </Container>
     ) : (
       // if user information has not yet loaded render this
