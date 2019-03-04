@@ -20,13 +20,7 @@ router.put('/user/:id', isLoggedIn, (req, res, next) => {
       username: req.body.username,
       email: req.body.email,
       profileUrl: req.body.profileUrl,
-      tranquility: req.body.tranquility,
-      empowerment: req.body.empowerment,
-      amusement: req.body.amusement,
-      inspiration: req.body.inspiration,
-      selfGrowth: req.body.selfGrowth,
-      motivation: req.body.motivation,
-      nostalgia: req.body.nostalgia
+      preference: req.body.preference
     },
     { new: true }
   ).then(user => {
@@ -56,7 +50,7 @@ router.post('/save-subscription', (req, res) => {
   });
 });
 
-// Out servers registration keys saved to an object
+// Our servers registration keys saved to an object
 const vapidKeys = {
   publicKey:
     'BHkK42FkboxMTeX0ceiE6fwIWgYO7zrFDK5L6u3dolpGwAHHNg5o744YSDdgkWCcVmfo10A1Wx8ONEcw4-5za5o',
@@ -70,63 +64,32 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
-const retreiveMemory = () => {
-  User.findById(req.user._id).then(user => {
-    Memories.find() //  need to add in loads of memories
-      .then((memories, user) => {
-        const selectedMemories = memories.filter(memory => {
-          return (
-            memory._owner === req.user._id &&
-            memory.tranquility &&
-            user.tranquility
-          ); // and so on tranquility, empowerment, amusement, inspiration, selfGrowth, motivation, nostalgia,
-        });
-        return selectedMemories[0];
-      });
-  });
-};
-
 //function to send the notification to the subscribed device
-
 const sendNotification = (subscription, dataToSend = '') => {
   webpush
     .sendNotification(subscription, dataToSend)
     .then(res => {
-      console.log('sent webpush, with the result: ', res);
+      console.log('sent webpush, with the result:  ', res);
     })
-    .catch(() => {
-      console.log('error in webpush.sendNotification');
+    .catch(err => {
+      console.log('error in webpush.sendNotification', err);
     });
 };
 
-// route to test send notification. Gets subscription
-// data from database and uses it to send a notifications message
+// sends notification to selected subscription endpoint with required info from backend
 router.get('/send-notification', (req, res) => {
-  const message = 'Hello World';
-  Subscription.find().then(subscription => {
-    console.log('subscription retrieved', subscription[0]);
-    sendNotification(subscription[0], message);
-    console.log('message sent from index.js', message);
-  });
-});
-router.post('/memories/create', isLoggedIn, (req, res, next) => {
-  // cycles through all users
-  // for each user finds the memory that they should recieve a notification about
-  // find the subscription for that user by _owner
-  // use sendNotification(subscription, body) with that subscription.
-
-  const body = 'hello world';
   Subscription.find()
     .populate('_owner')
     .then(subscriptions => {
-      subscriptions.forEach(subs => {
-        subs._owner.username.includes('tom'); // add in logic about who to send a notifications to --- later make it based on a date / timestamp - set it from user settings e.g. this subscription / user reminder date/time is x - then when herokue is runnign the api every minutes when the current date adn time is greater than the value stored in teh user / subscripton ...send thenotification.
-        if (subs.test) {
-          sendNotification(subs, body);
-        }
+      subscriptions.forEach(sub => {
+        // const memoryId = "chosenMemory"; // create new field in user model and generate chosen memory when setting preferences
+        const body = `http://localhost:3000/reminder/${sub._owner.email}`;
+        console.log('TCL: body', body);
+        sendNotification(sub, body);
+        // call chosen memory method again somehow after viewing memory to update
       });
     });
-  res.json({}); // sends empty response
+  res.json({}); // sends empty response to avoid weird errors
 });
 
 router.post('/memories/create', isLoggedIn, (req, res, next) => {
@@ -167,7 +130,7 @@ router.post('/profile/edit', isLoggedIn, (req, res, next) => {
 });
 
 router.get('/memories', isLoggedIn, (req, res, next) => {
-  Memory.find()
+  Memory.find({ _owner: req.user._id })
     .populate('_owner')
     .then(memories => {
       res.json(memories);
@@ -175,19 +138,4 @@ router.get('/memories', isLoggedIn, (req, res, next) => {
     .catch(err => next(err));
 });
 
-// router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
-//   Memory.find()
-//     .populate("_owner")
-//     .then(memoriesFromDB => {
-//       res.status(200).json(memoriesFromDB);
-//     })
-//     .catch(err => next(err));
-// });
-
 module.exports = router;
-
-// all are prefixed with api/ (from app.js)
-// post /memory               - creates a memory
-// get /profile-details/:id   - retrieves user data
-// get /memoryGallery/:_owner   - retrieves all memories from a particular user
-// get /reminder/:id            - retrieves one memory

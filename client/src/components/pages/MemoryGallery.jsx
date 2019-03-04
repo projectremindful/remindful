@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import MemoryCard from '../MemoryCard';
+import { Link } from 'react-router'
 // import api from '../../api';
 
 class MemoryGallery extends Component {
@@ -8,7 +9,7 @@ class MemoryGallery extends Component {
     super(props);
     this.state = {
       memories: [],
-      selectedMemoryId: null
+      selectedMemoryId: null,
     };
   }
   selectMemoryCard(memoryId) {
@@ -18,7 +19,8 @@ class MemoryGallery extends Component {
   }
   render() {
     return (
-      <div className="whitebg">
+
+      <div>
         <h1 className="m-4">Memory Gallery</h1>
         selectedMemoryId = {this.state.selectedMemoryId}
         <div className="memoryGallery">
@@ -38,7 +40,7 @@ class MemoryGallery extends Component {
     );
   }
   componentDidMount() {
-    api.getMemories().then(memories => {
+    api.getUserMemories().then(memories => {
       this.setState({ memories });
     });
   }
