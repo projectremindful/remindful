@@ -7,14 +7,11 @@ const userSchema = new Schema(
     email: String,
     password: String,
     profileUrl: { type: String, default: "https://i.imgur.com/tdi3NGa.png" },
-    tranquility: { type: Boolean, default: false },
-    empowerment: { type: Boolean, default: false },
-    amusement: { type: Boolean, default: false },
-    inspiration: { type: Boolean, default: false },
-    selfGrowth: { type: Boolean, default: false },
-    motivation: { type: Boolean, default: false },
-    nostalgia: { type: Boolean, default: false },
     chosenMem: { type: Schema.Types.ObjectId, ref: "Memory" },
+    preference: {
+      type: String,
+      enum: ["reflection", "motivation", "nostalgia"]
+    },
     datePreference: { enum: ["daily", "weekly", "fortnightly"] }
   },
   {

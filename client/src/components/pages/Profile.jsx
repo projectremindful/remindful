@@ -23,13 +23,7 @@ export default class Profile extends Component {
       username: "",
       email: "",
       profileUrl: "",
-      tranquility: false,
-      empowerment: false,
-      amusement: false,
-      inspiration: false,
-      selfGrowth: false,
-      motivation: false,
-      nostalgia: false,
+      preference: "",
       chosenMem: ""
     };
     this.service = new Service();
@@ -46,9 +40,8 @@ export default class Profile extends Component {
   }
 
   handlePrefChange(name) {
-    console.log(this.state.tranquility);
-    this.setState(prevState => ({
-      [name]: !prevState[name]
+    this.setState(() => ({
+      preference: `${name}`
     }));
   }
 
@@ -71,7 +64,7 @@ export default class Profile extends Component {
       });
   };
 
-  // this method submits the form
+  // this method submits the fior updating the users profile informaiton
   handleSubmit = e => {
     e.preventDefault();
     this.service
@@ -91,19 +84,14 @@ export default class Profile extends Component {
       username: this.state.username,
       email: this.state.email,
       profileUrl: this.state.profileUrl,
-      tranquility: this.state.tranquility,
-      empowerment: this.state.empowerment,
-      amusement: this.state.amusement,
-      inspiration: this.state.inspiration,
-      selfGrowth: this.state.selfGrowth,
-      motivation: this.state.motivation,
-      nostalgia: this.state.nostalgia,
+      preference: this.state.preference,
       chosenMem: this.state.chosenMem
     };
     api.updateUserPreferences(this.state._id, preferences).then(res => {});
   }
 
   render() {
+    console.log("preference", this.state.preference);
     return this.state.username ? (
       // when user information has loaded render this
       <Container className="forms">
@@ -177,47 +165,15 @@ export default class Profile extends Component {
         <h4 className="p-2">Your Memory Preferences</h4>
         <div>
           <CustomInput
-            checked={this.state.tranquility}
-            onChange={e => this.handlePrefChange("tranquility")}
+            checked={this.state.preference === "reflection"}
+            onChange={e => this.handlePrefChange("reflection")}
             type="switch"
-            id="tranquility"
-            name="tranquility"
-            label="tranquility"
+            id="reflection"
+            name="reflection"
+            label="reflection"
           />
           <CustomInput
-            checked={this.state.empowerment}
-            onChange={e => this.handlePrefChange("empowerment")}
-            type="switch"
-            id="empowerment"
-            name="empowerment"
-            label="empowerment"
-          />
-          <CustomInput
-            checked={this.state.amusement}
-            onChange={e => this.handlePrefChange("amusement")}
-            type="switch"
-            id="amusement"
-            name="amusement"
-            label="amusement"
-          />
-          <CustomInput
-            checked={this.state.inspiration}
-            onChange={e => this.handlePrefChange("inspiration")}
-            type="switch"
-            id="inspiration"
-            name="inspiration"
-            label="inspiration"
-          />
-          <CustomInput
-            checked={this.state.selfGrowth}
-            onChange={e => this.handlePrefChange("selfGrowth")}
-            type="switch"
-            id="selfGrowth"
-            name="selfGrowth"
-            label="selfGrowth"
-          />
-          <CustomInput
-            checked={this.state.motivation}
+            checked={this.state.preference === "motivation"}
             onChange={e => this.handlePrefChange("motivation")}
             type="switch"
             id="motivation"
@@ -225,7 +181,7 @@ export default class Profile extends Component {
             label="motivation"
           />
           <CustomInput
-            checked={this.state.nostalgia}
+            checked={this.state.preference === "nostalgia"}
             onChange={e => this.handlePrefChange("nostalgia")}
             type="switch"
             id="nostalgia"
@@ -252,13 +208,7 @@ export default class Profile extends Component {
         username: user.username,
         email: user.email,
         profileUrl: user.profileUrl,
-        tranquility: user.tranquility,
-        empowerment: user.empowerment,
-        amusement: user.amusement,
-        inspiration: user.inspiration,
-        selfGrowth: user.selfGrowth,
-        motivation: user.motivation,
-        nostalgia: user.nostalgia
+        preference: user.preference
       });
     });
   }

@@ -64,7 +64,7 @@ export default {
     return service.get(`/memories`).then(res => res.data);
   },
 
-  selectChosenMem(preferences, memories) {
+  chooseMemoryForUser(preferences, memories) {
     // .then for loop each memories loop through and match preferences agsint tags
     // remove any that have been viewed
     // use a counter inthe for loop to count the pushes
@@ -82,16 +82,6 @@ export default {
     // use that route
     // selectChosenMem method
     // that service.put
-    this.getUserMemories()
-      .then(memories => {
-        this.selectChosenMem(memories, preferences);
-      })
-      .then(memory => {
-        const newPreferences = {
-          chosenMem: memory
-        };
-        return newPreferences;
-      });
     return service.put(`user/${userId}`, preferences).then(res => {
       return res.data;
       // console.log('Im in the api method',res)

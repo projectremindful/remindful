@@ -20,13 +20,7 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
       username: req.body.username,
       email: req.body.email,
       profileUrl: req.body.profileUrl,
-      tranquility: req.body.tranquility,
-      empowerment: req.body.empowerment,
-      amusement: req.body.amusement,
-      inspiration: req.body.inspiration,
-      selfGrowth: req.body.selfGrowth,
-      motivation: req.body.motivation,
-      nostalgia: req.body.nostalgia
+      preference: req.body.preference
     },
     { new: true }
   ).then(user => {
@@ -143,14 +137,5 @@ router.get("/memories", isLoggedIn, (req, res, next) => {
     })
     .catch(err => next(err));
 });
-
-// router.get("/all-memories/:_owner", isLoggedIn, (req, res, next) => {
-//   Memory.find()
-//     .populate("_owner")
-//     .then(memoriesFromDB => {
-//       res.status(200).json(memoriesFromDB);
-//     })
-//     .catch(err => next(err));
-// });
 
 module.exports = router;
