@@ -29,25 +29,26 @@ export default class Profile extends Component {
       inspiration: false,
       selfGrowth: false,
       motivation: false,
-      nostalgia: false
+      nostalgia: false,
+      chosenMem: ""
     };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handlePrefChange = this.handlePrefChange.bind(this)
+    this.handlePrefChange = this.handlePrefChange.bind(this);
   }
 
   handleChange(e) {
-    console.log(this.state.username)
+    console.log(this.state.username);
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
   handlePrefChange(name) {
-    console.log(this.state.tranquility)
+    console.log(this.state.tranquility);
     this.setState(prevState => ({
-      [name] : !prevState[name]
+      [name]: !prevState[name]
     }));
   }
 
@@ -96,7 +97,8 @@ export default class Profile extends Component {
       inspiration: this.state.inspiration,
       selfGrowth: this.state.selfGrowth,
       motivation: this.state.motivation,
-      nostalgia: this.state.nostalgia
+      nostalgia: this.state.nostalgia,
+      chosenMem: this.state.chosenMem
     };
     api.updateUserPreferences(this.state._id, preferences).then(res => {});
   }
@@ -176,7 +178,7 @@ export default class Profile extends Component {
         <div>
           <CustomInput
             checked={this.state.tranquility}
-            onChange={e => this.handlePrefChange('tranquility')}
+            onChange={e => this.handlePrefChange("tranquility")}
             type="switch"
             id="tranquility"
             name="tranquility"
@@ -244,7 +246,7 @@ export default class Profile extends Component {
 
   componentDidMount() {
     api.getProfile().then(user => {
-      console.log("componenentdidmount", user.tranquility)
+      console.log("componenentdidmount", user.tranquility);
       this.setState({
         _id: user._id,
         username: user.username,

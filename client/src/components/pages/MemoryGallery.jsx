@@ -42,7 +42,7 @@ class MemoryGallery extends Component {
     );
   }
   componentDidMount() {
-    api.getMemories().then(memories => {
+    api.getUserMemories().then(memories => {
       this.setState({ memories });
     });
   }
