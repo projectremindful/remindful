@@ -1,3 +1,4 @@
+
 // This function encodes public key for chrome push API subscription into an array buffer which is needed by the subscription option
 const urlB64ToUint8Array = base64String => {
   console.log('encoding public key in public service.js')
@@ -48,12 +49,11 @@ self.addEventListener("activate", async () => {
 // listens for a push event and then calls the method to send a local notification with the information passed with teh push 
 // through "event"
 self.addEventListener("push", function(event) {
-  console.log(event.data)
   if (event.data) {
-    console.log("Push event!! ", event.data.text());
-    showLocalNotification("Yolo", event.data.text(),  self.registration);
+    // console.log("Push event!! ", event.data.text());
+    showLocalNotification("Your Reminder from Remindful", event.data.text(), self.registration);
   } else {
-    console.log("Push event but no data");
+    // console.log("Push event but no data");
   }
 });
 
@@ -63,10 +63,48 @@ self.addEventListener("push", function(event) {
 
 // method that sends a local notification with the options for the content and other things 
 const showLocalNotification = (title, body, swRegistration) => {
-  console.log("and the body is", body)
   const options = {
-    body,
-    // here you can add more properties like icon, image, vibrate, etc.
+    body: "Your Reminder from Remindful",
+    data: {
+      dateOfArrival: Date.now(),
+      url: body
+    },
+    actions: [
+      {action: 'reminder', title: 'Go to your  Memory'},
+      {action: 'close', title: 'Close notification',
+        icon: 'styles/images/user.png'},
+    ]
+    // onClicked : function() {window.open('http://www.mozilla.org', '_blank')}
   };
   swRegistration.showNotification(title, options);
 };
+
+self.addEventListener('notificationclose', function(e) {
+  console.log("got the EE:  ", e)
+  var notification = e.notification;
+  // notification.close();
+  var primaryKey = notification.data.primaryKey;
+  console.log('Closed notification: ' + primaryKey);
+});
+
+self.addEventListener('notificationclick', function(e) {
+  e.preventDefault()
+  var notification = e.notification;
+  var action = e.action;
+  var url = notification.data.url
+  if (action === 'close') {
+    notification.close();
+  } else {
+  e.waitUntil(clients.openWindow(url,'_blank'))};
+})
+
+// self.addEventListener("notificationclick", function(e){
+//   e.showNotification.close();
+//   if (e.action === "click me") {
+//     window.open('http://www.mozilla.org')
+//   } else {
+//     console.log('boo')
+//     window.open('http://www.google.org')
+//   }
+
+// })

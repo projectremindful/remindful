@@ -98,6 +98,12 @@ export default class MemoryCard extends Component {
               height: "250px"
             }}
           />
+          <input
+            className="delete"
+            type="button"
+            value="Delete"
+            onClick={() => this.delete()}
+          />
         </div>
     
         {/* <!-- Modal --> */}
