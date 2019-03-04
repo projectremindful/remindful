@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Service from "../service";
 import ReactModal from 'react-modal';
+import Modal from './Modal.js';
 
 // Modal.setAppElement('#yourAppElement');
 
@@ -12,35 +13,18 @@ export default class MemoryCard extends Component {
     this.delete = this.delete.bind(this);
     this.service = new Service();
     this.state = {
-      modalIsOpen: false
+      showModal: false
+      //modalIsOpen: false
     };
 
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-
-  //  componentDidMount() {
-      ReactModal.setAppElement('body');
-   // };
+ 
   }
-
-  openModal() {
-    // this.setState({modalIsOpen: true});
-    // function onClick(element) {
-      document.getElementById("img").src = element.src;
-      document.getElementById("modal").style.display = "block";
-    // }
+ 
+  toggleModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
   }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
-
 
   delete() {
     this.service
@@ -50,30 +34,30 @@ export default class MemoryCard extends Component {
   }
 
   render() {
-    const {
-      onCloseRequest,
-      children,
-      classes,
-    } = this.props;
+    // const {
+    //   onCloseRequest,
+    //   children,
+    //   classes,
+    // } = this.props;
     
     return (
-      <div className={classes.modalOverlay}>
-        <div
-          className={classes.modal}
-          ref={node => (this.modal = node)}
-        >
-          <div className={classes.modalContent}>
-            {children}
-          </div>
-        </div>
+      // <div className={classes.modalOverlay}>
+      //   <div
+      //     className={classes.modal}
+      //     ref={node => (this.modal = node)}
+      //   >
+      //     <div className={classes.modalContent}>
+      //       {children}
+      //     </div>
+      //   </div>
 
-        <button
-          type="button"
-          className={classes.closeButton}
-          onClick={onCloseRequest}
-        />
-      </div>
-
+      //   <button
+      //     type="button"
+      //     className={classes.closeButton}
+      //     onClick={onCloseRequest}
+      //   />
+      // </div>
+  
       <div
         style={{
           // border: "2px solid black",
@@ -84,29 +68,50 @@ export default class MemoryCard extends Component {
       >
 
         <h3>{this.props.memory.title}</h3>
+       
+        
         <div className="show-image">
+      
           <img
             id="memImg"
             src={this.props.memory.imgUrl}
-            onClick={this.openModal}
-            data-toggle="modal" 
-            data-bigimage={this.props.memory.imgUrl}  
-            data-target="#myModal" 
-            className="img-fluid"
+            onClick={this.toggleModal}
+            // data-toggle="modal" 
+            // data-bigimage={this.props.memory.imgUrl}  
+            // data-target="#myModal" 
+            // className="img-fluid"
             alt=""
             style={{
               height: "250px"
             }}
           />
+          
           <input
             className="delete"
             type="button"
             value="Delete"
             onClick={() => this.delete()}
           />
+            <Modal
+          show={this.state.showModal}
+          closeCallback={this.toggleModal}
+          customClass="custom_modal_class"
+        >
+        <React.Fragment>
+          <img 
+          src={this.props.memory.imgUrl} 
+          alt="" 
+          className="modal-content" />
+          
+        </React.Fragment>
+
+      </Modal>
+          
         </div>
+
+       
     
-        {/* <!-- Modal --> */}
+        {/* <!-- Modal -->
         <div
           className="modal fade"
           id="myModal"
@@ -133,13 +138,12 @@ export default class MemoryCard extends Component {
         <div id="caption"></div>
         </div>    */}
                 {/* <pre>{JSON.stringify(this.props.memory, null, 2)}</pre> */}
-              </div>
+              {/* </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
-
 
 }
