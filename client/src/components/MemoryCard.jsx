@@ -76,10 +76,6 @@ export default class MemoryCard extends Component {
             id="memImg"
             src={this.props.memory.imgUrl}
             onClick={this.toggleModal}
-            // data-toggle="modal" 
-            // data-bigimage={this.props.memory.imgUrl}  
-            // data-target="#myModal" 
-            // className="img-fluid"
             alt=""
             style={{
               height: "250px"
@@ -92,6 +88,7 @@ export default class MemoryCard extends Component {
             value="Delete"
             onClick={() => this.delete()}
           />
+          </div>
             <Modal
           show={this.state.showModal}
           closeCallback={this.toggleModal}
@@ -107,7 +104,7 @@ export default class MemoryCard extends Component {
 
       </Modal>
           
-        </div>
+        
 
        
     

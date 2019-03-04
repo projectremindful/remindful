@@ -283,7 +283,7 @@ opacity:1;
   padding: 20px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.7);
   border-radius: 4px;
-  width: 90%;
+  width: 80%;
   height: 60%;
 }
 
@@ -312,4 +312,11 @@ opacity:1;
 
 .modal .close_modal:hover {
   opacity: 0.9;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
 }
