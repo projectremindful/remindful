@@ -19,6 +19,7 @@ class AllMemories extends Component {
   }
   render() {
     return (
+
       <div>
         <h1 className="m-4">Your Memory Gallery</h1>
         <hr />
