@@ -8,8 +8,10 @@ class Home extends Component {
   }
   render() {
     return (
-      <div className="Home">
-        <img src={logo} className="App-logo" alt="logo" />
+      <div className="content">
+        <div className="Home-image">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
       </div>
     );
   }

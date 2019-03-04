@@ -7,8 +7,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #ffffff;
-  background-image: #fff;
+  color: black;
+  background-color: white;
   min-height: 100vh;
 }
 
@@ -58,11 +58,13 @@ h2 {
 
 .content {
   width: 100%;
-  background-color: white;
+  height: 300px;
+  background-color: black;
   color: black;
 }
 
 .navbar {
+  background-color: black;
   animation-delay: 2s;
   animation: mymove 3s;
 }
@@ -87,10 +89,8 @@ h2 {
 
 // --------------------
 // Style for Home component
-.Home {
+.Home-image {
   background-image: linear-gradient(to bottom, #14343f, #3a8186 100vh);
-  padding: 0;
-  margin: 0;
   height: 800px;
   display: flex;
   align-items: center;
@@ -139,9 +139,6 @@ h2 {
   text-shadow: 0.5em 0.5em 1em #9cb8b3;
 }
 
-
-
-
 #memImg {
   cursor: pointer;
   transition: 0.3s;
@@ -161,8 +158,8 @@ h2 {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
 
 .modal-content {
@@ -184,14 +181,19 @@ h2 {
 }
 
 /* Add Animation - Zoom in the Modal */
-.modal-content, #caption { 
+.modal-content,
+#caption {
   animation-name: zoom;
   animation-duration: 0.6s;
 }
 
 @keyframes zoom {
-  from {transform:scale(0)} 
-  to {transform:scale(1)}
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 /* The Close Button */
@@ -213,7 +215,7 @@ h2 {
 }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 700px) {
   .modal-content {
     width: 100%;
   }
@@ -221,12 +223,12 @@ h2 {
 
 div.show-image {
   position: relative;
-  float:left;
-  margin:5px;
+  float: left;
+  margin: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-div.show-image:hover img{
+div.show-image:hover img {
   // opacity:0.8;
   transform: scale(1.1);
 }
@@ -234,8 +236,8 @@ div.show-image:hover input {
   display: block;
 }
 div.show-image input {
-  position:absolute;
-  display:none;
+  position: absolute;
+  display: none;
   opacity: 0.8;
 }
 
@@ -247,19 +249,19 @@ div.show-image input.delete {
   border-radius: 10px;
   font-size: 0.8em;
   padding: 2px;
-  top:0;
-  left:86%;
+  top: 0;
+  left: 86%;
 }
 
 .close {
-position:absolute;
-right:-30px;
-top:0;
-z-index:999;
-font-size:2rem;
-font-weight: normal;
-color:#fff;
-opacity:1;
+  position: absolute;
+  right: -30px;
+  top: 0;
+  z-index: 999;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #fff;
+  opacity: 1;
 }
 
 .modal {
@@ -291,7 +293,7 @@ opacity:1;
   background: #fff;
   box-sizing: border-box;
   padding: 20px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.7);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
   border-radius: 2px;
   width: 60%;
   height: auto;
@@ -326,7 +328,7 @@ opacity:1;
 }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 700px) {
   .modal-content {
     width: 100%;
   }

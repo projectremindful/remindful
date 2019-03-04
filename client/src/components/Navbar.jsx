@@ -35,18 +35,10 @@ export default class NavBar extends Component {
     return (
       <Navbar className="navbar" expand="md" color="white" light>
         <NavbarToggler onClick={this.toggle} />
-        <NavItem>
-          <NavbarBrand tag={NLink} to="/">
-            {' '}
-            <img src={logo} alt="logo" />
-          </NavbarBrand>
-          {/* {api.isLoggedIn() && (
-              <NavbarBrand tag={NLink} to="/add-memory">
-                {' '}
-                <img src={addLogo} alt="addlogo" />
-              </NavbarBrand>
-            )} */}
-        </NavItem>
+        <NavbarBrand tag={NLink} to="/">
+          {' '}
+          <img src={logo} alt="logo" />
+        </NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             {api.isLoggedIn() && (
