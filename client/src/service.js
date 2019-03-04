@@ -37,7 +37,9 @@ class Service {
 
   delete = id => {
     return this.service.delete("/memory/" + id);
-  };
+  };  
 }
+
+
 
 export default Service;
