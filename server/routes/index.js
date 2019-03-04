@@ -20,7 +20,8 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
       username: req.body.username,
       email: req.body.email,
       profileUrl: req.body.profileUrl,
-      preference: req.body.preference
+      preference: req.body.preference,
+      chosenMem: req.body.chosenMem
     },
     { new: true }
   ).then(user => {

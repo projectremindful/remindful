@@ -22,6 +22,7 @@ class AddMemory extends Component {
       reflection: false,
       motivation: false,
       nostalgia: false,
+      viewed: false,
       imgUrl: "",
       _owner: ""
     };

@@ -64,24 +64,8 @@ export default {
     return service.get(`/memories`).then(res => res.data);
   },
 
-  chooseMemoryForUser(preferences, memories) {
-    // .then for loop each memories loop through and match preferences agsint tags
-    // remove any that have been viewed
-    // use a counter inthe for loop to count the pushes
-    // if array length is 0
-    // if counter is 1
-    // random number between 0 and counter
-    // return an array[] of posisble memories
-    // select a random memory from that array based on its length
-    // set chosenMem field in preferences to that
-  },
-
   updateUserPreferences(userId, preferences) {
-    // TO CREATE CHOSEN MEM FIELD IN USER MODEL
-    // update get memories route to be user memories only
-    // use that route
-    // selectChosenMem method
-    // that service.put
+    console.log("TCL: updateUserPreferences -> preferences", preferences);
     return service.put(`user/${userId}`, preferences).then(res => {
       return res.data;
       // console.log('Im in the api method',res)

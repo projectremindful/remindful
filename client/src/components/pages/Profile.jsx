@@ -33,7 +33,6 @@ export default class Profile extends Component {
   }
 
   handleChange(e) {
-    console.log(this.state.username);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -64,7 +63,7 @@ export default class Profile extends Component {
       });
   };
 
-  // this method submits the fior updating the users profile informaiton
+  // this method submits the form updating the users profile informaiton
   handleSubmit = e => {
     e.preventDefault();
     this.service
@@ -79,19 +78,29 @@ export default class Profile extends Component {
   };
 
   handleClick() {
-    console.log("clicked");
-    const preferences = {
-      username: this.state.username,
-      email: this.state.email,
-      profileUrl: this.state.profileUrl,
-      preference: this.state.preference,
-      chosenMem: this.state.chosenMem
-    };
-    api.updateUserPreferences(this.state._id, preferences).then(res => {});
+    var preferences = this.state.preference;
+    api
+      .getUserMemories()
+      .then(memories => {
+        var filteredMemories = memories.filter(memory => {
+          return memory[preferences] && !memory.viewed;
+        });
+        var rand = Math.floor(Math.random() * filteredMemories.length);
+        var chosenMem = filteredMemories[rand]._id;
+        return (preferences = {
+          username: this.state.username,
+          email: this.state.email,
+          profileUrl: this.state.profileUrl,
+          preference: this.state.preference,
+          chosenMem: chosenMem
+        });
+      })
+      .then(preferences => {
+        api.updateUserPreferences(this.state._id, preferences).then(res => {});
+      });
   }
 
   render() {
-    console.log("preference", this.state.preference);
     return this.state.username ? (
       // when user information has loaded render this
       <Container className="forms">
@@ -202,7 +211,6 @@ export default class Profile extends Component {
 
   componentDidMount() {
     api.getProfile().then(user => {
-      console.log("componenentdidmount", user.tranquility);
       this.setState({
         _id: user._id,
         username: user.username,
