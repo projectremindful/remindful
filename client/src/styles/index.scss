@@ -1,7 +1,7 @@
 // --------------------
 // Definition of variables
 $primary: #32c3ff;
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 body {
   margin: 0;
@@ -10,6 +10,7 @@ body {
   color: black;
   background-color: white;
   min-height: 100vh;
+  color: black;
 }
 
 h2 {
@@ -131,7 +132,7 @@ h2 {
 }
 
 .logout {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   text-align: center;
   line-height: 2em;
   padding-top: 70px;

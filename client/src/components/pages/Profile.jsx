@@ -24,7 +24,7 @@ export default class Profile extends Component {
       email: "",
       profileUrl: "",
       preference: "",
-      chosenMem: ""
+      chosenMemory: ""
     };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +33,6 @@ export default class Profile extends Component {
   }
 
   handleChange(e) {
-    console.log(this.state.username);
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -64,7 +63,7 @@ export default class Profile extends Component {
       });
   };
 
-  // this method submits the fior updating the users profile informaiton
+  // this method submits the form updating the users profile informaiton
   handleSubmit = e => {
     e.preventDefault();
     this.service
@@ -79,20 +78,38 @@ export default class Profile extends Component {
   };
 
   handleClick() {
-    console.log("clicked");
-    const preferences = {
+    var preferences = {
       username: this.state.username,
       email: this.state.email,
       profileUrl: this.state.profileUrl,
       preference: this.state.preference,
-      chosenMem: this.state.chosenMem
+      chosenMemory: null
     };
-    api.updateUserPreferences(this.state._id, preferences).then(res => {});
+    api
+      .getUserMemories()
+      .then(memories => {
+        if (memories.length === 0) return preferences;
+        var filteredMemories = memories.filter(memory => {
+          return memory[preferences.preference] && !memory.viewed;
+        });
+        if (filteredMemories.length === 0) return preferences;
+        var rand = Math.floor(Math.random() * filteredMemories.length);
+        var chosenMemory = filteredMemories[rand]._id;
+        return (preferences = {
+          username: this.state.username,
+          email: this.state.email,
+          profileUrl: this.state.profileUrl,
+          preference: this.state.preference,
+          chosenMemory: chosenMemory
+        });
+      })
+      .then(preferences => {
+        api.updateUserPreferences(this.state._id, preferences).then(res => {});
+      });
   }
 
   render() {
-    console.log("preference", this.state.preference);
-    return this.state.username ? (
+    return true ? (
       // when user information has loaded render this
       <Container className="forms">
         <Row style={{ margin: "30px 0" }}>
@@ -202,7 +219,6 @@ export default class Profile extends Component {
 
   componentDidMount() {
     api.getProfile().then(user => {
-      console.log("componenentdidmount", user.tranquility);
       this.setState({
         _id: user._id,
         username: user.username,
