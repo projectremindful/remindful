@@ -3,7 +3,12 @@ import axios from "axios";
 class Service {
   constructor() {
     let service = axios.create({
-      baseURL: "http://localhost:5000/api",
+      baseURL:
+        process.env.NODE_ENV === "production"
+          ? "/api"
+          : "http://localhost:5000/api",
+
+      // baseURL: "http://localhost:5000/api",
       withCredentials: true
     });
     this.service = service;
@@ -37,9 +42,7 @@ class Service {
 
   delete = id => {
     return this.service.delete("/memory/" + id);
-  };  
+  };
 }
-
-
 
 export default Service;
