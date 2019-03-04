@@ -24,7 +24,7 @@ export default class Profile extends Component {
       email: "",
       profileUrl: "",
       preference: "",
-      chosenMem: ""
+      chosenMemory: ""
     };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
@@ -86,13 +86,13 @@ export default class Profile extends Component {
           return memory[preferences] && !memory.viewed;
         });
         var rand = Math.floor(Math.random() * filteredMemories.length);
-        var chosenMem = filteredMemories[rand]._id;
+        var chosenMemory = filteredMemories[rand]._id;
         return (preferences = {
           username: this.state.username,
           email: this.state.email,
           profileUrl: this.state.profileUrl,
           preference: this.state.preference,
-          chosenMem: chosenMem
+          chosenMemory: chosenMemory
         });
       })
       .then(preferences => {

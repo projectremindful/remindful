@@ -21,7 +21,7 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
       email: req.body.email,
       profileUrl: req.body.profileUrl,
       preference: req.body.preference,
-      chosenMem: req.body.chosenMem
+      chosenMemory: req.body.chosenMemory
     },
     { new: true }
   ).then(user => {
@@ -84,7 +84,9 @@ router.get("/send-notification", (req, res) => {
     .then(subscriptions => {
       subscriptions.forEach(sub => {
         // const memoryId = "chosenMemory"; // create new field in user model and generate chosen memory when setting preferences
-        const body = `http://localhost:3000/reminder/${sub._owner.email}`;
+        const body = `http://localhost:3000/reminder/${
+          sub._owner.chosenMemory
+        }`;
         console.log("TCL: body", body);
         sendNotification(sub, body);
         // call chosen memory method again somehow after viewing memory to update
