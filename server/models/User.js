@@ -7,7 +7,7 @@ const userSchema = new Schema(
     email: String,
     password: String,
     profileUrl: { type: String, default: "https://i.imgur.com/tdi3NGa.png" },
-    chosenMem: { type: Schema.Types.ObjectId, ref: "Memory" },
+    chosenMemory: { type: Schema.Types.ObjectId, ref: "Memory" },
     preference: {
       type: String,
       enum: ["reflection", "motivation", "nostalgia"]

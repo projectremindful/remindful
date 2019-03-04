@@ -10,6 +10,7 @@ body {
   color: black;
   background-color: white;
   min-height: 100vh;
+  color: black;
 }
 
 h2 {
@@ -125,7 +126,7 @@ h2 {
 }
 
 .memoryGallery {
-  margin-top: 100px;
+  padding-top: 100px;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -233,6 +234,7 @@ div.show-image {
 div.show-image:hover img {
   // opacity:0.8;
   transform: scale(1.1);
+  margin: 12px 15px;
 }
 div.show-image:hover input {
   display: block;
@@ -244,13 +246,13 @@ div.show-image input {
 }
 
 div.show-image input.delete {
-  background-color: transparent;
-  border-color: darkred;
-  color: darkred;
-  text-shadow: 0.6px 0.6px lightcoral;
+  background-color: rgba(138, 44, 44, 0.5);
+  border-color: darkslategray;
+  color: black;
+  text-shadow: 0.6px 0.6px lightgray;
   border-radius: 10px;
   font-size: 0.8em;
-  padding: 2px;
+  padding: 1px;
   top: 0;
   left: 86%;
 }
