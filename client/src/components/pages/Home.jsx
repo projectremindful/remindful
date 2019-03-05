@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import logo from '../../images/logoonly (1).png';
+import React, { Component } from "react";
+import logo from "../../images/logoonly (1).png";
 
 class Home extends Component {
   constructor(props) {
