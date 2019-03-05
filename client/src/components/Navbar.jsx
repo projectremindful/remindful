@@ -33,7 +33,7 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <Navbar className="navbar py-0 px-0 pl-3" expand="md" color="white" light>
+      <Navbar className="navbar py-0 px-0 pl-3" expand="md" color="#fff" light>
         <NavbarToggler onClick={this.toggle} />
         <NavbarBrand tag={NLink} to="/">
           {' '}
