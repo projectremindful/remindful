@@ -203,19 +203,13 @@ export default class Profile extends Component {
               />
             </Col>
           </FormGroup>
+          <p>
+            These preferences will determine what memories you get reminded of
+          </p>
           <Button outline color="success" onClick={this.handleClick}>
             Submit Changes
           </Button>
         </Form>
-        {/* <hr /> */}
-        {/* <h4 className="p-2">Your Memory Preferences</h4> */}
-        {/* <div>
-        
-          <br />
-          <Button outline color="success" onClick={this.handleClick}>
-            Save
-          </Button>
-        </div> */}
       </Container>
     ) : (
       // if user information has not yet loaded render this
