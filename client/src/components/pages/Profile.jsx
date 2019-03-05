@@ -185,7 +185,7 @@ export default class Profile extends Component {
                 type="switch"
                 id="reflection"
                 name="reflection"
-                label="To reflect on my experiences"
+                label="To gain insight from my experiences"
               />
               <CustomInput
                 checked={this.state.preference === "motivation"}

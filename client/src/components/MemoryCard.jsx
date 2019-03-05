@@ -41,9 +41,6 @@ export default class MemoryCard extends Component {
         }}
         onClick={this.props.onSelect}
       >
-        <h3>{this.props.memory.title}</h3>
-        <h3>{this.props.memory.date}</h3>
-
         <div className="show-image">
           <img
             id="memImg"
@@ -51,14 +48,13 @@ export default class MemoryCard extends Component {
             onClick={this.toggleModal}
             alt=""
             style={{
-              height: '250px'
+              height: '380px'
             }}
           />
-
           <input
-            className="delete"
-            type="button"
-            value="Delete"
+            className="hovertitle"
+            type="text"
+            value={this.props.memory.title + ' - ' + this.props.memory.date}
             onClick={() => this.delete()}
           />
         </div>
@@ -72,6 +68,12 @@ export default class MemoryCard extends Component {
               src={this.props.memory.imgUrl}
               alt=""
               className="modal-content"
+            />
+            <input
+              className="delete"
+              type="button"
+              value="Delete"
+              onClick={() => this.delete()}
             />
             <Link variant="outline-info" to="/reminder/:id">
               Set Reminder

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Col,
   CustomInput,
@@ -8,24 +8,24 @@ import {
   FormGroup,
   Label,
   Input
-} from "reactstrap";
+} from 'reactstrap';
 
 // import the service file since we need it to send (and get) the data to(from) server
-import Service from "../../service";
+import Service from '../../service';
 
 class AddMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      date: "",
-      notes: "",
+      title: '',
+      date: '',
+      notes: '',
       reflection: false,
       motivation: false,
       nostalgia: false,
       viewed: false,
-      imgUrl: "",
-      _owner: ""
+      imgUrl: '',
+      _owner: ''
     };
     this.service = new Service();
   }
@@ -43,12 +43,12 @@ class AddMemory extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log('The file to be uploaded is: ', e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
     // req.body to .create() method when creating a new memory in '/api/memories/create' POST route
-    uploadData.append("imgUrl", e.target.files[0]);
+    uploadData.append('imgUrl', e.target.files[0]);
     this.service
       .handleUpload(uploadData)
       .then(response => {
@@ -57,7 +57,7 @@ class AddMemory extends Component {
         this.setState({ imgUrl: response.secure_url });
       })
       .catch(err => {
-        console.log("Error while uploading the file: ", err);
+        console.log('Error while uploading the file: ', err);
       });
   };
 
@@ -67,11 +67,11 @@ class AddMemory extends Component {
     this.service
       .saveNewMemory(this.state)
       .then(res => {
-        console.log("added: ", res);
-        alert("Image successfully uploaded");
+        console.log('added: ', res);
+        alert('Image successfully uploaded');
       })
       .catch(err => {
-        console.log("Error while adding the memory: ", err);
+        console.log('Error while adding the memory: ', err);
       });
   };
 
@@ -139,7 +139,7 @@ class AddMemory extends Component {
             <Col sm={10}>
               <CustomInput
                 checked={this.state.reflection}
-                onChange={e => this.handlePrefChange("reflection")}
+                onChange={e => this.handlePrefChange('reflection')}
                 type="switch"
                 id="reflection"
                 name="reflection"
@@ -147,7 +147,7 @@ class AddMemory extends Component {
               />
               <CustomInput
                 checked={this.state.nostalgia}
-                onChange={e => this.handlePrefChange("nostalgia")}
+                onChange={e => this.handlePrefChange('nostalgia')}
                 type="switch"
                 id="nostalgia"
                 name="nostalgia"
@@ -155,7 +155,7 @@ class AddMemory extends Component {
               />
               <CustomInput
                 checked={this.state.motivation}
-                onChange={e => this.handlePrefChange("motivation")}
+                onChange={e => this.handlePrefChange('motivation')}
                 type="switch"
                 id="motivation"
                 name="motivation"
