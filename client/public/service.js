@@ -21,8 +21,9 @@ const saveSubscription = async subscription => {
   // } else {
   //   baseUrl = "https://re-mindful.herokuapp.com";
   // }
+  // http://localhost:5000/api/save-subscription
   console.log("saving subscription in public service.js");
-  const SERVER_URL = "http://localhost:5000/api/save-subscription";
+  const SERVER_URL = "https://re-mindful.herokuapp.com/api/save-subscription";
   const response = await fetch(SERVER_URL, {
     credentials: "include",
     method: "post",
