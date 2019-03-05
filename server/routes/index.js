@@ -150,7 +150,7 @@ router.get("/send-notification", (req, res) => {
         if (sub._owner) {
           console.log("investigating THE SUB: ", sub._owner);
           var memoryId = sub._owner.chosenMemory;
-          const body = `http://localhost:3000/reminder/${memoryId}`; // ${sub._owner.chosenMemory};
+          const body = `http://re-mindful.herokuapp.com/reminder/${memoryId}`; // ${sub._owner.chosenMemory};
           console.log("TCL: body", body);
           sendNotification(sub, body);
         }
