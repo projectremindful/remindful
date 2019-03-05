@@ -1,11 +1,65 @@
 const express = require("express");
+const app = express();
 const { isLoggedIn } = require("../middlewares");
 const router = express.Router();
 const Memory = require("../models/Memory");
 const Subscription = require("../models/Subscription");
 const User = require("../models/User");
+const cron = require("node-schedule");
+const nodemailer = require("nodemailer");
 
 const webpush = require("web-push"); //requiring the web-push module
+
+// specifying the mailOptions
+let transporter = nodemailer.createTransport({
+  // The service which will be used to send the emails
+  service: "gmail",
+  //   credentials to send emails
+  auth: {
+    user: "process.env.GMAIL_EMAIL",
+    pass: "process.env.GMAIL_PASSWORD"
+  }
+});
+
+var rule2 = new cron.RecurrenceRule();
+rule2.dayOfWeek = [1];
+rule2.hour = 0;
+rule2.minute = 00;
+cron.scheduleJob(rule2, function() {
+  console.log("-----------------");
+  console.log("Running Cron Job");
+  let email = req.body;
+  let mailOptions = {
+    from: 'Remindful',
+    to: email,
+    subject: `Your Remindful reminder`,
+    text: 
+    `Hello ${req.body.username}!
+    <img src="${req.body.imgUrl}"/>
+    Have a remindful day`
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      throw error;
+    } else {
+      console.log("email sent");
+    }
+  })
+}
+);
+
+app.listen(3142);
+app.get('/schedule/:dayNum/:hour/:minute', function (req, res, next) {
+  var rule2 = new cron.RecurrenceRule();
+  rule2.dayOfWeek = [req.params.dayNum];
+  rule2.hour = req.params.hour;
+  rule2.minute = req.params.minute;
+  cron.scheduleJob(rule2, function(){
+    console.log('It works!');
+  });
+  res.json("sup")
+});
+
 
 router.get("/my-profile", isLoggedIn, (req, res, next) => {
   req.user.password = undefined;
