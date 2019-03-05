@@ -1,7 +1,7 @@
 // --------------------
 // Definition of variables
 $primary: #32c3ff;
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 body {
   margin: 0;
@@ -146,7 +146,7 @@ h2 {
 }
 
 .logout {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   text-align: center;
   line-height: 2em;
   padding-top: 70px;
@@ -360,4 +360,26 @@ div.show-image input.hovertitle {
   .modal-content {
     width: 100%;
   }
+}
+
+// weekday selector:
+.weekDays-selector input {
+  display: none !important;
+}
+
+.weekDays-selector input[type="checkbox"] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 40px;
+  width: 50px;
+  margin-right: 4px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type="checkbox"]:checked + label {
+  background: #5776e9;
+  color: #ffffff;
 }
