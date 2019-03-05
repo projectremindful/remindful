@@ -15,6 +15,12 @@ const urlB64ToUint8Array = base64String => {
 
 // function to save the subscription to the backend
 const saveSubscription = async subscription => {
+  // var baseUrl;
+  // if (self.location.href.contains("localhost")) {
+  //   baseUrl = "http://localhost:5000";
+  // } else {
+  //   baseUrl = "https://re-mindful.herokuapp.com";
+  // }
   console.log("saving subscription in public service.js");
   const SERVER_URL = "http://localhost:5000/api/save-subscription";
   const response = await fetch(SERVER_URL, {

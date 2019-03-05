@@ -93,9 +93,7 @@ router.get("/send-notification", (req, res) => {
     .then(subscriptions => {
       subscriptions.forEach(sub => {
         // const memoryId = "chosenMemory"; // create new field in user model and generate chosen memory when setting preferences
-        const body = `http://localhost:3000/reminder/${
-          sub._owner.chosenMemory
-        }`;
+        const body = "http://localhost:3000/reminder/memoryId"; // ${sub._owner.chosenMemory};
         console.log("TCL: body", body);
         sendNotification(sub, body);
         // call chosen memory method again somehow after viewing memory to update
@@ -122,6 +120,35 @@ router.delete("/memory/:id", isLoggedIn, (req, res, next) => {
     })
     .catch(function(err) {
       res.status(404).send(err);
+    });
+});
+
+router.get("/memory/:id", (req, res, next) => {
+  Memory.findById(req.params.id)
+    .then(memory => {
+      res.json(memory);
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.put("/memory/:id", (req, res, next) => {
+  Memory.findByIdAndUpdate(
+    req.params.id,
+    {
+      notes: req.body.updatedNotes
+    },
+    { new: true }
+  )
+    .then(memory => {
+      res.json({
+        message: "memory updated",
+        memory: memory
+      });
+    })
+    .catch(error => {
+      console.log("error in put user/id api: ", error);
     });
 });
 

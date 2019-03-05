@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import api from "../../api";
 import {
   Button,
@@ -109,6 +110,7 @@ export default class Profile extends Component {
   }
 
   render() {
+    console.log(this.state.chosenMemory);
     return true ? (
       // when user information has loaded render this
       <Container className="forms">
@@ -210,6 +212,9 @@ export default class Profile extends Component {
             Submit Changes
           </Button>
         </Form>
+        <Link to={`/reminder/${this.state.chosenMemory}`}>
+          Reflection view for users chosen memory
+        </Link>
       </Container>
     ) : (
       // if user information has not yet loaded render this
@@ -224,7 +229,8 @@ export default class Profile extends Component {
         username: user.username,
         email: user.email,
         profileUrl: user.profileUrl,
-        preference: user.preference
+        preference: user.preference,
+        chosenMemory: user.chosenMemory
       });
     });
   }
