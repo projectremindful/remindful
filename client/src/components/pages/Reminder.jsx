@@ -33,7 +33,7 @@ export default class Reminder extends Component {
   render() {
     console.log(JSON.stringify(this.state.reminderDate));
     return (
-      <div className="reminderContainer col py-3 px-lg-5 border bg-light">
+      <div className="reminderContainer col py-3 px-lg-5 pt-5 border bg-light">
       <img id="reminderImg" src={this.props.imgUrl} alt="" />
       <p>When would you like to be reminded of this moment?</p>
         {/* <Form onSubmit={this.scheduleReminder.bind(this)}>> */}
