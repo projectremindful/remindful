@@ -369,3 +369,25 @@ div.show-image input.hovertitle {
     width: 100%;
   }
 }
+
+// weekday selector:
+.weekDays-selector input {
+  display: none !important;
+}
+
+.weekDays-selector input[type="checkbox"] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 40px;
+  width: 50px;
+  margin-right: 4px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type="checkbox"]:checked + label {
+  background: #5776e9;
+  color: #ffffff;
+}
