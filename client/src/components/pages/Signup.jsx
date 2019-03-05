@@ -47,8 +47,8 @@ class Signup extends Component {
   main = async () => {
     console.log("main() called on button click");
     this.check();
-    const swRegistration = await this.registerServiceWorker();
-    const permission = await this.requestNotificationPermission();
+    await this.requestNotificationPermission();
+    await this.registerServiceWorker();
   };
 
   //------METHODS FOR SIGNUP------

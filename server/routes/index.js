@@ -38,18 +38,21 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
 
 //-----NOTIFICATIONS PUSH API ROUTES_____
 // api that saves subscription data for chrome to the database
-router.post("/save-subscription", (req, res) => {
-  console.log("req.body", req.body);
+router.post("/save-subscription", isLoggedIn, (req, res) => {
+  console.log("in save-subscription route", req.user._id);
+  const _owner = req.user._id;
   const {
     endpoint,
     expirationTime,
     keys: { p256dh, auth }
   } = req.body;
   const newSubscription = new Subscription({
+    _owner,
     endpoint,
     expirationTime,
     keys: { p256dh, auth }
   });
+  console.log("TCL: newSubscription WITH OWNER ID", newSubscription);
   return newSubscription
     .save()
     .then(result => {
@@ -79,10 +82,10 @@ const sendNotification = (subscription, dataToSend = "") => {
   webpush
     .sendNotification(subscription, dataToSend)
     .then(res => {
-      console.log("sent webpush, with the result:  ", res);
+      console.log("sent webpush, with the result:  ");
     })
     .catch(err => {
-      console.log("error in webpush.sendNotification", err);
+      console.log("error in webpush.sendNotification");
     });
 };
 
@@ -92,11 +95,13 @@ router.get("/send-notification", (req, res) => {
     .populate("_owner")
     .then(subscriptions => {
       subscriptions.forEach(sub => {
-        // const memoryId = "chosenMemory"; // create new field in user model and generate chosen memory when setting preferences
-        const body = "http://localhost:3000/reminder/memoryId"; // ${sub._owner.chosenMemory};
-        console.log("TCL: body", body);
-        sendNotification(sub, body);
-        // call chosen memory method again somehow after viewing memory to update
+        if (sub._owner) {
+          console.log("investigating THE SUB: ", sub._owner);
+          var memoryId = sub._owner.chosenMemory;
+          const body = `http://localhost:3000/reminder/${memoryId}`; // ${sub._owner.chosenMemory};
+          console.log("TCL: body", body);
+          sendNotification(sub, body);
+        }
       });
     });
   res.json({}); // sends empty response to avoid weird errors
