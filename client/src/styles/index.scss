@@ -8,7 +8,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   color: black;
-  background-color: white;
+  background-color: #fff;
   min-height: 100vh;
   color: black;
 }
@@ -96,6 +96,7 @@ h2 {
 
 .navbar {
   position: fixed;
+  background-color: #ffffff;
   border-bottom: 1px solid #e6eaea;
   z-index: 999;
   padding: 0;
@@ -160,10 +161,13 @@ h2 {
 #memImg {
   cursor: pointer;
   transition: 0.3s;
+  // filter: grayscale(100%);
+  // -webkit-filter: grayscale(100%);
 }
 
 #memImg:hover {
-  opacity: 0.9;
+  opacity: 1;
+  // filter: none;
 }
 
 .modal {
@@ -284,6 +288,7 @@ div.show-image input.hovertitle {
   padding-left: 5px;
   bottom: 0px;
   left: 0;
+  filter: none;
 }
 
 .close {
@@ -366,3 +371,59 @@ div.show-image input.hovertitle {
     width: 100%;
   }
 }
+
+// mosiac images
+
+.box-gallery {
+  margin: 0px;
+}
+
+.mosaic-images img {
+  max-height: 310px;
+  max-width: 25%;
+  border: 3px black;
+}
+
+.mosaic-images {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  z-index: -1;
+}
+
+.child {
+  flex: 1 0 21%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin-left: 270px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+}
+
+.profilebox {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  width: 600px;
+  height: 400px;
+  text-align: center;
+  margin-top: 160px;
+  line-height: 20px;
+  color: black;
+}
+
+.preferences {
+  text-align: left;
+}
+
+// .top-padding {
+//   padding-top: 310px;
+// }

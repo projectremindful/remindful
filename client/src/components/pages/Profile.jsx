@@ -111,112 +111,117 @@ export default class Profile extends Component {
   render() {
     return true ? (
       // when user information has loaded render this
-      <Container className="forms">
-        <Row style={{ margin: '30px 0' }}>
-          <Col xs="4">
-            <img
-              style={{ height: '100px' }}
-              src={this.state.profileUrl}
-              alt="profile pic"
-            />
-          </Col>
-          <Col xs="8" align="left">
-            <h4>{this.state.username}</h4>
-            <p>{this.state.email}</p>
-          </Col>
-        </Row>
-        <hr />
-        <h4 className="p-2">Edit your Details</h4>
-        <Form onSubmit={e => this.handleSubmit(e)}>
-          <FormGroup row>
-            <Label for="username" sm={2} size="sm">
-              Username
-            </Label>
-            <Col sm={10}>
-              <Input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Enter new Username"
-                value={this.state.username}
-                onChange={e => this.handleChange(e)}
-                bsSize="sm"
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="email" sm={2} size="sm">
-              Email
-            </Label>
-            <Col sm={10}>
-              <Input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Enter new Email"
-                value={this.state.email}
-                onChange={e => this.handleChange(e)}
-                bsSize="sm"
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="profileUrl" sm={2} size="sm">
-              Upload Profile Picture
-            </Label>
-            <Col sm={10}>
-              <Input
-                type="file"
-                name="profileUrl"
-                id="file"
-                onChange={e => this.handleFileUpload(e)}
-                bsSize="sm"
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Col sm={10}>
-              <Label>What would you like to get out of using Remindful?</Label>
-              <CustomInput
-                checked={this.state.preference === 'reflection'}
-                onChange={e => this.handlePrefChange('reflection')}
-                type="switch"
-                id="reflection"
-                name="reflection"
-                label="To gain insight from my experiences"
-              />
-              <CustomInput
-                checked={this.state.preference === 'motivation'}
-                onChange={e => this.handlePrefChange('motivation')}
-                type="switch"
-                id="motivation"
-                name="motivation"
-                label="For motivation"
-              />
-              <CustomInput
-                checked={this.state.preference === 'nostalgia'}
-                onChange={e => this.handlePrefChange('nostalgia')}
-                type="switch"
-                id="nostalgia"
-                name="nostalgia"
-                label="To enjoy happy memories"
-              />
-            </Col>
-          </FormGroup>
-          <p>
-            These preferences will determine what memories you get reminded of
-          </p>
-          <Button outline color="success" onClick={this.handleClick}>
-            Submit Changes
-          </Button>
-        </Form>
-      </Container>
+      <div>
+        <div className="box-gallery">
+          <div className="mosaic-images">
+            <img className="child" src="./mosaic-images/IMG_2904.jpg" />
+            <img className="child" src="./mosaic-images/IMG_2463.jpg" />
+            <img className="child" src="./mosaic-images/IMG_1869.jpg" />
+            <img className="child" src="./mosaic-images/IMG_2616.jpg" />
+            <img className="child" src="./mosaic-images/IMG_1675.jpg" />
+            <img className="child" src="./mosaic-images/IMG_1882.jpg" />
+            <img className="child" src="./mosaic-images/IMG_1732.jpg" />
+            <img className="child" src="./mosaic-images/IMG_1698.jpg" />
+            <img className="child" src="./mosaic-images/IMG_1871.jpg" />
+            <img className="child" src="./mosaic-images/IMG_1663.jpg" />
+            <img className="child" src="./mosaic-images/IMG_3045.jpg" />
+            <img className="child" src="./mosaic-images/IMG_2728.jpg" />
+          </div>
+        </div>
+        <Container className="forms">
+          <div className="profilebox">
+            <h4 className="p-2">Profile Preferences</h4>
+            <Form onSubmit={e => this.handleSubmit(e)}>
+              <FormGroup row>
+                <Label for="username" sm={2} size="sm">
+                  Username
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Enter new Username"
+                    value={this.state.username}
+                    onChange={e => this.handleChange(e)}
+                    bsSize="sm"
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="email" sm={2} size="sm">
+                  Email
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Enter new Email"
+                    value={this.state.email}
+                    onChange={e => this.handleChange(e)}
+                    bsSize="sm"
+                  />
+                </Col>
+              </FormGroup>
+              <br />
+              <FormGroup row className="preferences">
+                <Col sm={10}>
+                  <Label>
+                    What would you like to get out of using Remindful?
+                  </Label>
+                  <CustomInput
+                    checked={this.state.preference === 'reflection'}
+                    onChange={e => this.handlePrefChange('reflection')}
+                    type="switch"
+                    id="reflection"
+                    name="reflection"
+                    label="To gain insight from my experiences"
+                  />
+                  <CustomInput
+                    checked={this.state.preference === 'motivation'}
+                    onChange={e => this.handlePrefChange('motivation')}
+                    type="switch"
+                    id="motivation"
+                    name="motivation"
+                    label="For motivation"
+                  />
+                  <CustomInput
+                    checked={this.state.preference === 'nostalgia'}
+                    onChange={e => this.handlePrefChange('nostalgia')}
+                    type="switch"
+                    id="nostalgia"
+                    name="nostalgia"
+                    label="To enjoy happy memories"
+                  />
+                </Col>
+              </FormGroup>
+              <br />
+              <p>
+                These preferences will determine what memories you are reminded
+                of
+              </p>
+              <Button
+                style={{
+                  backgroundColor: '#24f0a9',
+                  color: 'white',
+                  border: 'white'
+                }}
+                onClick={this.handleClick}
+              >
+                Submit Changes
+              </Button>
+            </Form>
+          </div>
+        </Container>
+      </div>
     ) : (
       // if user information has not yet loaded render this
       <div>Loading</div>
     );
   }
 
+  // 3 random mosaic images light up every 4 seconds
   componentDidMount() {
     api.getProfile().then(user => {
       this.setState({
@@ -227,5 +232,50 @@ export default class Profile extends Component {
         preference: user.preference
       });
     });
+    var bgImages = document.querySelectorAll('.mosaic-images img');
+    function setAllToGrayScale() {
+      for (var i = 0; i < bgImages.length; i++) {
+        // bgImages[i].style.filter = 'grayscale(100%)';
+        // bgImages[i].style.filter = 'brightness(50%)';
+        bgImages[i].style.filter = 'grayscale(100%) brightness(40%)';
+      }
+    }
+    setInterval(function() {
+      setAllToGrayScale();
+
+      const randomNum = (max, min, except, except2) => {
+        let num = Math.floor(Math.random() * (max - min)) + min;
+        return num === except || num === except2
+          ? randomNum(max, min, except, except2)
+          : num;
+      };
+
+      const randomNumber = randomNum(0, 4, -1, -2);
+      const randomNumber2 = randomNum(4, 8, randomNumber + 4, -3);
+      const randomNumber3 = randomNum(
+        8,
+        12,
+        randomNumber + 4,
+        randomNumber2 + 4
+      );
+
+      var randomImage = bgImages[randomNumber];
+
+      var randomImage2 = bgImages[randomNumber2];
+
+      var randomImage3 = bgImages[randomNumber3];
+
+      console.log(randomImage);
+      randomImage.style.filter = 'grayscale(0%)';
+      randomImage.style.opacity = 1;
+      randomImage2.style.filter = 'grayscale(0%)';
+      randomImage2.style.opacity = 1;
+      randomImage3.style.filter = 'grayscale(0%)';
+      randomImage3.style.opacity = 1;
+    }, 5000);
   }
 }
+
+// 0123 1230
+// 3012 3012
+// 1230 0123
