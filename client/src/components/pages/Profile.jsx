@@ -215,9 +215,9 @@ export default class Profile extends Component {
                 Submit Changes
               </Button>
             </Form>
-            {/* <Link to={`/reminder/${this.state.chosenMemory}`}>
-                 Reflection view for users chosen memory
-              </Link> */}
+            <Link to={`/reminder/${this.state.chosenMemory}`}>
+              Reflection view for users chosen memory
+            </Link>
           </div>
         </Container>
       </div>
@@ -272,7 +272,7 @@ export default class Profile extends Component {
 
       var randomImage3 = bgImages[randomNumber3];
 
-      console.log(randomImage);
+      // console.log(randomImage);
       randomImage.style.filter = "grayscale(0%)";
       randomImage.style.opacity = 1;
       randomImage2.style.filter = "grayscale(0%)";

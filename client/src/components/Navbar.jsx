@@ -9,7 +9,6 @@ import {
   NavLink,
   NavItem
 } from "reactstrap";
-import logo from "../../images/Remindful.png";
 import { NavLink as NLink } from "react-router-dom";
 
 export default class NavBar extends Component {
@@ -37,7 +36,7 @@ export default class NavBar extends Component {
         <NavbarToggler onClick={this.toggle} />
         <NavbarBrand tag={NLink} to="/">
           {" "}
-          <img src={logo} alt="logo" />
+          <img src={"/images/Remindful.png"} alt="logo" />
         </NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
