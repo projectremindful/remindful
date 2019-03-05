@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import api from "../../api";
+import React, { Component } from 'react';
+import api from '../../api';
 import {
   Button,
   CustomInput,
@@ -10,21 +10,21 @@ import {
   FormGroup,
   Label,
   Input
-} from "reactstrap";
+} from 'reactstrap';
 
 // import the service file since we need it to send (and get) the data to(from) server
-import Service from "../../service";
+import Service from '../../service';
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: "",
-      username: "",
-      email: "",
-      profileUrl: "",
-      preference: "",
-      chosenMemory: ""
+      _id: '',
+      username: '',
+      email: '',
+      profileUrl: '',
+      preference: '',
+      chosenMemory: ''
     };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
@@ -46,11 +46,11 @@ export default class Profile extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log('The file to be uploaded is: ', e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
-    uploadData.append("imgUrl", e.target.files[0]);
+    uploadData.append('imgUrl', e.target.files[0]);
     this.service
       .handleUpload(uploadData)
       .then(response => {
@@ -59,7 +59,7 @@ export default class Profile extends Component {
         this.setState({ profileUrl: response.secure_url });
       })
       .catch(err => {
-        console.log("Error while uploading the file: ", err);
+        console.log('Error while uploading the file: ', err);
       });
   };
 
@@ -69,11 +69,11 @@ export default class Profile extends Component {
     this.service
       .updateProfile(this.state)
       .then(res => {
-        console.log("added: ", res);
-        alert("Profile Picture successfully uploaded");
+        console.log('added: ', res);
+        alert('Profile Picture successfully uploaded');
       })
       .catch(err => {
-        console.log("Error while updating Profile Picture: ", err);
+        console.log('Error while updating Profile Picture: ', err);
       });
   };
 
@@ -112,10 +112,10 @@ export default class Profile extends Component {
     return true ? (
       // when user information has loaded render this
       <Container className="forms">
-        <Row style={{ margin: "30px 0" }}>
+        <Row style={{ margin: '30px 0' }}>
           <Col xs="4">
             <img
-              style={{ height: "100px" }}
+              style={{ height: '100px' }}
               src={this.state.profileUrl}
               alt="profile pic"
             />
@@ -178,24 +178,24 @@ export default class Profile extends Component {
             <Col sm={10}>
               <Label>What would you like to get out of using Remindful?</Label>
               <CustomInput
-                checked={this.state.preference === "reflection"}
-                onChange={e => this.handlePrefChange("reflection")}
+                checked={this.state.preference === 'reflection'}
+                onChange={e => this.handlePrefChange('reflection')}
                 type="switch"
                 id="reflection"
                 name="reflection"
-                label="To reflect on my experiences"
+                label="To gain insight from my experiences"
               />
               <CustomInput
-                checked={this.state.preference === "motivation"}
-                onChange={e => this.handlePrefChange("motivation")}
+                checked={this.state.preference === 'motivation'}
+                onChange={e => this.handlePrefChange('motivation')}
                 type="switch"
                 id="motivation"
                 name="motivation"
                 label="For motivation"
               />
               <CustomInput
-                checked={this.state.preference === "nostalgia"}
-                onChange={e => this.handlePrefChange("nostalgia")}
+                checked={this.state.preference === 'nostalgia'}
+                onChange={e => this.handlePrefChange('nostalgia')}
                 type="switch"
                 id="nostalgia"
                 name="nostalgia"
