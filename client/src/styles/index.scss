@@ -21,6 +21,17 @@ h2 {
   background-color: #24f0a9;
   color: white;
   text-align: center;
+  padding: 0 !important;
+}
+
+#test {
+  background-color: #24f0a9 !important;
+  color: white;
+  height: 100%;
+}
+
+.nav-link {
+  padding: 1rem 1rem !important;
 }
 
 .info {
@@ -84,6 +95,7 @@ h2 {
 
 .navbar {
   position: absolute;
+  padding: 0;
   width: 100%;
   animation-delay: 2s;
   animation: mymove 3s;
@@ -255,6 +267,18 @@ div.show-image input.delete {
   padding: 1px;
   top: 0;
   left: 86%;
+}
+
+div.show-image input.hovertitle {
+  background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #fff;
+  width: 100%;
+  font-size: 1.5em;
+  padding: 0px;
+  bottom: 0;
+  left: 0;
 }
 
 .close {

@@ -33,7 +33,7 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <Navbar className="navbar" expand="md" color="white" light>
+      <Navbar className="navbar py-0 px-0 pl-3" expand="md" color="white" light>
         <NavbarToggler onClick={this.toggle} />
         <NavbarBrand tag={NLink} to="/">
           {' '}
@@ -81,9 +81,15 @@ export default class NavBar extends Component {
           </Nav>
           <div className="add-memory">
             {api.isLoggedIn() && (
-              <NavLink tag={NLink} to="/add-memory">
-                Add Memory
-              </NavLink>
+              <div id="test">
+                <NavLink
+                  style={{ marginBottom: '0', color: 'white' }}
+                  tag={NLink}
+                  to="/add-memory"
+                >
+                  Add Memory
+                </NavLink>
+              </div>
             )}
           </div>
         </Collapse>

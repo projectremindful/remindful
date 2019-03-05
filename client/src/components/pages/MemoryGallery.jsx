@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import MemoryCard from '../MemoryCard';
-import {
-  Button,
-  CustomInput,
-  Container,
-  Row,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input
-} from 'reactstrap';
+
 // import api from '../../api';
 
 class MemoryGallery extends Component {
