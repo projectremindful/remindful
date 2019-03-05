@@ -48,15 +48,8 @@ export default class MemoryCard extends Component {
             onClick={this.toggleModal}
             alt=""
             style={{
-              height: '250px'
+              height: '380px'
             }}
-          />
-
-          <input
-            className="delete"
-            type="button"
-            value="Delete"
-            onClick={() => this.delete()}
           />
           <input
             className="hovertitle"
@@ -75,6 +68,12 @@ export default class MemoryCard extends Component {
               src={this.props.memory.imgUrl}
               alt=""
               className="modal-content"
+            />
+            <input
+              className="delete"
+              type="button"
+              value="Delete"
+              onClick={() => this.delete()}
             />
             <Link variant="outline-info" to="/reminder/:id">
               Set Reminder
