@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import api from '../api';
+import React, { Component } from "react";
+import api from "../api";
 import {
   Collapse,
   Navbar,
@@ -8,9 +8,8 @@ import {
   Nav,
   NavLink,
   NavItem
-} from 'reactstrap';
-import logo from '../images/Remindful.png';
-import { NavLink as NLink } from 'react-router-dom';
+} from "reactstrap";
+import { NavLink as NLink } from "react-router-dom";
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -36,8 +35,8 @@ export default class NavBar extends Component {
       <Navbar className="navbar py-0 px-0 pl-3" expand="md" color="#fff" light>
         <NavbarToggler onClick={this.toggle} />
         <NavbarBrand tag={NLink} to="/">
-          {' '}
-          <img src={logo} alt="logo" />
+          {" "}
+          <img src={"/images/Remindful.png"} alt="logo" />
         </NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
@@ -83,7 +82,7 @@ export default class NavBar extends Component {
             {api.isLoggedIn() && (
               <div id="test">
                 <NavLink
-                  style={{ marginBottom: '0', color: 'white' }}
+                  style={{ marginBottom: "0", color: "white" }}
                   tag={NLink}
                   to="/add-memory"
                 >

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import api from '../../api';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import api from "../../api";
 import {
   Button,
   CustomInput,
@@ -10,21 +11,21 @@ import {
   FormGroup,
   Label,
   Input
-} from 'reactstrap';
+} from "reactstrap";
 
 // import the service file since we need it to send (and get) the data to(from) server
-import Service from '../../service';
+import Service from "../../service";
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: '',
-      username: '',
-      email: '',
-      profileUrl: '',
-      preference: '',
-      chosenMemory: ''
+      _id: "",
+      username: "",
+      email: "",
+      profileUrl: "",
+      preference: "",
+      chosenMemory: ""
     };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
@@ -47,11 +48,11 @@ export default class Profile extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log('The file to be uploaded is: ', e.target.files[0]);
+    console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
-    uploadData.append('imgUrl', e.target.files[0]);
+    uploadData.append("imgUrl", e.target.files[0]);
     this.service
       .handleUpload(uploadData)
       .then(response => {
@@ -60,7 +61,7 @@ export default class Profile extends Component {
         this.setState({ profileUrl: response.secure_url });
       })
       .catch(err => {
-        console.log('Error while uploading the file: ', err);
+        console.log("Error while uploading the file: ", err);
       });
   };
 
@@ -70,11 +71,11 @@ export default class Profile extends Component {
     this.service
       .updateProfile(this.state)
       .then(res => {
-        console.log('added: ', res);
-        alert('Profile Picture successfully uploaded');
+        console.log("added: ", res);
+        alert("Profile Picture successfully uploaded");
       })
       .catch(err => {
-        console.log('Error while updating Profile Picture: ', err);
+        console.log("Error while updating Profile Picture: ", err);
       });
   };
 
@@ -110,8 +111,10 @@ export default class Profile extends Component {
   }
 
   render() {
+    console.log(this.state.chosenMemory);
     return true ? (
       // when user information has loaded render this
+
       <div>
         <div className="box-gallery">
           <div className="mosaic-images">
@@ -172,24 +175,24 @@ export default class Profile extends Component {
                     What would you like to get out of using Remindful?
                   </Label>
                   <CustomInput
-                    checked={this.state.preference === 'reflection'}
-                    onChange={e => this.handlePrefChange('reflection')}
+                    checked={this.state.preference === "reflection"}
+                    onChange={e => this.handlePrefChange("reflection")}
                     type="switch"
                     id="reflection"
                     name="reflection"
                     label="To gain insight from my experiences"
                   />
                   <CustomInput
-                    checked={this.state.preference === 'motivation'}
-                    onChange={e => this.handlePrefChange('motivation')}
+                    checked={this.state.preference === "motivation"}
+                    onChange={e => this.handlePrefChange("motivation")}
                     type="switch"
                     id="motivation"
                     name="motivation"
                     label="For motivation"
                   />
                   <CustomInput
-                    checked={this.state.preference === 'nostalgia'}
-                    onChange={e => this.handlePrefChange('nostalgia')}
+                    checked={this.state.preference === "nostalgia"}
+                    onChange={e => this.handlePrefChange("nostalgia")}
                     type="switch"
                     id="nostalgia"
                     name="nostalgia"
@@ -204,15 +207,18 @@ export default class Profile extends Component {
               </p>
               <Button
                 style={{
-                  backgroundColor: '#24f0a9',
-                  color: 'white',
-                  border: 'white'
+                  backgroundColor: "#24f0a9",
+                  color: "white",
+                  border: "white"
                 }}
                 onClick={this.handleClick}
               >
                 Submit Changes
               </Button>
             </Form>
+            <Link to={`/reminder/${this.state.chosenMemory}`}>
+              Reflection view for users chosen memory
+            </Link>
           </div>
         </Container>
       </div>
@@ -230,10 +236,11 @@ export default class Profile extends Component {
         username: user.username,
         email: user.email,
         profileUrl: user.profileUrl,
-        preference: user.preference
+        preference: user.preference,
+        chosenMemory: user.chosenMemory
       });
     });
-    var bgImages = document.querySelectorAll('.mosaic-images img');
+    var bgImages = document.querySelectorAll(".mosaic-images img");
     function setAllToGrayScale() {
       for (var i = 0; i < bgImages.length; i++) {
         // bgImages[i].style.filter = 'grayscale(100%)';
@@ -293,3 +300,107 @@ export default class Profile extends Component {
 // 0123 1230
 // 3012 3012
 // 1230 0123
+
+// <Container className="forms">
+// <Row style={{ margin: "30px 0" }}>
+//   <Col xs="4">
+//     <img
+//       style={{ height: "100px" }}
+//       src={this.state.profileUrl}
+//       alt="profile pic"
+//     />
+//   </Col>
+//   <Col xs="8" align="left">
+//     <h4>{this.state.username}</h4>
+//     <p>{this.state.email}</p>
+//   </Col>
+// </Row>
+// <hr />
+// <h4 className="p-2">Edit your Details</h4>
+// <Form onSubmit={e => this.handleSubmit(e)}>
+//   <FormGroup row>
+//     <Label for="username" sm={2} size="sm">
+//       Username
+//     </Label>
+//     <Col sm={10}>
+//       <Input
+//         type="text"
+//         name="username"
+//         id="username"
+//         placeholder="Enter new Username"
+//         value={this.state.username}
+//         onChange={e => this.handleChange(e)}
+//         bsSize="sm"
+//       />
+//     </Col>
+//   </FormGroup>
+//   <FormGroup row>
+//     <Label for="email" sm={2} size="sm">
+//       Email
+//     </Label>
+//     <Col sm={10}>
+//       <Input
+//         type="email"
+//         name="email"
+//         id="email"
+//         placeholder="Enter new Email"
+//         value={this.state.email}
+//         onChange={e => this.handleChange(e)}
+//         bsSize="sm"
+//       />
+//     </Col>
+//   </FormGroup>
+//   <FormGroup row>
+//     <Label for="profileUrl" sm={2} size="sm">
+//       Upload Profile Picture
+//     </Label>
+//     <Col sm={10}>
+//       <Input
+//         type="file"
+//         name="profileUrl"
+//         id="file"
+//         onChange={e => this.handleFileUpload(e)}
+//         bsSize="sm"
+//       />
+//     </Col>
+//   </FormGroup>
+//   <FormGroup row>
+//     <Col sm={10}>
+//       <Label>What would you like to get out of using Remindful?</Label>
+//       <CustomInput
+//         checked={this.state.preference === "reflection"}
+//         onChange={e => this.handlePrefChange("reflection")}
+//         type="switch"
+//         id="reflection"
+//         name="reflection"
+//         label="To gain insight from my experiences"
+//       />
+//       <CustomInput
+//         checked={this.state.preference === "motivation"}
+//         onChange={e => this.handlePrefChange("motivation")}
+//         type="switch"
+//         id="motivation"
+//         name="motivation"
+//         label="For motivation"
+//       />
+//       <CustomInput
+//         checked={this.state.preference === "nostalgia"}
+//         onChange={e => this.handlePrefChange("nostalgia")}
+//         type="switch"
+//         id="nostalgia"
+//         name="nostalgia"
+//         label="To enjoy happy memories"
+//       />
+//     </Col>
+//   </FormGroup>
+//   <p>
+//     These preferences will determine what memories you get reminded of
+//   </p>
+//   <Button outline color="success" onClick={this.handleClick}>
+//     Submit Changes
+//   </Button>
+// </Form>
+// <Link to={`/reminder/${this.state.chosenMemory}`}>
+//   Reflection view for users chosen memory
+// </Link>
+// </Container>

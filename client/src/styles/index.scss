@@ -1,7 +1,10 @@
 // --------------------
 // Definition of variables
 $primary: #32c3ff;
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/react-quill/dist/quill.snow.css";
+@import "../../node_modules/react-quill/dist/quill.bubble.css";
+@import "../../node_modules/react-quill/dist/quill.core.css";
 
 body {
   margin: 0;
@@ -154,7 +157,7 @@ h2 {
 }
 
 .logout {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   text-align: center;
   line-height: 2em;
   padding-top: 70px;
@@ -450,7 +453,7 @@ div.show-image input.hovertitle {
   display: none !important;
 }
 
-.weekDays-selector input[type='checkbox'] + label {
+.weekDays-selector input[type="checkbox"] + label {
   display: inline-block;
   border-radius: 6px;
   background: #dddddd;
@@ -462,7 +465,7 @@ div.show-image input.hovertitle {
   cursor: pointer;
 }
 
-.weekDays-selector input[type='checkbox']:checked + label {
+.weekDays-selector input[type="checkbox"]:checked + label {
   background: #5776e9;
   color: #ffffff;
 }

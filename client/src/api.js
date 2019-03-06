@@ -1,4 +1,5 @@
 import axios from "axios";
+import { runInNewContext } from "vm";
 
 const service = axios.create({
   baseURL:
@@ -64,11 +65,20 @@ export default {
     return service.get(`/memories`).then(res => res.data);
   },
 
+  getMemory(memoryId) {
+    return service.get(`memory/${memoryId}`).then(res => res.data);
+  },
+
+  updateMemory(memoryId, notes) {
+    console.log("notes in the api method: ", notes);
+    return service.put(`memory/${memoryId}`, notes).then(res => {
+      return res.data;
+    });
+  },
+
   updateUserPreferences(userId, preferences) {
-    console.log("TCL: updateUserPreferences -> preferences", preferences);
     return service.put(`user/${userId}`, preferences).then(res => {
       return res.data;
-      // console.log('Im in the api method',res)
     });
   }
 };
