@@ -60,20 +60,20 @@ export default class Reminder extends Component {
     }));
   }
 
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  }
+  // handleChange(event) {
+  //   const { name, value } = event.target;
+  //   this.setState({ [name]: value });
+  // }
 
-  handleDateChange = e => {
-    console.log("debug:", e.target.value);
-    this.setState({ reminderDate: e.target.value });
-  };
+  // handleDateChange = e => {
+  //   console.log("debug:", e.target.value);
+  //   this.setState({ reminderDate: e.target.value });
+  // };
 
-  scheduleReminder(e) {
-    e.preventDefault();
-    let reminderDate = this.params.date;
-  }
+  // scheduleReminder(e) {
+  //   e.preventDefault();
+  //   let reminderDate = this.params.date;
+  // }
 
   toggleModal = () => {
     this.setState({
@@ -163,5 +163,3 @@ export default class Reminder extends Component {
     // reminderWeekday: "..."
   }
 }
-
-// onChange = reminderDate => this.setState({ reminderDate });
