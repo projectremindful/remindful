@@ -65,19 +65,44 @@ export default {
   },
 
   getMemory(memoryId) {
-    return service.get(`memory/${memoryId}`).then(res => res.data);
+    return service.get(`memories/${memoryId}`).then(res => res.data);
   },
 
   updateMemory(memoryId, notes) {
     console.log("notes in the api method: ", notes);
-    return service.put(`memory/${memoryId}`, notes).then(res => {
+    return service.put(`memories/${memoryId}`, notes).then(res => {
       return res.data;
     });
   },
 
-  updateUserPreferences(userId, preferences) {
-    return service.put(`user/${userId}`, preferences).then(res => {
+  updateUserPreferences(preferences) {
+    return service.put(`/my-profile`, preferences).then(res => {
       return res.data;
     });
+  },
+
+  handleUpload(theFile) {
+    return this.service
+      .post("/upload", theFile)
+      .then(res => res.data)
+      .catch(this.errorHandler);
+  },
+
+  saveNewMemory(newMemory) {
+    return this.service
+      .post("/memories", newMemory)
+      .then(res => res.data)
+      .catch(this.errorHandler);
+  },
+
+  updateProfile(body) {
+    return this.service
+      .put("/profile", body)
+      .then(res => res.data)
+      .catch(this.errorHandler);
+  },
+
+  delete(id) {
+    return this.service.delete("/memories/" + id);
   }
 };

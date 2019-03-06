@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 
 // import the service file since we need it to send (and get) the data to(from) server
-import Service from "../../service";
+import api from "../../api";
 
 class AddMemory extends Component {
   constructor(props) {
@@ -27,7 +27,6 @@ class AddMemory extends Component {
       imgUrl: "",
       _owner: ""
     };
-    this.service = new Service();
   }
 
   handleChange = e => {
@@ -49,7 +48,7 @@ class AddMemory extends Component {
     // imgUrl => this name has to be the same as in the model since we pass
     // req.body to .create() method when creating a new memory in '/api/memories/create' POST route
     uploadData.append("imgUrl", e.target.files[0]);
-    this.service
+    api
       .handleUpload(uploadData)
       .then(response => {
         // console.log('response is: ', response);
@@ -64,12 +63,12 @@ class AddMemory extends Component {
   // this method submits the form
   handleSubmit = e => {
     e.preventDefault();
-    this.service
+    api
       .saveNewMemory(this.state)
       .then(res => {
         console.log("added: ", res);
         alert("Image successfully uploaded");
-        
+        this.props.history.push("/memory-gallery");
       })
       .catch(err => {
         console.log("Error while adding the memory: ", err);

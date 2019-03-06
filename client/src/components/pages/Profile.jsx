@@ -12,9 +12,6 @@ import {
   Input
 } from "reactstrap";
 
-// import the service file since we need it to send (and get) the data to(from) server
-import Service from "../../service";
-
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +23,6 @@ export default class Profile extends Component {
       preference: "",
       chosenMemory: ""
     };
-    this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handlePrefChange = this.handlePrefChange.bind(this);
@@ -52,7 +48,7 @@ export default class Profile extends Component {
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
     uploadData.append("imgUrl", e.target.files[0]);
-    this.service
+    api
       .handleUpload(uploadData)
       .then(response => {
         // console.log('response is: ', response);
@@ -67,7 +63,7 @@ export default class Profile extends Component {
   // this method submits the form updating the users profile informaiton
   handleSubmit = e => {
     e.preventDefault();
-    this.service
+    api
       .updateProfile(this.state)
       .then(res => {
         console.log("added: ", res);
@@ -105,7 +101,7 @@ export default class Profile extends Component {
         });
       })
       .then(preferences => {
-        api.updateUserPreferences(this.state._id, preferences).then(res => {});
+        api.updateUserPreferences(preferences).then(res => {});
       });
   }
 

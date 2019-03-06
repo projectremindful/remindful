@@ -45,8 +45,8 @@ class Signup extends Component {
     console.log("requesting permission to send notifications");
     const permission = await window.Notification.requestPermission();
     // value of permission from the user can be 'granted', 'default', 'denied'
-    if (permission !== 'granted') {
-      throw new Error('Permission not granted for Notification');
+    if (permission !== "granted") {
+      throw new Error("Permission not granted for Notification");
     }
     console.log("permission status is", permission);
   };
@@ -109,6 +109,22 @@ class Signup extends Component {
                     placeholder="Your username"
                     value={this.state.username}
                     onChange={e => this.handleInputChange("username", e)}
+                  />{" "}
+                  <br />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="email" sm={2} size="sm">
+                  Email
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Your Email"
+                    value={this.state.email}
+                    onChange={e => this.handleInputChange("email", e)}
                   />{" "}
                   <br />
                 </Col>

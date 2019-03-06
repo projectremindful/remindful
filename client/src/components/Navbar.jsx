@@ -36,7 +36,11 @@ export default class NavBar extends Component {
         <NavbarToggler onClick={this.toggle} />
         <NavbarBrand tag={NLink} to="/">
           {" "}
+<<<<<<< HEAD
           <img src={"../images/Remindful.png"} alt="logo" />
+=======
+          <img src={"/images/Remindful.png"} alt="logo" />
+>>>>>>> 2d4704fa3a73d06051c1a9d431eebeb413320a15
         </NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
