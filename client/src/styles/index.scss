@@ -2,7 +2,7 @@
 // Definition of variables
 $primary: #32c3ff;
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-// @import '../../node_modules/react-quill/dist/quill.snow.css';
+@import '../../node_modules/react-quill/dist/quill.snow.css';
 // @import '../../node_modules/react-quill/dist/quill.core.css';
 
 body {
@@ -73,7 +73,7 @@ h2 {
 }
 
 .App-logo {
-  margin-top: -200px;
+  margin-top: -80px;
   animation: pulse 3s;
 }
 
@@ -407,7 +407,7 @@ div.show-image input.hovertitle {
   border-radius: 5px;
   padding: 10px;
   width: 600px;
-  height: 400px;
+  height: 440px;
   text-align: center;
   margin-top: 160px;
   line-height: 20px;
@@ -430,6 +430,12 @@ div.show-image input.hovertitle {
 
 .preferences {
   text-align: left;
+}
+
+.initialbg {
+  position: absolute;
+  margin-top: 58px;
+  margin-left: 2px;
 }
 
 // .top-padding {

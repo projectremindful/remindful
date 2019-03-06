@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import api from "../../api";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import api from '../../api';
 import {
   Button,
   CustomInput,
@@ -11,21 +11,21 @@ import {
   FormGroup,
   Label,
   Input
-} from "reactstrap";
+} from 'reactstrap';
 
 // import the service file since we need it to send (and get) the data to(from) server
-import Service from "../../service";
+import Service from '../../service';
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: "",
-      username: "",
-      email: "",
-      profileUrl: "",
-      preference: "",
-      chosenMemory: ""
+      _id: '',
+      username: '',
+      email: '',
+      profileUrl: '',
+      preference: '',
+      chosenMemory: ''
     };
     this.service = new Service();
     this.handleChange = this.handleChange.bind(this);
@@ -48,11 +48,11 @@ export default class Profile extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log('The file to be uploaded is: ', e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
-    uploadData.append("imgUrl", e.target.files[0]);
+    uploadData.append('imgUrl', e.target.files[0]);
     this.service
       .handleUpload(uploadData)
       .then(response => {
@@ -61,7 +61,7 @@ export default class Profile extends Component {
         this.setState({ profileUrl: response.secure_url });
       })
       .catch(err => {
-        console.log("Error while uploading the file: ", err);
+        console.log('Error while uploading the file: ', err);
       });
   };
 
@@ -71,11 +71,11 @@ export default class Profile extends Component {
     this.service
       .updateProfile(this.state)
       .then(res => {
-        console.log("added: ", res);
-        alert("Profile Picture successfully uploaded");
+        console.log('added: ', res);
+        alert('Profile Picture successfully uploaded');
       })
       .catch(err => {
-        console.log("Error while updating Profile Picture: ", err);
+        console.log('Error while updating Profile Picture: ', err);
       });
   };
 
@@ -175,24 +175,24 @@ export default class Profile extends Component {
                     What would you like to get out of using Remindful?
                   </Label>
                   <CustomInput
-                    checked={this.state.preference === "reflection"}
-                    onChange={e => this.handlePrefChange("reflection")}
+                    checked={this.state.preference === 'reflection'}
+                    onChange={e => this.handlePrefChange('reflection')}
                     type="switch"
                     id="reflection"
                     name="reflection"
                     label="To gain insight from my experiences"
                   />
                   <CustomInput
-                    checked={this.state.preference === "motivation"}
-                    onChange={e => this.handlePrefChange("motivation")}
+                    checked={this.state.preference === 'motivation'}
+                    onChange={e => this.handlePrefChange('motivation')}
                     type="switch"
                     id="motivation"
                     name="motivation"
                     label="For motivation"
                   />
                   <CustomInput
-                    checked={this.state.preference === "nostalgia"}
-                    onChange={e => this.handlePrefChange("nostalgia")}
+                    checked={this.state.preference === 'nostalgia'}
+                    onChange={e => this.handlePrefChange('nostalgia')}
                     type="switch"
                     id="nostalgia"
                     name="nostalgia"
@@ -207,9 +207,9 @@ export default class Profile extends Component {
               </p>
               <Button
                 style={{
-                  backgroundColor: "#24f0a9",
-                  color: "white",
-                  border: "white"
+                  backgroundColor: '#24f0a9',
+                  color: 'white',
+                  border: 'white'
                 }}
                 onClick={this.handleClick}
               >
@@ -240,7 +240,7 @@ export default class Profile extends Component {
         chosenMemory: user.chosenMemory
       });
     });
-    var bgImages = document.querySelectorAll(".mosaic-images img");
+    var bgImages = document.querySelectorAll('.mosaic-images img');
     function setAllToGrayScale() {
       for (var i = 0; i < bgImages.length; i++) {
         // bgImages[i].style.filter = 'grayscale(100%)';
