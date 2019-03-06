@@ -1,8 +1,9 @@
 # remindful
 
 Remindful image gallery & notification app, to remind you of special moments.
-&nbsp;
-&nbsp;
+
+------
+
 **How To Install:**
 
 Clone git repository:
@@ -30,8 +31,8 @@ Run local server:
 ```
 $ npm run dev
 ```
-&nbsp;
-&nbsp;
+------
+
 **Technologies Used:**
 
 * MongoDB
@@ -44,13 +45,14 @@ $ npm run dev
 * WebPush / Service Worker
 * Cloudinary
 * Passport
-&nbsp;
-&nbsp;
+------
+
 **Link:**
 
 https://re-mindful.herokuapp.com/
-&nbsp;
-&nbsp;
+
+------
+
 **Creators:**
 
 * **Jen Roberts** - [Jangle282](https://github.com/Jangle282)
