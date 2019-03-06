@@ -10,7 +10,7 @@ const nodemailer = require("nodemailer");
 
 const webpush = require("web-push"); //requiring the web-push module
 // for notifications to work in dev and production - switch enviornmentIsDev to false before deploying
-const environmentIsDev = true;
+const environmentIsDev = false;
 if (environmentIsDev) {
   baseUrl = "http://localhost:3000";
 } else {
