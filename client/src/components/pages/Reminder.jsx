@@ -74,27 +74,48 @@ export default class Reminder extends Component {
 
   render() {
     return (
-      <Container style={{ padding: "100px" }}>
-        <Row>
-          <Col>
-            <img
-              style={{ width: "400px" }}
-              src={this.state.imgUrl}
-              alt="memory"
-            />
-          </Col>
-          <Col>
-            <h2>{this.state.title}</h2>
-            <p>{this.state.date}</p>
-            <ul>
-              <li>Try to imagine the event in every detail</li>
-              <li>What does this moment mean to you?</li>
-              <li>How did this experience change you?</li>
-              <li>Did you share it with someone? What do they mean to you?</li>
-              <li>What were you thinking about at the time?</li>
-            </ul>
-            <Button onClick={this.toggleModal}>Read your reflections</Button>
-            {/* <p>Viewed: {this.state.viewed ? "true" : "false"}</p>
+      <div
+        style={{
+          margin: "0",
+          padding: "0"
+        }}
+      >
+        <div
+          style={{
+            margin: "0 auto",
+            padding: "100px 0px",
+            width: "100%"
+          }}
+        >
+          <Row>
+            <Col sm="12" lg="8">
+              <img
+                style={{ width: "100%" }}
+                src={this.state.imgUrl}
+                alt="memory"
+              />
+              <br />
+              <br />
+              <br />
+            </Col>
+            <Col
+              sm="12"
+              lg="4"
+              style={{ textAlign: "center", lineHeight: "1.5" }}
+            >
+              <h2>{this.state.title}</h2>
+              <p>
+                <i>{this.state.date}</i>
+              </p>
+              <br />
+              <p>Try to imagine the event in every detail</p>
+              <p>What does this moment mean to you?</p>
+              <p>How did this experience change you?</p>
+              <p>Did you share it with someone? What do they mean to you?</p>
+              <p>What were you thinking about at the time?</p>
+              <br />
+              <Button onClick={this.toggleModal}>Read your reflections</Button>
+              {/* <p>Viewed: {this.state.viewed ? "true" : "false"}</p>
             <p>Nostalgia tag: {this.state.nostalgia ? "true" : "false"}</p>
             <p>Reflection tag: {this.state.reflection ? "true" : "false"}</p>
             <p>Motivation tag: {this.state.motivation ? "true" : "false"}</p>
@@ -106,26 +127,29 @@ export default class Reminder extends Component {
             >
               I {this.state.viewed ? "won't" : "will"} see this memory again
             </Button> */}
-          </Col>
-        </Row>
+            </Col>
+          </Row>
 
-        <Modal // show Quill box
-          show={this.state.showModal}
-          closeCallback={this.toggleModal}
-          customClass="custom_modal_class"
-        >
-          <React.Fragment>
-            <Form>
-              <QuillTextBox
-                text={this.state.notes}
-                onChange={this.changeText}
-                className="modal-content"
-              />
-              <Button onClick={this.handleNotesClick}>Save your changes</Button>
-            </Form>
-          </React.Fragment>
-        </Modal>
-      </Container>
+          <Modal // show Quill box
+            show={this.state.showModal}
+            closeCallback={this.toggleModal}
+            customClass="custom_modal_class"
+          >
+            <React.Fragment>
+              <Form>
+                <QuillTextBox
+                  text={this.state.notes}
+                  onChange={this.changeText}
+                  className="modal-content"
+                />
+                <Button onClick={this.handleNotesClick}>
+                  Save your changes
+                </Button>
+              </Form>
+            </React.Fragment>
+          </Modal>
+        </div>
+      </div>
     );
   }
 
