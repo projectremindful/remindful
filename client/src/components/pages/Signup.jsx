@@ -45,8 +45,8 @@ class Signup extends Component {
     console.log("requesting permission to send notifications");
     const permission = await window.Notification.requestPermission();
     // value of permission from the user can be 'granted', 'default', 'denied'
-    if (permission !== "granted") {
-      throw new Error("Permission not granted for Notification");
+    if (permission !== 'granted') {
+      throw new Error('Permission not granted for Notification');
     }
     console.log("permission status is", permission);
   };
