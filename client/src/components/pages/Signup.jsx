@@ -47,11 +47,6 @@ class Signup extends Component {
     // value of permission from the user can be 'granted', 'default', 'denied'
     if (permission !== 'granted') {
       throw new Error('Permission not granted for Notification');
-    if (permission !== "granted") {
-      alert(
-        "You must allow notifications from Remindful to receive your daily Reminders"
-      );
-      // throw new Error("Permission not granted for Notification");
     }
     console.log('permission status is', permission);
   };
