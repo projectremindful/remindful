@@ -1,8 +1,8 @@
 // --------------------
 // Definition of variables
 $primary: #32c3ff;
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
-// @import '../../node_modules/react-quill/dist/quill.snow.css';
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/react-quill/dist/quill.snow.css";
 // @import '../../node_modules/react-quill/dist/quill.core.css';
 
 body {
@@ -156,7 +156,7 @@ h2 {
 }
 
 .logout {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   text-align: center;
   line-height: 2em;
   padding-top: 70px;

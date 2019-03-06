@@ -16,7 +16,6 @@ class QuillTextBox extends Component {
     return (
       <div>
         <ReactQuill
-          style={{ border: "5px solid red" }}
           value={this.props.text}
           onChange={e => this.handleChange(e)}
         />
