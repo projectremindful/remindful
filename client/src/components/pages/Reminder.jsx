@@ -49,20 +49,20 @@ export default class Reminder extends Component {
     }));
   }
 
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  }
+  // handleChange(event) {
+  //   const { name, value } = event.target;
+  //   this.setState({ [name]: value });
+  // }
 
-  handleDateChange = e => {
-    console.log("debug:", e.target.value);
-    this.setState({ reminderDate: e.target.value });
-  };
+  // handleDateChange = e => {
+  //   console.log("debug:", e.target.value);
+  //   this.setState({ reminderDate: e.target.value });
+  // };
 
-  scheduleReminder(e) {
-    e.preventDefault();
-    let reminderDate = this.params.date;
-  }
+  // scheduleReminder(e) {
+  //   e.preventDefault();
+  //   let reminderDate = this.params.date;
+  // }
 
   render() {
     console.log(JSON.stringify(this.state.reminderDate));
@@ -93,12 +93,14 @@ export default class Reminder extends Component {
         >
           I {this.state.viewed ? "won't" : "will"} see this memory again
         </Button>
-        <div className="reminderContainer col py-3 px-lg-5 pt-5 border bg-light">
+
+
+        {/* <div className="reminderContainer col py-3 px-lg-5 pt-5 border bg-light">
           <img id="reminderImg" src={this.props.imgUrl} alt="" />
           <p>When would you like to be reminded of this moment?</p>
-          {/* <Form onSubmit={this.scheduleReminder.bind(this)}>> */}
+          <Form onSubmit={this.scheduleReminder.bind(this)}>>
           <Form>
-            {/* <FormGroup>
+            <FormGroup>
           <Label for="exampleDate">Specific Date:</Label>
           <Input
             onChange={(e) => this.handleDateChange(e)}
@@ -108,7 +110,7 @@ export default class Reminder extends Component {
             placeholder="date placeholder"
             onC
           />
-        </FormGroup> */}
+          </FormGroup>
             <FormGroup className="weekDays-selector">
               <Label for="weekDays-selector">Once a week on:</Label>
               <br />
@@ -169,7 +171,8 @@ export default class Reminder extends Component {
               Set Reminder
             </button>
           </Form>
-        </div>
+        </div> */}
+
       </div>
     );
   }
@@ -200,4 +203,3 @@ export default class Reminder extends Component {
   }
 }
 
-// onChange = reminderDate => this.setState({ reminderDate });
