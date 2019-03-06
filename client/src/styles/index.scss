@@ -35,6 +35,10 @@ h2 {
   padding: 1rem 1rem !important;
 }
 
+.gray {
+  filter: grayscale(100%) brightness(40%);
+}
+
 .info {
   margin: 20px;
   padding: 10px 20px;
@@ -418,6 +422,20 @@ div.show-image input.hovertitle {
   margin-top: 160px;
   line-height: 20px;
   color: black;
+}
+
+.sl-box {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  width: 600px;
+  height: 260px;
+  text-align: center;
+  line-height: 20px;
+  color: black;
+}
+
+.centerbutton {
 }
 
 .preferences {

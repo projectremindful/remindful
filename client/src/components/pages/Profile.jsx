@@ -30,6 +30,7 @@ export default class Profile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handlePrefChange = this.handlePrefChange.bind(this);
+    this.oldNumbers = [-1, -1, -1];
   }
 
   handleChange(e) {
@@ -114,18 +115,18 @@ export default class Profile extends Component {
       <div>
         <div className="box-gallery">
           <div className="mosaic-images">
-            <img className="child" src="./mosaic-images/IMG_2904.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_2904.jpg" />
             <img className="child" src="./mosaic-images/IMG_2463.jpg" />
-            <img className="child" src="./mosaic-images/IMG_1869.jpg" />
-            <img className="child" src="./mosaic-images/IMG_2616.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_1869.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_2616.jpg" />
             <img className="child" src="./mosaic-images/IMG_1675.jpg" />
-            <img className="child" src="./mosaic-images/IMG_1882.jpg" />
-            <img className="child" src="./mosaic-images/IMG_1732.jpg" />
-            <img className="child" src="./mosaic-images/IMG_1698.jpg" />
-            <img className="child" src="./mosaic-images/IMG_1871.jpg" />
-            <img className="child" src="./mosaic-images/IMG_1663.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_1882.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_1732.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_1698.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_1871.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_1663.jpg" />
             <img className="child" src="./mosaic-images/IMG_3045.jpg" />
-            <img className="child" src="./mosaic-images/IMG_2728.jpg" />
+            <img className="child gray" src="./mosaic-images/IMG_2728.jpg" />
           </div>
         </div>
         <Container className="forms">
@@ -237,27 +238,40 @@ export default class Profile extends Component {
       for (var i = 0; i < bgImages.length; i++) {
         // bgImages[i].style.filter = 'grayscale(100%)';
         // bgImages[i].style.filter = 'brightness(50%)';
-        bgImages[i].style.filter = 'grayscale(100%) brightness(40%)';
+        bgImages[i].classList.add('gray');
       }
     }
+    var that = this;
     setInterval(function() {
       setAllToGrayScale();
 
-      const randomNum = (max, min, except, except2) => {
+      const randomNum = (max, min, except, except2, except3) => {
         let num = Math.floor(Math.random() * (max - min)) + min;
-        return num === except || num === except2
-          ? randomNum(max, min, except, except2)
+        return num === except || num === except2 || num === except3
+          ? randomNum(max, min, except, except2, except3)
           : num;
       };
 
-      const randomNumber = randomNum(0, 4, -1, -2);
-      const randomNumber2 = randomNum(4, 8, randomNumber + 4, -3);
+      const randomNumber = randomNum(0, 4, -1, -2, that.oldNumbers[0]);
+
+      const randomNumber2 = randomNum(
+        4,
+        8,
+        randomNumber + 4,
+        -3,
+        that.oldNumbers[1]
+      );
+
+      // random generated number between 8 and 12, except from aligning items over and the old number
       const randomNumber3 = randomNum(
         8,
         12,
         randomNumber + 4,
-        randomNumber2 + 4
+        randomNumber2 + 4,
+        that.oldNumbers[2]
       );
+
+      that.oldNumbers = [randomNumber, randomNumber2, randomNumber3];
 
       var randomImage = bgImages[randomNumber];
 
@@ -265,14 +279,14 @@ export default class Profile extends Component {
 
       var randomImage3 = bgImages[randomNumber3];
 
-      console.log(randomImage);
-      randomImage.style.filter = 'grayscale(0%)';
+      //console.log(randomImage);
+      randomImage.classList.remove('gray');
       randomImage.style.opacity = 1;
-      randomImage2.style.filter = 'grayscale(0%)';
+      randomImage2.classList.remove('gray');
       randomImage2.style.opacity = 1;
-      randomImage3.style.filter = 'grayscale(0%)';
+      randomImage3.classList.remove('gray');
       randomImage3.style.opacity = 1;
-    }, 5000);
+    }, 4000);
   }
 }
 
