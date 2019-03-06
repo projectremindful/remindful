@@ -107,10 +107,8 @@ router.get("/send-notification", (req, res) => {
           var memoryId = sub._owner.chosenMemory;
           const body = `${baseUrl}/reminder/${memoryId}`;
           sendNotification(sub, body);
-        } else {
-          const body = `${baseUrl}/profile`;
-          sendNotification(sub, body);
         }
+        // else {const body = `${baseUrl}/profile`; sendNotification(sub, body); }
       });
     });
   res.json({}); // sends empty response to avoid weird errors
@@ -191,7 +189,6 @@ router.get("/memories", isLoggedIn, (req, res, next) => {
     .catch(err => next(err));
 });
 
-
 // // specifying the mailOptions
 // let transporter = nodemailer.createTransport({
 //   // The service which will be used to send the emails
@@ -202,7 +199,6 @@ router.get("/memories", isLoggedIn, (req, res, next) => {
 //     pass: "process.env.GMAIL_PASSWORD"
 //   }
 // });
-
 
 // app.listen(3142);
 // app.get("/schedule/:dayNum/:hour/:minute", function(req, res, next) {
