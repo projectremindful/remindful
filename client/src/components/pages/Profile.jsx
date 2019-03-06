@@ -247,7 +247,7 @@ export default class Profile extends Component {
                   />
                 </Col>
               </FormGroup>
-              <br />
+
               <p>
                 These preferences will determine what memories you are reminded
                 of
@@ -260,9 +260,10 @@ export default class Profile extends Component {
                 }}
                 onClick={this.handleClick}
               >
-                Submit Changes
+                Save Changes
               </Button>
             </Form>
+            <br />
             <Link to={`/reminder/${this.state.chosenMemory}`}>
               Reflection view for users chosen memory
             </Link>
@@ -292,7 +293,7 @@ export default class Profile extends Component {
       for (var i = 0; i < bgImages.length; i++) {
         // bgImages[i].style.filter = 'grayscale(100%)';
         // bgImages[i].style.filter = 'brightness(50%)';
-        bgImages[i].classList.add("gray");
+        bgImages[i].classList.add('gray');
       }
     }
     var that = this;
@@ -334,120 +335,12 @@ export default class Profile extends Component {
       var randomImage3 = bgImages[randomNumber3];
 
       //console.log(randomImage);
-      randomImage.classList.remove("gray");
+      randomImage.classList.remove('gray');
       randomImage.style.opacity = 1;
-      randomImage2.classList.remove("gray");
+      randomImage2.classList.remove('gray');
       randomImage2.style.opacity = 1;
-      randomImage3.classList.remove("gray");
+      randomImage3.classList.remove('gray');
       randomImage3.style.opacity = 1;
     }, 4000);
   }
 }
-
-// 0123 1230
-// 3012 3012
-// 1230 0123
-
-// <Container className="forms">
-// <Row style={{ margin: "30px 0" }}>
-//   <Col xs="4">
-//     <img
-//       style={{ height: "100px" }}
-//       src={this.state.profileUrl}
-//       alt="profile pic"
-//     />
-//   </Col>
-//   <Col xs="8" align="left">
-//     <h4>{this.state.username}</h4>
-//     <p>{this.state.email}</p>
-//   </Col>
-// </Row>
-// <hr />
-// <h4 className="p-2">Edit your Details</h4>
-// <Form onSubmit={e => this.handleSubmit(e)}>
-//   <FormGroup row>
-//     <Label for="username" sm={2} size="sm">
-//       Username
-//     </Label>
-//     <Col sm={10}>
-//       <Input
-//         type="text"
-//         name="username"
-//         id="username"
-//         placeholder="Enter new Username"
-//         value={this.state.username}
-//         onChange={e => this.handleChange(e)}
-//         bsSize="sm"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <FormGroup row>
-//     <Label for="email" sm={2} size="sm">
-//       Email
-//     </Label>
-//     <Col sm={10}>
-//       <Input
-//         type="email"
-//         name="email"
-//         id="email"
-//         placeholder="Enter new Email"
-//         value={this.state.email}
-//         onChange={e => this.handleChange(e)}
-//         bsSize="sm"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <FormGroup row>
-//     <Label for="profileUrl" sm={2} size="sm">
-//       Upload Profile Picture
-//     </Label>
-//     <Col sm={10}>
-//       <Input
-//         type="file"
-//         name="profileUrl"
-//         id="file"
-//         onChange={e => this.handleFileUpload(e)}
-//         bsSize="sm"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <FormGroup row>
-//     <Col sm={10}>
-//       <Label>What would you like to get out of using Remindful?</Label>
-//       <CustomInput
-//         checked={this.state.preference === "reflection"}
-//         onChange={e => this.handlePrefChange("reflection")}
-//         type="switch"
-//         id="reflection"
-//         name="reflection"
-//         label="To gain insight from my experiences"
-//       />
-//       <CustomInput
-//         checked={this.state.preference === "motivation"}
-//         onChange={e => this.handlePrefChange("motivation")}
-//         type="switch"
-//         id="motivation"
-//         name="motivation"
-//         label="For motivation"
-//       />
-//       <CustomInput
-//         checked={this.state.preference === "nostalgia"}
-//         onChange={e => this.handlePrefChange("nostalgia")}
-//         type="switch"
-//         id="nostalgia"
-//         name="nostalgia"
-//         label="To enjoy happy memories"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <p>
-//     These preferences will determine what memories you get reminded of
-//   </p>
-//   <Button outline color="success" onClick={this.handleClick}>
-//     Submit Changes
-//   </Button>
-// </Form>
-// <Link to={`/reminder/${this.state.chosenMemory}`}>
-//   Reflection view for users chosen memory
-// </Link>
-// </Container>

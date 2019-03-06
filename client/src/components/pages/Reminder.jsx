@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import api from "../../api";
-import QuillTextBox from "../QuillTextBox";
-import { Form, Button, Col, Row, Container } from "reactstrap";
-import Modal from "../Modal";
+import React, { Component } from 'react';
+import api from '../../api';
+import QuillTextBox from '../QuillTextBox';
+import { Form, Button, Col, Row, Container } from 'reactstrap';
+import Modal from '../Modal';
 
 export default class Reminder extends Component {
   constructor(props) {
@@ -10,10 +10,10 @@ export default class Reminder extends Component {
 
     this.state = {
       memoryId: this.props.match.params.id,
-      imgUrl: "",
-      date: "",
-      notes: "",
-      title: "",
+      imgUrl: '',
+      date: '',
+      notes: '',
+      title: '',
       viewed: false,
       ownerId: null,
       nostalgia: false,
@@ -32,15 +32,15 @@ export default class Reminder extends Component {
 
   handleNotesClick() {
     var updatedNotes = { updatedNotes: this.state.notes };
-    console.log("notes from user", updatedNotes);
+    console.log('notes from user', updatedNotes);
     api
       .updateMemory(this.state.memoryId, updatedNotes)
       .then(res => {
-        console.log("memorynotes updated: ", res);
+        console.log('memorynotes updated: ', res);
         // alert("Profile Picture successfully uploaded");
       })
       .catch(err => {
-        console.log("Error while updating memory notes: ", err);
+        console.log('Error while updating memory notes: ', err);
       });
     // console.log(this.state.notes);
   }
@@ -76,21 +76,21 @@ export default class Reminder extends Component {
     return (
       <div
         style={{
-          margin: "0",
-          padding: "0"
+          margin: '0',
+          padding: '0'
         }}
       >
         <div
           style={{
-            margin: "0 auto",
-            padding: "100px 0px",
-            width: "100%"
+            margin: '0 auto',
+            padding: '100px 0px',
+            width: '100%'
           }}
         >
           <Row>
             <Col sm="12" lg="8">
               <img
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 src={this.state.imgUrl}
                 alt="memory"
               />
@@ -101,7 +101,7 @@ export default class Reminder extends Component {
             <Col
               sm="12"
               lg="4"
-              style={{ textAlign: "center", lineHeight: "1.5" }}
+              style={{ textAlign: 'center', lineHeight: '1.5' }}
             >
               <h2>{this.state.title}</h2>
               <p>
@@ -155,7 +155,7 @@ export default class Reminder extends Component {
 
   componentDidMount() {
     api.getMemory(this.state.memoryId).then(memory => {
-      console.log("memory is:   ", memory);
+      console.log('memory is:   ', memory);
       this.setState({
         imgUrl: memory.imgUrl,
         date: memory.date,
