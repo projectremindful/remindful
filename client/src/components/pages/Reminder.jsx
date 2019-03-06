@@ -87,7 +87,7 @@ export default class Reminder extends Component {
             width: '100%'
           }}
         >
-          <Row>
+          <Row style={{ margin: "0" }}>
             <Col sm="12" lg="8">
               <img
                 style={{ width: '100%' }}

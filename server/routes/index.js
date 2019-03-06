@@ -9,12 +9,12 @@ const cron = require("node-schedule");
 const nodemailer = require("nodemailer");
 
 const webpush = require("web-push"); //requiring the web-push module
-// for notifications to work in dev and production - switch enviornmentIsDev to false before deploying
-const environmentIsDev = true;
-if (environmentIsDev) {
-  baseUrl = "http://localhost:3000";
-} else {
+
+let baseUrl;
+if (process.env.NODE_ENV === "production") {
   baseUrl = "https://re-mindful.herokuapp.com";
+} else {
+  baseUrl = "http://localhost:3000";
 }
 
 router.get("/my-profile", isLoggedIn, (req, res, next) => {
@@ -23,9 +23,9 @@ router.get("/my-profile", isLoggedIn, (req, res, next) => {
 });
 
 //update user preferences
-router.put("/user/:id", isLoggedIn, (req, res, next) => {
+router.put("/my-profile", isLoggedIn, (req, res, next) => {
   User.findByIdAndUpdate(
-    req.params.id,
+    req.user._id, // The id of the connected user
     {
       username: req.body.username,
       email: req.body.email,
@@ -107,16 +107,14 @@ router.get("/send-notification", (req, res) => {
           var memoryId = sub._owner.chosenMemory;
           const body = `${baseUrl}/reminder/${memoryId}`;
           sendNotification(sub, body);
-        } else {
-          const body = `${baseUrl}/profile`;
-          sendNotification(sub, body);
         }
+        // else {const body = `${baseUrl}/profile`; sendNotification(sub, body); }
       });
     });
   res.json({}); // sends empty response to avoid weird errors
 });
 
-router.post("/memories/create", isLoggedIn, (req, res, next) => {
+router.post("/memories", isLoggedIn, (req, res, next) => {
   let _owner = req.user._id;
   req.body._owner = _owner;
   Memory.create(req.body)
@@ -127,7 +125,7 @@ router.post("/memories/create", isLoggedIn, (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.delete("/memory/:id", isLoggedIn, (req, res, next) => {
+router.delete("/memories/:id", isLoggedIn, (req, res, next) => {
   Memory.findByIdAndDelete(req.params.id)
     .then(function(success) {
       res.json();
@@ -137,7 +135,7 @@ router.delete("/memory/:id", isLoggedIn, (req, res, next) => {
     });
 });
 
-router.get("/memory/:id", (req, res, next) => {
+router.get("/memories/:id", (req, res, next) => {
   Memory.findById(req.params.id)
     .then(memory => {
       res.json(memory);
@@ -147,7 +145,7 @@ router.get("/memory/:id", (req, res, next) => {
     });
 });
 
-router.put("/memory/:id", (req, res, next) => {
+router.put("/memories/:id", (req, res, next) => {
   Memory.findByIdAndUpdate(
     req.params.id,
     {
@@ -166,7 +164,7 @@ router.put("/memory/:id", (req, res, next) => {
     });
 });
 
-router.post("/profile/edit", isLoggedIn, (req, res, next) => {
+router.put("/profile", isLoggedIn, (req, res, next) => {
   // console.log('body: ', req.body); ==> here we can see that all
   // the fields have the same names as the ones in the model so we can simply pass
   // req.body to the .update() method
@@ -191,7 +189,6 @@ router.get("/memories", isLoggedIn, (req, res, next) => {
     .catch(err => next(err));
 });
 
-
 // // specifying the mailOptions
 // let transporter = nodemailer.createTransport({
 //   // The service which will be used to send the emails
@@ -202,7 +199,6 @@ router.get("/memories", isLoggedIn, (req, res, next) => {
 //     pass: "process.env.GMAIL_PASSWORD"
 //   }
 // });
-
 
 // app.listen(3142);
 // app.get("/schedule/:dayNum/:hour/:minute", function(req, res, next) {
