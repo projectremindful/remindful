@@ -10,7 +10,7 @@ const nodemailer = require("nodemailer");
 
 const webpush = require("web-push"); //requiring the web-push module
 // for notifications to work in dev and production - switch enviornmentIsDev to false before deploying
-const environmentIsDev = false;
+const environmentIsDev = true;
 if (environmentIsDev) {
   baseUrl = "http://localhost:3000";
 } else {
@@ -157,7 +157,6 @@ router.get("/send-notification", (req, res) => {
           const body = `${baseUrl}/reminder/${memoryId}`;
           sendNotification(sub, body);
         } else {
-          var memoryId = sub._owner.chosenMemory;
           const body = `${baseUrl}/profile`;
           sendNotification(sub, body);
         }

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import api from '../../api';
-import MemoryCard from '../MemoryCard';
+import React, { Component } from "react";
+import api from "../../api";
+import MemoryCard from "../MemoryCard";
 
 // import api from '../../api';
 
@@ -22,7 +22,6 @@ class MemoryGallery extends Component {
       <div className="memoryGallery">
         {this.state.memories.map(memory => (
           <MemoryCard
-            key={memory._id}
             isSelected={
               !this.state.selectedMemoryId ||
               this.state.selectedMemoryId === memory._id
