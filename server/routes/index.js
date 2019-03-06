@@ -9,6 +9,13 @@ const cron = require("node-schedule");
 const nodemailer = require("nodemailer");
 
 const webpush = require("web-push"); //requiring the web-push module
+// for notifications to work in dev and production - switch enviornmentIsDev to false before deploying
+const environmentIsDev = true;
+if (environmentIsDev) {
+  baseUrl = "http://localhost:3000";
+} else {
+  baseUrl = "https://re-mindful.herokuapp.com";
+}
 
 // specifying the mailOptions
 let transporter = nodemailer.createTransport({
@@ -91,7 +98,6 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
 //-----NOTIFICATIONS PUSH API ROUTES_____
 // api that saves subscription data for chrome to the database
 router.post("/save-subscription", isLoggedIn, (req, res) => {
-  console.log("in save-subscription route", req.user._id);
   const _owner = req.user._id;
   const {
     endpoint,
@@ -104,11 +110,10 @@ router.post("/save-subscription", isLoggedIn, (req, res) => {
     expirationTime,
     keys: { p256dh, auth }
   });
-  console.log("TCL: newSubscription WITH OWNER ID", newSubscription);
   return newSubscription
     .save()
     .then(result => {
-      console.log("Success at saving subscription", result);
+      console.log("Success at saving notification subscription");
     })
     .catch(err => {
       console.log("error in save-subscription apiL: ", err);
@@ -134,10 +139,10 @@ const sendNotification = (subscription, dataToSend = "") => {
   webpush
     .sendNotification(subscription, dataToSend)
     .then(res => {
-      console.log("sent webpush, with the result:  ");
+      console.log("webpush notification sent");
     })
     .catch(err => {
-      console.log("error in webpush.sendNotification");
+      console.log("error in webpush.sendNotification", err);
     });
 };
 
@@ -147,11 +152,13 @@ router.get("/send-notification", (req, res) => {
     .populate("_owner")
     .then(subscriptions => {
       subscriptions.forEach(sub => {
-        if (sub._owner) {
-          console.log("investigating THE SUB: ", sub._owner);
+        if (sub._owner.chosenMemory) {
           var memoryId = sub._owner.chosenMemory;
-          const body = `http://re-mindful.herokuapp.com/reminder/${memoryId}`; // ${sub._owner.chosenMemory};
-          console.log("TCL: body", body);
+          const body = `${baseUrl}/reminder/${memoryId}`;
+          sendNotification(sub, body);
+        } else {
+          var memoryId = sub._owner.chosenMemory;
+          const body = `${baseUrl}/profile`;
           sendNotification(sub, body);
         }
       });
