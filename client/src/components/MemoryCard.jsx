@@ -80,38 +80,6 @@ export default class MemoryCard extends Component {
             </Link>
           </React.Fragment>
         </Modal>
-
-        {/* <!-- Modal -->
-        <div
-          className="modal fade"
-          id="myModal"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-body">
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-
-                {/* <div id="myModal" className="modal">
-        <span className="close">&times;</span>
-        <img className="modal-content" id="img01" />
-        <div id="caption"></div>
-        </div>    */}
-        {/* <pre>{JSON.stringify(this.props.memory, null, 2)}</pre> */}
-        {/* </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     );
   }

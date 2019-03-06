@@ -260,18 +260,6 @@ div.show-image input {
   opacity: 1;
 }
 
-// div.show-image input.delete {
-//   background-color: rgba(138, 44, 44, 0.5);
-//   border-color: darkslategray;
-//   color: black;
-//   text-shadow: 0.6px 0.6px lightgray;
-//   border-radius: 10px;
-//   font-size: 0.8em;
-//   padding: 1px;
-//   top: 0;
-//   left: 86%;
-// }
-
 div.show-image input.hovertitle {
   background-image: linear-gradient(to top, rgb(54, 54, 54), rgba(0, 0, 0, 0));
   background-color: rgba(0, 0, 0, 0);
@@ -367,24 +355,24 @@ div.show-image input.hovertitle {
   }
 }
 
-// weekday selector:
-.weekDays-selector input {
-  display: none !important;
-}
+// // weekday selector:
+// .weekDays-selector input {
+//   display: none !important;
+// }
 
-.weekDays-selector input[type="checkbox"] + label {
-  display: inline-block;
-  border-radius: 6px;
-  background: #dddddd;
-  height: 40px;
-  width: 50px;
-  margin-right: 4px;
-  line-height: 40px;
-  text-align: center;
-  cursor: pointer;
-}
+// .weekDays-selector input[type="checkbox"] + label {
+//   display: inline-block;
+//   border-radius: 6px;
+//   background: #dddddd;
+//   height: 40px;
+//   width: 50px;
+//   margin-right: 4px;
+//   line-height: 40px;
+//   text-align: center;
+//   cursor: pointer;
+// }
 
-.weekDays-selector input[type="checkbox"]:checked + label {
-  background: #5776e9;
-  color: #ffffff;
-}
+// .weekDays-selector input[type="checkbox"]:checked + label {
+//   background: #5776e9;
+//   color: #ffffff;
+// }
