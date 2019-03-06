@@ -1,4 +1,4 @@
-const environmentIsDev = false;
+const environmentIsDev = true;
 // This function encodes public key for chrome push API subscription into an array buffer which is needed by the subscription option
 const urlB64ToUint8Array = base64String => {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);

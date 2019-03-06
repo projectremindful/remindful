@@ -1,5 +1,4 @@
 import axios from "axios";
-import { runInNewContext } from "vm";
 
 const service = axios.create({
   baseURL:
