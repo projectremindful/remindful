@@ -7,7 +7,6 @@ import Modal from "../Modal";
 export default class Reminder extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       memoryId: this.props.match.params.id,
       imgUrl: "",
@@ -73,7 +72,13 @@ export default class Reminder extends Component {
   };
 
   render() {
-    return (
+    console.log(this.state.title);
+    return this.state.title === "" ? (
+      <div style={{ padding: "100px" }}>
+        It looks like you don't have any memories! Add a memory to your gallery
+        to start receiving daily reminders of your favourite memories
+      </div>
+    ) : (
       <div
         style={{
           margin: "0",

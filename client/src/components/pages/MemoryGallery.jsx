@@ -16,7 +16,7 @@ class MemoryGallery extends Component {
     });
   }
   render() {
-    return (
+    return this.state.memories.length > 0 ? (
       <div className="memoryGallery">
         {this.state.memories.map(memory => (
           <MemoryCard
@@ -28,6 +28,10 @@ class MemoryGallery extends Component {
             onSelect={() => this.selectMemoryCard(memory._id)}
           />
         ))}
+      </div>
+    ) : (
+      <div style={{ padding: "100px" }}>
+        You don't have any memories uploaded yet!
       </div>
     );
   }

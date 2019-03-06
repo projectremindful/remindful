@@ -7,6 +7,7 @@ import {
   Container,
   Col,
   Form,
+  FormFeedback,
   FormGroup,
   Label,
   Input
@@ -20,8 +21,10 @@ export default class Profile extends Component {
       username: "",
       email: "",
       profileUrl: "",
-      preference: "",
-      chosenMemory: ""
+      preference: "none",
+      chosenMemory: null,
+      requiredFields: false,
+      successMessage: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -31,13 +34,16 @@ export default class Profile extends Component {
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      successMessage: false
     });
   }
 
   handlePrefChange(name) {
+    console.log(typeof this.state.preference);
     this.setState(() => ({
-      preference: `${name}`
+      preference: `${name}`,
+      successMessage: false
     }));
   }
 
@@ -60,56 +66,64 @@ export default class Profile extends Component {
       });
   };
 
-  // this method submits the form updating the users profile informaiton
-  handleSubmit = e => {
-    e.preventDefault();
-    api
-      .updateProfile(this.state)
-      .then(res => {
-        console.log("added: ", res);
-        alert("Profile Picture successfully uploaded");
-      })
-      .catch(err => {
-        console.log("Error while updating Profile Picture: ", err);
-      });
-  };
-
   handleClick() {
-    var preferences = {
-      username: this.state.username,
-      email: this.state.email,
-      profileUrl: this.state.profileUrl,
-      preference: this.state.preference,
-      chosenMemory: null
-    };
-    api
-      .getUserMemories()
-      .then(memories => {
-        if (memories.length === 0) return preferences;
-        var filteredMemories = memories.filter(memory => {
-          return memory[preferences.preference] && !memory.viewed;
+    console.log(
+      "in the handleclick ",
+      this.state.username.length,
+      this.state.preference
+    );
+    if (
+      this.state.username.length > 1 &&
+      this.state.preference.length > 4 &&
+      this.state.email.includes("@")
+    ) {
+      console.log("in the if block");
+      var preferences = {
+        username: this.state.username,
+        email: this.state.email,
+        profileUrl: this.state.profileUrl,
+        preference: this.state.preference,
+        chosenMemory: null
+      };
+      api
+        .getUserMemories()
+        .then(memories => {
+          console.log("in the first .then");
+          if (memories.length === 0) return preferences;
+          var filteredMemories = memories.filter(memory => {
+            return memory[preferences.preference] && !memory.viewed;
+          });
+          if (filteredMemories.length === 0) return preferences;
+          var rand = Math.floor(Math.random() * filteredMemories.length);
+          var chosenMemory = filteredMemories[rand]._id;
+          return (preferences = {
+            username: this.state.username,
+            email: this.state.email,
+            profileUrl: this.state.profileUrl,
+            preference: this.state.preference,
+            chosenMemory: chosenMemory
+          });
+        })
+        .then(preferences => {
+          api.updateUserPreferences(preferences).then(res => {
+            console.log("in the .then after saving", this.props.history);
+            this.setState({
+              requiredFields: false,
+              successMessage: true
+            });
+          });
         });
-        if (filteredMemories.length === 0) return preferences;
-        var rand = Math.floor(Math.random() * filteredMemories.length);
-        var chosenMemory = filteredMemories[rand]._id;
-        return (preferences = {
-          username: this.state.username,
-          email: this.state.email,
-          profileUrl: this.state.profileUrl,
-          preference: this.state.preference,
-          chosenMemory: chosenMemory
-        });
-      })
-      .then(preferences => {
-        api.updateUserPreferences(preferences).then(res => {});
-      });
+    } else {
+      console.log("in the else statement");
+      this.setState(prevState => ({
+        requiredFields: !prevState.requiredFields
+      }));
+    }
   }
 
   render() {
-    console.log(this.state.chosenMemory);
-    return true ? (
+    return this.state._id ? (
       // when user information has loaded render this
-
       <div>
         <div className="box-gallery">
           <div className="mosaic-images">
@@ -178,10 +192,23 @@ export default class Profile extends Component {
         <Container className="forms">
           <div className="profilebox">
             <h4 className="p-2">Profile Preferences</h4>
+            {this.state.requiredFields ? (
+              <p style={{ color: "red" }}>Please fill out required fields</p>
+            ) : (
+              " "
+            )}
             <Form onSubmit={e => this.handleSubmit(e)}>
+              <FormFeedback valid={this.state.successMessage}>
+                Your
+              </FormFeedback>
               <FormGroup row>
                 <Label for="username" sm={2} size="sm">
                   Username
+                  {this.state.requiredFields ? (
+                    <span style={{ color: "red" }}>*</span>
+                  ) : (
+                    " "
+                  )}
                 </Label>
                 <Col sm={10}>
                   <Input
@@ -198,6 +225,11 @@ export default class Profile extends Component {
               <FormGroup row>
                 <Label for="email" sm={2} size="sm">
                   Email
+                  {this.state.requiredFields ? (
+                    <span style={{ color: "red" }}>*</span>
+                  ) : (
+                    " "
+                  )}
                 </Label>
                 <Col sm={10}>
                   <Input
@@ -216,6 +248,11 @@ export default class Profile extends Component {
                 <Col sm={10}>
                   <Label>
                     What would you like to get out of using Remindful?
+                    {this.state.requiredFields ? (
+                      <span style={{ color: "red" }}>*</span>
+                    ) : (
+                      " "
+                    )}
                   </Label>
                   <CustomInput
                     checked={this.state.preference === "reflection"}
@@ -226,14 +263,6 @@ export default class Profile extends Component {
                     label="To gain insight from my experiences"
                   />
                   <CustomInput
-                    checked={this.state.preference === "motivation"}
-                    onChange={e => this.handlePrefChange("motivation")}
-                    type="switch"
-                    id="motivation"
-                    name="motivation"
-                    label="For motivation"
-                  />
-                  <CustomInput
                     checked={this.state.preference === "nostalgia"}
                     onChange={e => this.handlePrefChange("nostalgia")}
                     type="switch"
@@ -241,13 +270,21 @@ export default class Profile extends Component {
                     name="nostalgia"
                     label="To enjoy happy memories"
                   />
+                  <CustomInput
+                    checked={this.state.preference === "motivation"}
+                    onChange={e => this.handlePrefChange("motivation")}
+                    type="switch"
+                    id="motivation"
+                    name="motivation"
+                    label="For motivation"
+                  />
                 </Col>
               </FormGroup>
-              <br />
               <p>
                 These preferences will determine what memories you are reminded
                 of
               </p>
+              <br />
               <Button
                 style={{
                   backgroundColor: "#24f0a9",
@@ -259,9 +296,20 @@ export default class Profile extends Component {
                 Submit Changes
               </Button>
             </Form>
-            <Link to={`/reminder/${this.state.chosenMemory}`}>
+            <br />
+            {this.state.successMessage ? (
+              <div>
+                <p style={{ color: "#24f0a9" }}>
+                  Your information has been succesfully saved
+                </p>
+                {/* <Link to="/reminder/:id">Set Reminder</Link> */}
+              </div>
+            ) : (
+              " "
+            )}
+            {/* <Link to={`/reminder/${this.state.chosenMemory}`}>
               Reflection view for users chosen memory
-            </Link>
+            </Link> */}
           </div>
         </Container>
       </div>
@@ -343,107 +391,3 @@ export default class Profile extends Component {
 // 0123 1230
 // 3012 3012
 // 1230 0123
-
-// <Container className="forms">
-// <Row style={{ margin: "30px 0" }}>
-//   <Col xs="4">
-//     <img
-//       style={{ height: "100px" }}
-//       src={this.state.profileUrl}
-//       alt="profile pic"
-//     />
-//   </Col>
-//   <Col xs="8" align="left">
-//     <h4>{this.state.username}</h4>
-//     <p>{this.state.email}</p>
-//   </Col>
-// </Row>
-// <hr />
-// <h4 className="p-2">Edit your Details</h4>
-// <Form onSubmit={e => this.handleSubmit(e)}>
-//   <FormGroup row>
-//     <Label for="username" sm={2} size="sm">
-//       Username
-//     </Label>
-//     <Col sm={10}>
-//       <Input
-//         type="text"
-//         name="username"
-//         id="username"
-//         placeholder="Enter new Username"
-//         value={this.state.username}
-//         onChange={e => this.handleChange(e)}
-//         bsSize="sm"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <FormGroup row>
-//     <Label for="email" sm={2} size="sm">
-//       Email
-//     </Label>
-//     <Col sm={10}>
-//       <Input
-//         type="email"
-//         name="email"
-//         id="email"
-//         placeholder="Enter new Email"
-//         value={this.state.email}
-//         onChange={e => this.handleChange(e)}
-//         bsSize="sm"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <FormGroup row>
-//     <Label for="profileUrl" sm={2} size="sm">
-//       Upload Profile Picture
-//     </Label>
-//     <Col sm={10}>
-//       <Input
-//         type="file"
-//         name="profileUrl"
-//         id="file"
-//         onChange={e => this.handleFileUpload(e)}
-//         bsSize="sm"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <FormGroup row>
-//     <Col sm={10}>
-//       <Label>What would you like to get out of using Remindful?</Label>
-//       <CustomInput
-//         checked={this.state.preference === "reflection"}
-//         onChange={e => this.handlePrefChange("reflection")}
-//         type="switch"
-//         id="reflection"
-//         name="reflection"
-//         label="To gain insight from my experiences"
-//       />
-//       <CustomInput
-//         checked={this.state.preference === "motivation"}
-//         onChange={e => this.handlePrefChange("motivation")}
-//         type="switch"
-//         id="motivation"
-//         name="motivation"
-//         label="For motivation"
-//       />
-//       <CustomInput
-//         checked={this.state.preference === "nostalgia"}
-//         onChange={e => this.handlePrefChange("nostalgia")}
-//         type="switch"
-//         id="nostalgia"
-//         name="nostalgia"
-//         label="To enjoy happy memories"
-//       />
-//     </Col>
-//   </FormGroup>
-//   <p>
-//     These preferences will determine what memories you get reminded of
-//   </p>
-//   <Button outline color="success" onClick={this.handleClick}>
-//     Submit Changes
-//   </Button>
-// </Form>
-// <Link to={`/reminder/${this.state.chosenMemory}`}>
-//   Reflection view for users chosen memory
-// </Link>
-// </Container>
