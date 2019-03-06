@@ -156,7 +156,7 @@ h2 {
 }
 
 .logout {
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   text-align: center;
   line-height: 2em;
   padding-top: 70px;
@@ -407,11 +407,32 @@ div.show-image input.hovertitle {
   border-radius: 5px;
   padding: 10px;
   width: 600px;
-  height: 440px;
+  height: 420px;
   text-align: center;
   margin-top: 160px;
   line-height: 20px;
   color: black;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: 20px;
+}
+.box {
+  padding: 0px 100px 50px;
+}
+
+.textbox {
+  padding: 50px 75px 0px;
+}
+
+.homestyle {
+  width: 580px;
+  border: none;
+  margin-top: 120px;
 }
 
 .sl-box {
@@ -423,9 +444,6 @@ div.show-image input.hovertitle {
   text-align: center;
   line-height: 20px;
   color: black;
-}
-
-.centerbutton {
 }
 
 .preferences {

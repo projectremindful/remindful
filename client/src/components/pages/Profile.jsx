@@ -293,7 +293,7 @@ export default class Profile extends Component {
                 }}
                 onClick={this.handleClick}
               >
-                Submit Changes
+                Save Changes
               </Button>
             </Form>
             <br />
@@ -387,7 +387,3 @@ export default class Profile extends Component {
     }, 4000);
   }
 }
-
-// 0123 1230
-// 3012 3012
-// 1230 0123
