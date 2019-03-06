@@ -80,7 +80,7 @@ class Signup extends Component {
         console.log("SIGNUP SUCCESS!");
         // running main() only after user is logged in
         this.main();
-        this.props.history.push("/memory-gallery"); // Redirect to memory gallery page
+        this.props.history.push('/memory-gallery'); // Redirect to memory gallery page
       })
       .catch(err => this.setState({ message: err.toString() }));
   }
