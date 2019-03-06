@@ -9,6 +9,13 @@ const cron = require("node-schedule");
 const nodemailer = require("nodemailer");
 
 const webpush = require("web-push"); //requiring the web-push module
+// for notifications to work in dev and production - switch enviornmentIsDev to false before deploying
+const environmentIsDev = false;
+if (environmentIsDev) {
+  baseUrl = "http://localhost:3000";
+} else {
+  baseUrl = "https://re-mindful.herokuapp.com";
+}
 
 // specifying the mailOptions
 let transporter = nodemailer.createTransport({
@@ -32,34 +39,32 @@ let transporter = nodemailer.createTransport({
 // );
 
 app.listen(3142);
-app.get('/schedule/:dayNum/:hour/:minute', function (req, res, next) {
+app.get("/schedule/:dayNum/:hour/:minute", function(req, res, next) {
   var rule2 = new cron.RecurrenceRule();
   rule2.dayOfWeek = [req.params.dayNum];
   rule2.hour = req.params.hour;
   rule2.minute = req.params.minute;
-  cron.scheduleJob(rule2, function(){
-    console.log('It works!');
-      let email = req.body;
-  let mailOptions = {
-    from: 'Remindful',
-    to: email,
-    subject: `Your Remindful reminder`,
-    text: 
-    `Hello ${req.body.username}!
+  cron.scheduleJob(rule2, function() {
+    console.log("It works!");
+    let email = req.body;
+    let mailOptions = {
+      from: "Remindful",
+      to: email,
+      subject: `Your Remindful reminder`,
+      text: `Hello ${req.body.username}!
     <img src="${req.body.imgUrl}"/>
     Have a remindful day`
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      throw error;
-    } else {
-      console.log("email sent");
-    }
-  })
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        throw error;
+      } else {
+        console.log("email sent");
+      }
+    });
   });
-  res.json("sup")
+  res.json("sup");
 });
-
 
 router.get("/my-profile", isLoggedIn, (req, res, next) => {
   req.user.password = undefined;
@@ -92,14 +97,15 @@ router.put("/user/:id", isLoggedIn, (req, res, next) => {
 
 //-----NOTIFICATIONS PUSH API ROUTES_____
 // api that saves subscription data for chrome to the database
-router.post("/save-subscription", (req, res) => {
-  console.log("req.body", req.body);
+router.post("/save-subscription", isLoggedIn, (req, res) => {
+  const _owner = req.user._id;
   const {
     endpoint,
     expirationTime,
     keys: { p256dh, auth }
   } = req.body;
   const newSubscription = new Subscription({
+    _owner,
     endpoint,
     expirationTime,
     keys: { p256dh, auth }
@@ -107,7 +113,7 @@ router.post("/save-subscription", (req, res) => {
   return newSubscription
     .save()
     .then(result => {
-      console.log("Success at saving subscription", result);
+      console.log("Success at saving notification subscription");
     })
     .catch(err => {
       console.log("error in save-subscription apiL: ", err);
@@ -133,7 +139,7 @@ const sendNotification = (subscription, dataToSend = "") => {
   webpush
     .sendNotification(subscription, dataToSend)
     .then(res => {
-      console.log("sent webpush, with the result:  ", res);
+      console.log("webpush notification sent");
     })
     .catch(err => {
       console.log("error in webpush.sendNotification", err);
@@ -146,13 +152,15 @@ router.get("/send-notification", (req, res) => {
     .populate("_owner")
     .then(subscriptions => {
       subscriptions.forEach(sub => {
-        // const memoryId = "chosenMemory"; // create new field in user model and generate chosen memory when setting preferences
-        const body = `http://localhost:3000/reminder/${
-          sub._owner.chosenMemory
-        }`;
-        console.log("TCL: body", body);
-        sendNotification(sub, body);
-        // call chosen memory method again somehow after viewing memory to update
+        if (sub._owner.chosenMemory) {
+          var memoryId = sub._owner.chosenMemory;
+          const body = `${baseUrl}/reminder/${memoryId}`;
+          sendNotification(sub, body);
+        } else {
+          var memoryId = sub._owner.chosenMemory;
+          const body = `${baseUrl}/profile`;
+          sendNotification(sub, body);
+        }
       });
     });
   res.json({}); // sends empty response to avoid weird errors
@@ -176,6 +184,35 @@ router.delete("/memory/:id", isLoggedIn, (req, res, next) => {
     })
     .catch(function(err) {
       res.status(404).send(err);
+    });
+});
+
+router.get("/memory/:id", (req, res, next) => {
+  Memory.findById(req.params.id)
+    .then(memory => {
+      res.json(memory);
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.put("/memory/:id", (req, res, next) => {
+  Memory.findByIdAndUpdate(
+    req.params.id,
+    {
+      notes: req.body.updatedNotes
+    },
+    { new: true }
+  )
+    .then(memory => {
+      res.json({
+        message: "memory updated",
+        memory: memory
+      });
+    })
+    .catch(error => {
+      console.log("error in put user/id api: ", error);
     });
 });
 

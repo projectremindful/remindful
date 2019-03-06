@@ -12,7 +12,7 @@ const memorySchema = new Schema(
     motivation: false,
     nostalgia: false,
     custom: { name: String, tagged: false },
-    notes: [String]
+    notes: String
   },
   {
     timestamps: {

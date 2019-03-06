@@ -2,13 +2,16 @@
 // Definition of variables
 $primary: #32c3ff;
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/react-quill/dist/quill.snow.css";
+@import "../../node_modules/react-quill/dist/quill.bubble.css";
+@import "../../node_modules/react-quill/dist/quill.core.css";
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   color: black;
-  background-color: white;
+  background-color: #fff;
   min-height: 100vh;
   color: black;
 }
@@ -96,6 +99,7 @@ h2 {
 
 .navbar {
   position: fixed;
+  background-color: #ffffff;
   border-bottom: 1px solid #e6eaea;
   z-index: 999;
   padding: 0;
@@ -160,10 +164,13 @@ h2 {
 #memImg {
   cursor: pointer;
   transition: 0.3s;
+  // filter: grayscale(100%);
+  // -webkit-filter: grayscale(100%);
 }
 
 #memImg:hover {
-  opacity: 0.9;
+  opacity: 1;
+  // filter: none;
 }
 
 .modal {
@@ -272,6 +279,7 @@ div.show-image input.hovertitle {
   padding-left: 5px;
   bottom: 0px;
   left: 0;
+  filter: none;
 }
 
 .close {
@@ -355,10 +363,65 @@ div.show-image input.hovertitle {
   }
 }
 
-// // weekday selector:
-// .weekDays-selector input {
-//   display: none !important;
+// mosiac images
+
+.box-gallery {
+  margin: 0px;
+}
+
+.mosaic-images img {
+  max-height: 310px;
+  max-width: 25%;
+  border: 3px black;
+}
+
+.mosaic-images {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  z-index: -1;
+}
+
+.child {
+  flex: 1 0 21%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin-left: 270px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+}
+
+.profilebox {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  width: 600px;
+  height: 400px;
+  text-align: center;
+  margin-top: 160px;
+  line-height: 20px;
+  color: black;
+}
+
+.preferences {
+  text-align: left;
+}
+
+// .top-padding {
+//   padding-top: 310px;
 // }
+// weekday selector:
+.weekDays-selector input {
+  display: none !important;
+}
 
 // .weekDays-selector input[type="checkbox"] + label {
 //   display: inline-block;
