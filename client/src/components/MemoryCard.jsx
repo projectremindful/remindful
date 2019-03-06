@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import Service from '../service';
-import Modal from './Modal.js';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import Modal from "./Modal.js";
+import { Link } from "react-router-dom";
+import api from "../api";
 
 export default class MemoryCard extends Component {
   constructor(props) {
     super(props);
 
     this.delete = this.delete.bind(this);
-    this.service = new Service();
     this.state = {
       showModal: false
     };
@@ -21,9 +20,9 @@ export default class MemoryCard extends Component {
   };
 
   delete() {
-    this.service
+    api
       .delete(this.props.memory._id)
-      .then(console.log('Deleted'))
+      .then(console.log("Deleted"))
       .catch(err => console.log(err));
   }
 
@@ -37,7 +36,7 @@ export default class MemoryCard extends Component {
         style={{
           // border: "2px solid black",
           // opacity: this.props.isSelected ? 1 : 0.5,
-          margin: '10px'
+          margin: "10px"
         }}
         onClick={this.props.onSelect}
       >
@@ -48,13 +47,13 @@ export default class MemoryCard extends Component {
             onClick={this.toggleModal}
             alt=""
             style={{
-              height: '380px'
+              height: "380px"
             }}
           />
           <input
             className="hovertitle"
             type="text"
-            value={this.props.memory.title + ' - ' + this.props.memory.date}
+            value={this.props.memory.title + " - " + this.props.memory.date}
             onClick={() => this.delete()}
           />
         </div>

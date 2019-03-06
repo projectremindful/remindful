@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import logo from './images/logoonly(1).png';
 
 class Home extends Component {
@@ -11,7 +11,7 @@ class Home extends Component {
       <div className="content">
         <div className="Home-image">
           <img
-            src={'../../images/remindfulhome.png'}
+            src={"/images/Remindfulhome.png"}
             className="App-logo"
             alt="logo"
           />
