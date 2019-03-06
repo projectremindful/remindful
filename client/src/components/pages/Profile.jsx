@@ -5,7 +5,6 @@ import {
   Button,
   CustomInput,
   Container,
-  Row,
   Col,
   Form,
   FormGroup,
@@ -118,18 +117,66 @@ export default class Profile extends Component {
       <div>
         <div className="box-gallery">
           <div className="mosaic-images">
-            <img className="child gray" src="./mosaic-images/IMG_2904.jpg" />
-            <img className="child" src="./mosaic-images/IMG_2463.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_1869.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_2616.jpg" />
-            <img className="child" src="./mosaic-images/IMG_1675.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_1882.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_1732.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_1698.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_1871.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_1663.jpg" />
-            <img className="child" src="./mosaic-images/IMG_3045.jpg" />
-            <img className="child gray" src="./mosaic-images/IMG_2728.jpg" />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_2904.jpg"
+            />
+            <img
+              className="child"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_2463.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1869.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_2616.jpg"
+            />
+            <img
+              className="child"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1675.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1882.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1732.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1698.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1871.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1663.jpg"
+            />
+            <img
+              className="child"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_3045.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_2728.jpg"
+            />
           </div>
         </div>
         <Container className="forms">
@@ -245,7 +292,7 @@ export default class Profile extends Component {
       for (var i = 0; i < bgImages.length; i++) {
         // bgImages[i].style.filter = 'grayscale(100%)';
         // bgImages[i].style.filter = 'brightness(50%)';
-        bgImages[i].classList.add('gray');
+        bgImages[i].classList.add("gray");
       }
     }
     var that = this;
@@ -287,11 +334,11 @@ export default class Profile extends Component {
       var randomImage3 = bgImages[randomNumber3];
 
       //console.log(randomImage);
-      randomImage.classList.remove('gray');
+      randomImage.classList.remove("gray");
       randomImage.style.opacity = 1;
-      randomImage2.classList.remove('gray');
+      randomImage2.classList.remove("gray");
       randomImage2.style.opacity = 1;
-      randomImage3.classList.remove('gray');
+      randomImage3.classList.remove("gray");
       randomImage3.style.opacity = 1;
     }, 4000);
   }
