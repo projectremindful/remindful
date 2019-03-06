@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import api from '../../api';
 import MemoryCard from '../MemoryCard';
 
-// import api from '../../api';
-
 class MemoryGallery extends Component {
   constructor(props) {
     super(props);
