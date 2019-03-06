@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import api from "../../api";
 import QuillTextBox from "../QuillTextBox";
-import {
-  Form,
-  Button,
-  FormGroup,
-  Col,
-  Row,
-  Container,
-  Label,
-  Input
-} from "reactstrap";
+import { Form, Button, Col, Row, Container } from "reactstrap";
 import Modal from "../Modal";
 
 export default class Reminder extends Component {
