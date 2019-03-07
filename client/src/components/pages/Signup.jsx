@@ -94,9 +94,9 @@ class Signup extends Component {
         }}
       >
         <Container className="forms">
-          <div className="sl-box">
+          <Form className="sl-box">
             <h4 className="p-2">Signup</h4>
-            <Form onSubmit={e => this.handleSubmit(e)}>
+            <div onSubmit={e => this.handleSubmit(e)}>
               <FormGroup row>
                 <Label for="username" sm={2} size="sm">
                   Username
@@ -144,7 +144,7 @@ class Signup extends Component {
                   />{" "}
                   <br />
                 </Col>
-                <Form style={{ width: "100%" }}>
+                <div style={{ width: "100%" }}>
                   <Button
                     style={{
                       backgroundColor: "#24f0a9",
@@ -155,10 +155,10 @@ class Signup extends Component {
                   >
                     Signup
                   </Button>
-                </Form>
+                </div>
               </FormGroup>
             </div>
-          </div>
+          </Form>
         </Container>
         {this.state.message && (
           <div className="info info-danger">{this.state.message}</div>
