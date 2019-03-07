@@ -197,6 +197,9 @@ h2 {
   max-width: 700px;
 }
 
+.quillbox-content {
+}
+
 #caption {
   margin: auto;
   display: block;
@@ -327,7 +330,7 @@ div.show-image input.hovertitle {
   padding: 20px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
   border-radius: 2px;
-  width: 60%;
+  width: 75%;
   height: auto;
   max-width: 100vw;
 }
@@ -402,6 +405,25 @@ div.show-image input.hovertitle {
   display: -webkit-flex;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+.item {
+  text-align: center;
+}
+
 .profilebox {
   background-color: white;
   border-radius: 5px;
@@ -456,27 +478,15 @@ div.show-image input.hovertitle {
   margin-left: 2px;
 }
 
-// .top-padding {
-//   padding-top: 310px;
-// }
-// weekday selector:
+.top-padding {
+  padding-top: 310px;
+}
+
 .weekDays-selector input {
   display: none !important;
 }
 
-// .weekDays-selector input[type="checkbox"] + label {
-//   display: inline-block;
-//   border-radius: 6px;
-//   background: #dddddd;
-//   height: 40px;
-//   width: 50px;
-//   margin-right: 4px;
-//   line-height: 40px;
-//   text-align: center;
-//   cursor: pointer;
-// }
-
-// .weekDays-selector input[type="checkbox"]:checked + label {
-//   background: #5776e9;
-//   color: #ffffff;
-// }
+.progress {
+  margin: 10px;
+  width: 700px;
+}

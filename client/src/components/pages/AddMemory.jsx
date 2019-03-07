@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// import ReactDOM from 'react-dom';
+import $ from "jquery";
 import {
   Col,
   CustomInput,
@@ -67,12 +69,27 @@ class AddMemory extends Component {
       .saveNewMemory(this.state)
       .then(res => {
         console.log("added: ", res);
-        alert("Image successfully uploaded");
-        this.props.history.push("/"); // TODO: update the URL
+        setTimeout(function() {
+          alert("Image successfully uploaded");
+          this.props.history.push("/memory-gallery");
+        }.bind(this), 2000);
       })
       .catch(err => {
         console.log("Error while adding the memory: ", err);
       });
+  };
+
+  progress = () => {
+    console.log('Test executed');
+    var current_progress = 0;
+    var interval = setInterval(function() {
+      current_progress += 10;
+      $("#dynamic")
+        .css("width", current_progress + "%")
+        .attr("aria-valuenow", current_progress)
+        .text(current_progress + "% uploaded");
+      if (current_progress >= 100) clearInterval(interval);
+    }, 100);
   };
 
   render() {
@@ -168,9 +185,22 @@ class AddMemory extends Component {
               <Input type="file" onChange={e => this.handleFileUpload(e)} />
             </Col>
           </FormGroup>
-          <Button outline color="info" type="submit">
+          <Button outline color="info" type="submit" onClick={() => this.progress()}>
             Save new memory
           </Button>
+          <div className="progress" id="target">
+            <div
+              id="dynamic"
+              className="progress-bar progress-bar-info progress-bar-striped active"
+              role="progressbar"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style={{width: '0%'}}
+            >
+              <span id="current-progress" />
+            </div>
+          </div>
         </Form>
       </div>
     );
