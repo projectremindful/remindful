@@ -26,7 +26,8 @@ class AddMemory extends Component {
       motivation: false,
       nostalgia: false,
       viewed: false,
-      imgUrl: "https://res.cloudinary.com/fracloudo/image/upload/v1551962224/defaultMemory.jpg",
+      imgUrl:
+        "https://res.cloudinary.com/fracloudo/image/upload/v1551962224/defaultMemory.jpg",
       _owner: ""
     };
   }
@@ -53,7 +54,7 @@ class AddMemory extends Component {
     api
       .handleUpload(uploadData)
       .then(response => {
-        console.log('response is: ', response);
+        console.log("response is: ", response);
         // after the console.log we can see that response carries 'secure_url' which we can use to update the state
         this.setState({ imgUrl: response.secure_url });
       })
@@ -69,10 +70,14 @@ class AddMemory extends Component {
       .saveNewMemory(this.state)
       .then(res => {
         console.log("added: ", res);
-        setTimeout(function() {
-          alert("Your memory was successfully saved");
-          this.props.history.push("/memory-gallery");
-        }.bind(this), 2000);
+        this.props.testProp("...Test from add memory after new memory saved");
+        setTimeout(
+          function() {
+            alert("Image successfully uploaded");
+            this.props.history.push("/memory-gallery");
+          }.bind(this),
+          2000
+        );
       })
       .catch(err => {
         console.log("Error while adding the memory: ", err);
@@ -80,7 +85,7 @@ class AddMemory extends Component {
   };
 
   progress = () => {
-    console.log('Test executed');
+    console.log("Test executed");
     var current_progress = 0;
     var interval = setInterval(function() {
       current_progress += 10;
@@ -141,7 +146,7 @@ class AddMemory extends Component {
                 className="p-2"
                 type="textarea"
                 name="notes"
-                placeholder="Add what you'd like to reflect on in this memory, note you thoughts or memories."
+                placeholder="Add what you'd like to reflect on in this memory, note your thoughts or memories."
                 value={this.state.notes}
                 onChange={e => this.handleChange(e)}
               />
@@ -185,7 +190,12 @@ class AddMemory extends Component {
               <Input type="file" onChange={e => this.handleFileUpload(e)} />
             </Col>
           </FormGroup>
-          <Button outline color="info" type="submit" onClick={() => this.progress()}>
+          <Button
+            outline
+            color="info"
+            type="submit"
+            onClick={() => this.progress()}
+          >
             Save new memory
           </Button>
           <div className="progress" id="target">
@@ -196,7 +206,7 @@ class AddMemory extends Component {
               aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="100"
-              style={{width: '0%'}}
+              style={{ width: "0%" }}
             >
               <span id="current-progress" />
             </div>

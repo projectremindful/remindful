@@ -219,12 +219,4 @@ export default class Reminder extends Component {
       });
     });
   }
-
-  componentWillUnmount() {
-    console.log(this.state.viewed);
-    // can saveupdate the memory here too to save the view to the database but
-    // this involves editing the api method and call that also updates the notes.
-    // reminderDate: "...",
-    // reminderWeekday: "..."
-  }
 }

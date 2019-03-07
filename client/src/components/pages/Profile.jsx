@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import api from '../../api';
+import React, { Component } from "react";
+import api from "../../api";
 import {
   Button,
   CustomInput,
@@ -10,18 +10,19 @@ import {
   FormGroup,
   Label,
   Input
-} from 'reactstrap';
+} from "reactstrap";
+import { resolve } from "dns";
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: '',
-      username: '',
-      email: '',
-      profileUrl: '',
-      preference: 'none',
-      chosenMemory: null,
+      _id: "",
+      username: "",
+      email: "",
+      profileUrl: "",
+      preference: "none",
+      // chosenMemory: null,
       requiredFields: false,
       successMessage: false
     };
@@ -49,11 +50,11 @@ export default class Profile extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log('The file to be uploaded is: ', e.target.files[0]);
+    console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
-    uploadData.append('imgUrl', e.target.files[0]);
+    uploadData.append("imgUrl", e.target.files[0]);
     api
       .handleUpload(uploadData)
       .then(response => {
@@ -62,59 +63,60 @@ export default class Profile extends Component {
         this.setState({ profileUrl: response.secure_url });
       })
       .catch(err => {
-        console.log('Error while uploading the file: ', err);
+        console.log("Error while uploading the file: ", err);
       });
   };
 
   handleClick() {
     console.log(
-      'in the handleclick ',
+      "in the handleclick ",
       this.state.username.length,
       this.state.preference
     );
     if (
       this.state.username.length > 1 &&
       this.state.preference.length > 4 &&
-      this.state.email.includes('@')
+      this.state.email.includes("@")
     ) {
-      console.log('in the if block');
+      console.log("in the if block");
       var preferences = {
         username: this.state.username,
         email: this.state.email,
         profileUrl: this.state.profileUrl,
-        preference: this.state.preference,
-        chosenMemory: null
+        preference: this.state.preference
+        // chosenMemory: null
       };
-      api
-        .getUserMemories()
-        .then(memories => {
-          console.log('in the first .then');
-          if (memories.length === 0) return preferences;
-          var filteredMemories = memories.filter(memory => {
-            return memory[preferences.preference] && !memory.viewed;
-          });
-          if (filteredMemories.length === 0) return preferences;
-          var rand = Math.floor(Math.random() * filteredMemories.length);
-          var chosenMemory = filteredMemories[rand]._id;
-          return (preferences = {
-            username: this.state.username,
-            email: this.state.email,
-            profileUrl: this.state.profileUrl,
-            preference: this.state.preference,
-            chosenMemory: chosenMemory
-          });
-        })
-        .then(preferences => {
-          api.updateUserPreferences(preferences).then(res => {
-            console.log('in the .then after saving', this.props.history);
-            this.setState({
-              requiredFields: false,
-              successMessage: true
-            });
-          });
+      // api
+      //   .getUserMemories()
+      //   .then(memories => {
+      //     console.log("in the first .then");
+      //     if (memories.length === 0) return preferences;
+      //     var filteredMemories = memories.filter(memory => {
+      //       return memory[preferences.preference] && !memory.viewed;
+      //     });
+      //     if (filteredMemories.length === 0) return preferences;
+      //     var rand = Math.floor(Math.random() * filteredMemories.length);
+      //     var chosenMemory = filteredMemories[rand]._id;
+      //     return (preferences = {
+      //       username: this.state.username,
+      //       email: this.state.email,
+      //       profileUrl: this.state.profileUrl,
+      //       preference: this.state.preference,
+      //       chosenMemory: chosenMemory
+      //     });
+      //   })
+      //   .then(preferences => {
+      api.updateUserPreferences(preferences).then(res => {
+        console.log("in the .then after saving", res);
+        this.props.testProp("...Test from Profile after User updated");
+        this.setState({
+          requiredFields: false,
+          successMessage: true
         });
+      });
+      // });
     } else {
-      console.log('in the else statement');
+      console.log("in the else statement");
       this.setState(prevState => ({
         requiredFields: !prevState.requiredFields
       }));
@@ -193,9 +195,9 @@ export default class Profile extends Component {
           <div className="profilebox">
             <h4 className="p-2">Profile Preferences</h4>
             {this.state.requiredFields ? (
-              <p style={{ color: 'red' }}>Please fill out required fields</p>
+              <p style={{ color: "red" }}>Please fill out required fields</p>
             ) : (
-              ' '
+              " "
             )}
             <Form onSubmit={e => this.handleSubmit(e)}>
               <FormFeedback valid={this.state.successMessage}>
@@ -205,9 +207,9 @@ export default class Profile extends Component {
                 <Label for="username" sm={2} size="sm">
                   Username
                   {this.state.requiredFields ? (
-                    <span style={{ color: 'red' }}>*</span>
+                    <span style={{ color: "red" }}>*</span>
                   ) : (
-                    ' '
+                    " "
                   )}
                 </Label>
                 <Col sm={10}>
@@ -226,9 +228,9 @@ export default class Profile extends Component {
                 <Label for="email" sm={2} size="sm">
                   Email
                   {this.state.requiredFields ? (
-                    <span style={{ color: 'red' }}>*</span>
+                    <span style={{ color: "red" }}>*</span>
                   ) : (
-                    ' '
+                    " "
                   )}
                 </Label>
                 <Col sm={10}>
@@ -249,30 +251,30 @@ export default class Profile extends Component {
                   <Label>
                     What would you like to get out of using Remindful?
                     {this.state.requiredFields ? (
-                      <span style={{ color: 'red' }}>*</span>
+                      <span style={{ color: "red" }}>*</span>
                     ) : (
-                      ' '
+                      " "
                     )}
                   </Label>
                   <CustomInput
-                    checked={this.state.preference === 'reflection'}
-                    onChange={e => this.handlePrefChange('reflection')}
+                    checked={this.state.preference === "reflection"}
+                    onChange={e => this.handlePrefChange("reflection")}
                     type="switch"
                     id="reflection"
                     name="reflection"
                     label="To gain insight from my experiences"
                   />
                   <CustomInput
-                    checked={this.state.preference === 'nostalgia'}
-                    onChange={e => this.handlePrefChange('nostalgia')}
+                    checked={this.state.preference === "nostalgia"}
+                    onChange={e => this.handlePrefChange("nostalgia")}
                     type="switch"
                     id="nostalgia"
                     name="nostalgia"
                     label="To enjoy happy memories"
                   />
                   <CustomInput
-                    checked={this.state.preference === 'motivation'}
-                    onChange={e => this.handlePrefChange('motivation')}
+                    checked={this.state.preference === "motivation"}
+                    onChange={e => this.handlePrefChange("motivation")}
                     type="switch"
                     id="motivation"
                     name="motivation"
@@ -287,9 +289,9 @@ export default class Profile extends Component {
               <br />
               <Button
                 style={{
-                  backgroundColor: '#24f0a9',
-                  color: 'white',
-                  border: 'white'
+                  backgroundColor: "#24f0a9",
+                  color: "white",
+                  border: "white"
                 }}
                 onClick={this.handleClick}
               >
@@ -299,13 +301,13 @@ export default class Profile extends Component {
             <br />
             {this.state.successMessage ? (
               <div>
-                <p style={{ color: '#24f0a9' }}>
+                <p style={{ color: "#24f0a9" }}>
                   Your information has been successfully saved
                 </p>
                 {/* <Link to="/reminder/:id">Set Reminder</Link> */}
               </div>
             ) : (
-              ' '
+              " "
             )}
             {/* <Link to={`/reminder/${this.state.chosenMemory}`}>
               Reflection view for users chosen memory
@@ -327,13 +329,13 @@ export default class Profile extends Component {
         username: user.username,
         email: user.email,
         profileUrl: user.profileUrl,
-        preference: user.preference,
-        chosenMemory: user.chosenMemory
+        preference: user.preference
+        // chosenMemory: user.chosenMemory
       });
     });
 
     setTimeout(() => {
-      this.bgImages = document.querySelectorAll('.mosaic-images img');
+      this.bgImages = document.querySelectorAll(".mosaic-images img");
     }, 100);
 
     //const bgImages = document.querySelectorAll('.mosaic-images img');
@@ -342,7 +344,7 @@ export default class Profile extends Component {
       for (var i = 0; i < that.bgImages.length; i++) {
         // this.bgImages[i].style.filter = 'grayscale(100%)';
         // this.bgImages[i].style.filter = 'brightness(50%)';
-        that.bgImages[i].classList.add('gray');
+        that.bgImages[i].classList.add("gray");
       }
     }
 
@@ -384,11 +386,11 @@ export default class Profile extends Component {
       var randomImage3 = that.bgImages[randomNumber3];
 
       //console.log(randomImage);
-      randomImage.classList.remove('gray');
+      randomImage.classList.remove("gray");
       randomImage.style.opacity = 1;
-      randomImage2.classList.remove('gray');
+      randomImage2.classList.remove("gray");
       randomImage2.style.opacity = 1;
-      randomImage3.classList.remove('gray');
+      randomImage3.classList.remove("gray");
       randomImage3.style.opacity = 1;
     }, 4000);
   }
