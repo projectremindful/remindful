@@ -10,7 +10,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   color: black;
-  background-color: #fff;
+  background-color: #e9ecef;
   min-height: 100vh;
   color: black;
 }
@@ -376,12 +376,12 @@ div.show-image input.hovertitle {
 // mosiac images
 
 .box-gallery {
-  margin: 0px;
+  margin-top: 0px;
 }
 
 .mosaic-images img {
-  max-height: 310px;
-  max-width: 25%;
+  // max-height: 310px;
+  // max-width: 300px;
   border: 3px black;
 }
 
@@ -393,7 +393,12 @@ div.show-image input.hovertitle {
 }
 
 .child {
-  flex: 1 0 21%;
+  flex: 1 0 16%;
+}
+
+.smaller {
+  width: 310px;
+  height: 233px;
 }
 
 .container {
@@ -432,7 +437,6 @@ div.show-image input.hovertitle {
   padding: 20px 30px;
   // width: 600px;
   // height: 420px;
-  text-align: center;
   margin-top: 160px;
   line-height: 20px;
   color: black;

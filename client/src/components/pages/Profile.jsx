@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import api from "../../api";
+import React, { Component } from 'react';
+import api from '../../api';
 import {
   Button,
   CustomInput,
@@ -10,18 +10,17 @@ import {
   FormGroup,
   Label,
   Input
-} from "reactstrap";
-import { resolve } from "dns";
+} from 'reactstrap';
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _id: "",
-      username: "",
-      email: "",
-      profileUrl: "",
-      preference: "none",
+      _id: '',
+      username: '',
+      email: '',
+      profileUrl: '',
+      preference: 'none',
       // chosenMemory: null,
       requiredFields: false,
       successMessage: false
@@ -50,11 +49,11 @@ export default class Profile extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
+    console.log('The file to be uploaded is: ', e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
-    uploadData.append("imgUrl", e.target.files[0]);
+    uploadData.append('imgUrl', e.target.files[0]);
     api
       .handleUpload(uploadData)
       .then(response => {
@@ -63,22 +62,22 @@ export default class Profile extends Component {
         this.setState({ profileUrl: response.secure_url });
       })
       .catch(err => {
-        console.log("Error while uploading the file: ", err);
+        console.log('Error while uploading the file: ', err);
       });
   };
 
   handleClick() {
     console.log(
-      "in the handleclick ",
+      'in the handleclick ',
       this.state.username.length,
       this.state.preference
     );
     if (
       this.state.username.length > 1 &&
       this.state.preference.length > 4 &&
-      this.state.email.includes("@")
+      this.state.email.includes('@')
     ) {
-      console.log("in the if block");
+      console.log('in the if block');
       var preferences = {
         username: this.state.username,
         email: this.state.email,
@@ -107,8 +106,8 @@ export default class Profile extends Component {
       //   })
       //   .then(preferences => {
       api.updateUserPreferences(preferences).then(res => {
-        console.log("in the .then after saving", res);
-        this.props.testProp("...Test from Profile after User updated");
+        console.log('in the .then after saving', res);
+        this.props.testProp('...Test from Profile after User updated');
         this.setState({
           requiredFields: false,
           successMessage: true
@@ -116,7 +115,7 @@ export default class Profile extends Component {
       });
       // });
     } else {
-      console.log("in the else statement");
+      console.log('in the else statement');
       this.setState(prevState => ({
         requiredFields: !prevState.requiredFields
       }));
@@ -132,62 +131,102 @@ export default class Profile extends Component {
             <img
               className="child gray"
               alt="profilebackground"
-              src="./mosaic-images/IMG_2904.jpg"
+              src="./mosaic-images/IMG_2904_copy.jpg"
             />
             <img
               className="child"
               alt="profilebackground"
-              src="./mosaic-images/IMG_2463.jpg"
+              src="./mosaic-images/IMG_2463_copy.jpg"
             />
             <img
               className="child gray"
               alt="profilebackground"
-              src="./mosaic-images/IMG_1869.jpg"
+              src="./mosaic-images/IMG_1869_copy.jpg"
             />
             <img
               className="child gray"
               alt="profilebackground"
-              src="./mosaic-images/IMG_2616.jpg"
+              src="./mosaic-images/IMG_2616_copy.jpg"
             />
             <img
               className="child"
               alt="profilebackground"
-              src="./mosaic-images/IMG_1675.jpg"
+              src="./mosaic-images/IMG_1675_copy.jpg"
             />
             <img
               className="child gray"
               alt="profilebackground"
-              src="./mosaic-images/IMG_1882.jpg"
+              src="./mosaic-images/IMG_1882_copy.jpg"
             />
             <img
               className="child gray"
               alt="profilebackground"
-              src="./mosaic-images/IMG_1732.jpg"
-            />
-            <img
-              className="child gray"
-              alt="profilebackground"
-              src="./mosaic-images/IMG_1698.jpg"
-            />
-            <img
-              className="child gray"
-              alt="profilebackground"
-              src="./mosaic-images/IMG_1871.jpg"
-            />
-            <img
-              className="child gray"
-              alt="profilebackground"
-              src="./mosaic-images/IMG_1663.jpg"
+              src="./mosaic-images/IMG_1732_copy.jpg"
             />
             <img
               className="child"
               alt="profilebackground"
-              src="./mosaic-images/IMG_3045.jpg"
+              src="./mosaic-images/IMG_1698_copy.jpg"
             />
             <img
               className="child gray"
               alt="profilebackground"
-              src="./mosaic-images/IMG_2728.jpg"
+              src="./mosaic-images/IMG_1871_copy.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_1663_copy.jpg"
+            />
+            <img
+              className="child"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_3045_copy.jpg"
+            />
+            <img
+              className="child gray"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_2728_copy.jpg"
+            />
+            <img
+              className="child gray smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_4183_copy.jpg"
+            />
+            <img
+              className="child gray smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_4287_copy.jpg"
+            />
+            <img
+              className="child smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_4321_copy.jpg"
+            />
+            <img
+              className="child gray smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_4352_copy.jpg"
+            />
+            <img
+              className="child gray smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_4720_copy.jpg"
+            />
+            <img
+              className="child gray smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_4759_copy.jpg"
+            />
+            <img
+              className="child smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_4904_copy.jpg"
+            />
+            <img
+              className="child gray smaller"
+              alt="profilebackground"
+              src="./mosaic-images/IMG_E4392_copy.jpg"
             />
           </div>
         </div>
@@ -195,21 +234,19 @@ export default class Profile extends Component {
           <div className="profilebox">
             <h4 className="p-2">Profile Preferences</h4>
             {this.state.requiredFields ? (
-              <p style={{ color: "red" }}>Please fill out required fields</p>
+              <p style={{ color: 'red' }}>Please fill out required fields</p>
             ) : (
-              " "
+              ' '
             )}
             <Form onSubmit={e => this.handleSubmit(e)}>
-              <FormFeedback valid={this.state.successMessage}>
-                Your
-              </FormFeedback>
+              <FormFeedback valid={this.state.successMessage} />
               <FormGroup row>
                 <Label for="username" sm={2} size="sm">
                   Username
                   {this.state.requiredFields ? (
-                    <span style={{ color: "red" }}>*</span>
+                    <span style={{ color: 'red' }}>*</span>
                   ) : (
-                    " "
+                    ' '
                   )}
                 </Label>
                 <Col sm={10}>
@@ -228,9 +265,9 @@ export default class Profile extends Component {
                 <Label for="email" sm={2} size="sm">
                   Email
                   {this.state.requiredFields ? (
-                    <span style={{ color: "red" }}>*</span>
+                    <span style={{ color: 'red' }}>*</span>
                   ) : (
-                    " "
+                    ' '
                   )}
                 </Label>
                 <Col sm={10}>
@@ -251,30 +288,30 @@ export default class Profile extends Component {
                   <Label>
                     What would you like to get out of using Remindful?
                     {this.state.requiredFields ? (
-                      <span style={{ color: "red" }}>*</span>
+                      <span style={{ color: 'red' }}>*</span>
                     ) : (
-                      " "
+                      ' '
                     )}
                   </Label>
                   <CustomInput
-                    checked={this.state.preference === "reflection"}
-                    onChange={e => this.handlePrefChange("reflection")}
+                    checked={this.state.preference === 'reflection'}
+                    onChange={e => this.handlePrefChange('reflection')}
                     type="switch"
                     id="reflection"
                     name="reflection"
                     label="To gain insight from my experiences"
                   />
                   <CustomInput
-                    checked={this.state.preference === "nostalgia"}
-                    onChange={e => this.handlePrefChange("nostalgia")}
+                    checked={this.state.preference === 'nostalgia'}
+                    onChange={e => this.handlePrefChange('nostalgia')}
                     type="switch"
                     id="nostalgia"
                     name="nostalgia"
                     label="To enjoy happy memories"
                   />
                   <CustomInput
-                    checked={this.state.preference === "motivation"}
-                    onChange={e => this.handlePrefChange("motivation")}
+                    checked={this.state.preference === 'motivation'}
+                    onChange={e => this.handlePrefChange('motivation')}
                     type="switch"
                     id="motivation"
                     name="motivation"
@@ -289,9 +326,9 @@ export default class Profile extends Component {
               <br />
               <Button
                 style={{
-                  backgroundColor: "#24f0a9",
-                  color: "white",
-                  border: "white"
+                  backgroundColor: '#24f0a9',
+                  color: 'white',
+                  border: 'white'
                 }}
                 onClick={this.handleClick}
               >
@@ -301,13 +338,13 @@ export default class Profile extends Component {
             <br />
             {this.state.successMessage ? (
               <div>
-                <p style={{ color: "#24f0a9" }}>
+                <p style={{ color: '#24f0a9' }}>
                   Your information has been successfully saved
                 </p>
                 {/* <Link to="/reminder/:id">Set Reminder</Link> */}
               </div>
             ) : (
-              " "
+              ' '
             )}
             {/* <Link to={`/reminder/${this.state.chosenMemory}`}>
               Reflection view for users chosen memory
@@ -335,49 +372,67 @@ export default class Profile extends Component {
     });
 
     setTimeout(() => {
-      this.bgImages = document.querySelectorAll(".mosaic-images img");
+      this.bgImages = document.querySelectorAll('.mosaic-images img');
     }, 100);
 
-    //const bgImages = document.querySelectorAll('.mosaic-images img');
     var that = this;
+
     function setAllToGrayScale() {
       for (var i = 0; i < that.bgImages.length; i++) {
         // this.bgImages[i].style.filter = 'grayscale(100%)';
         // this.bgImages[i].style.filter = 'brightness(50%)';
-        that.bgImages[i].classList.add("gray");
+        that.bgImages[i].classList.add('gray');
       }
     }
 
     setInterval(function() {
       setAllToGrayScale();
 
-      const randomNum = (max, min, except, except2, except3) => {
+      const randomNum = (max, min, except, except2, except3, except4) => {
         let num = Math.floor(Math.random() * (max - min)) + min;
-        return num === except || num === except2 || num === except3
-          ? randomNum(max, min, except, except2, except3)
+        return num === except ||
+          num === except2 ||
+          num === except3 ||
+          num === except4
+          ? randomNum(max, min, except, except2, except3, except4)
           : num;
       };
 
-      const randomNumber = randomNum(0, 4, -1, -2, that.oldNumbers[0]);
+      const randomNumber = randomNum(0, 5, -1, -2, -3, that.oldNumbers[0]);
 
       const randomNumber2 = randomNum(
-        4,
-        8,
-        randomNumber + 4,
-        -3,
+        5,
+        10,
+        randomNumber + 5,
+        -4,
+        -5,
         that.oldNumbers[1]
       );
 
       // random generated number between 8 and 12, except from aligning items over and the old number
       const randomNumber3 = randomNum(
-        8,
-        12,
-        randomNumber + 4,
-        randomNumber2 + 4,
+        10,
+        15,
+        -6,
+        randomNumber + 5,
+        randomNumber2 + 5,
         that.oldNumbers[2]
       );
+      const randomNumber4 = randomNum(
+        15,
+        20,
+        randomNumber + 5,
+        randomNumber2 + 5,
+        randomNumber3 + 5,
+        that.oldNumbers[3]
+      );
 
-      that.oldNumbers = [randomNumber, randomNumber2, randomNumber3];
+      that.oldNumbers = [
+        randomNumber,
+        randomNumber2,
+        randomNumber3,
+        randomNumber4
+      ];
 
       var randomImage = that.bgImages[randomNumber];
 
@@ -385,13 +440,17 @@ export default class Profile extends Component {
 
       var randomImage3 = that.bgImages[randomNumber3];
 
+      var randomImage4 = that.bgImages[randomNumber4];
+
       //console.log(randomImage);
-      randomImage.classList.remove("gray");
+      randomImage.classList.remove('gray');
       randomImage.style.opacity = 1;
-      randomImage2.classList.remove("gray");
+      randomImage2.classList.remove('gray');
       randomImage2.style.opacity = 1;
-      randomImage3.classList.remove("gray");
+      randomImage3.classList.remove('gray');
       randomImage3.style.opacity = 1;
-    }, 4000);
+      randomImage4.classList.remove('gray');
+      randomImage4.style.opacity = 1;
+    }, 3000);
   }
 }

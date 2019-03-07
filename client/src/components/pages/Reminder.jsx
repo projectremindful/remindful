@@ -115,7 +115,8 @@ export default class Reminder extends Component {
       <div
         style={{
           margin: '0',
-          padding: '0'
+          padding: '0',
+          backgroundColor: 'white'
         }}
       >
         <div

@@ -91,11 +91,7 @@ export default class MemoryCard extends Component {
             onClick={() => this.delete()}
           />
         </div>
-        <Modal
-          show={this.state.showModal}
-          closeCallback={this.toggleModal}
-          className=""
-        >
+        <Modal show={this.state.showModal} closeCallback={this.toggleModal}>
           <React.Fragment>
             <Row style={{ margin: '0' }}>
               <Col sm="12" lg="8">
