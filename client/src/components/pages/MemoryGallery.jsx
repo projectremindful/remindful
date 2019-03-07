@@ -22,6 +22,7 @@ class MemoryGallery extends Component {
   }
 
   render() {
+
     return this.state.memories.length > 0 ? (
       <div className="memoryGallery">
         {this.state.memories.map((memory, i) => (
@@ -71,7 +72,7 @@ class MemoryGallery extends Component {
   }
   componentDidMount() {
     api.getUserMemories().then(memories => {
-      this.setState({ memories });
+      this.setState({ memories, isMounted:true });
     });
   }
 }
