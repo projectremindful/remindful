@@ -11,7 +11,7 @@ import {
   Label,
   Input
 } from "reactstrap";
-import { resolve } from "dns";
+// import { resolve } from "dns";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -68,11 +68,6 @@ export default class Profile extends Component {
   };
 
   handleClick() {
-    console.log(
-      "in the handleclick ",
-      this.state.username.length,
-      this.state.preference
-    );
     if (
       this.state.username.length > 1 &&
       this.state.preference.length > 4 &&

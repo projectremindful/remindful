@@ -1,4 +1,5 @@
 import axios from "axios";
+// import { realpathSync } from "fs";
 
 const service = axios.create({
   baseURL:
@@ -77,6 +78,12 @@ export default {
 
   updateUserPreferences(preferences) {
     return service.put(`/my-profile`, preferences).then(res => {
+      return res.data;
+    });
+  },
+
+  updateUserMemory(chosenMemory) {
+    return service.put("/my-memory", chosenMemory).then(res => {
       return res.data;
     });
   },
