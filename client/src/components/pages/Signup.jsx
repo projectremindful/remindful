@@ -155,7 +155,7 @@ class Signup extends Component {
                   >
                     Signup
                   </Button>
-                </Form>
+                </div>
               </FormGroup>
             </Form>
           </div>
