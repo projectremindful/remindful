@@ -1,8 +1,8 @@
 // --------------------
 // Definition of variables
 $primary: #32c3ff;
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../../node_modules/react-quill/dist/quill.snow.css";
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../node_modules/react-quill/dist/quill.snow.css';
 // @import '../../node_modules/react-quill/dist/quill.core.css';
 
 body {
@@ -156,7 +156,7 @@ h2 {
 }
 
 .logout {
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   text-align: center;
   line-height: 2em;
   padding-top: 70px;
@@ -195,6 +195,7 @@ h2 {
   display: block;
   width: 100%;
   max-width: 700px;
+  min-height: 400px;
 }
 
 .quillbox-content {
@@ -508,10 +509,12 @@ div.show-image input.hovertitle {
   color: #2ca5f7;
 }
 
-.ql-toolbar.ql-snow {
-  display: none;
-}
+// .ql-toolbar.ql-snow {
+//   display: none;
+// }
 
 .ql-container.ql-snow {
-  border: 1px solid white;
+  min-height: 100px;
 }
+
+// border: 1px solid white;

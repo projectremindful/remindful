@@ -19,10 +19,10 @@ class Home extends Component {
         <Jumbotron>
           <Row>
             <Col>
-              <h1 className="display-3">A New Way of Looking at the Past</h1>
+              <h1 className="display-5">A New Way of Looking at the Past</h1>
               <hr className="my-2" />
 
-              <p className="lead .col-6">
+              <p className="lead">
                 We all take pictures to remember and share events with friends
                 via social platforms like facebook, Instagram, and twitter. But
                 as time goes on, how often do we really look back at them? And
@@ -51,7 +51,7 @@ class Home extends Component {
               />
             </Col>
             <Col>
-              <h1 className="display-3">Making Time for Your Memories</h1>
+              <h1 className="display-6">Making Time for Your Memories</h1>
               <hr className="my-2" />
 
               <p className="lead">
