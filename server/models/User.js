@@ -10,7 +10,8 @@ const userSchema = new Schema(
     chosenMemory: { type: Schema.Types.ObjectId, ref: "Memory" },
     preference: {
       type: String,
-      enum: ["reflection", "motivation", "nostalgia"]
+      enum: ["reflection", "motivation", "nostalgia", "none"],
+      default: "none"
     },
     datePreference: { enum: ["daily", "weekly", "fortnightly"] }
   },

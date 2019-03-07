@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import MemoryGallery from './pages/MemoryGallery';
-import Login from './pages/Login';
-import Logout from './pages/Logout';
-import Reminder from './pages/Reminder';
-import Profile from './pages/Profile';
-import Signup from './pages/Signup';
-import AddMemory from './pages/AddMemory.jsx';
-import NavBar from './Navbar.jsx';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+import MemoryGallery from "./pages/MemoryGallery";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
+import Reminder from "./pages/Reminder";
+import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
+import AddMemory from "./pages/AddMemory.jsx";
+import NavBar from "./Navbar.jsx";
 
 class App extends Component {
   constructor(props) {
