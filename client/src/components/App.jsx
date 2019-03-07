@@ -9,7 +9,7 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import AddMemory from "./pages/AddMemory.jsx";
 import NavBar from "./Navbar.jsx";
-import Demo from "./Demo.jsx";
+// import Demo from "./Demo.jsx";
 import api from "../api";
 
 class App extends Component {
@@ -53,6 +53,14 @@ class App extends Component {
           chosenMemory: chosenMemory
         });
       }
+      console.log(
+        "CHOSEN MEMORY IN THE APP STATE:   ",
+        this.state.chosenMemory
+      );
+      var chosenUserMemory = { chosenMemory: this.state.chosenMemory };
+      api.updateUserMemory(chosenUserMemory).then(res => {
+        console.log("in the update user api", res);
+      });
     });
   }
 
@@ -61,7 +69,11 @@ class App extends Component {
       <div className="App">
         <NavBar memId={this.state.chosenMemory} />
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route
+            path="/"
+            exact
+            render={props => <Home {...props} testProp={this.testAppMethod} />}
+          />
           <Route path="/signup" component={Signup} />
           <Route
             path="/login"
@@ -82,7 +94,7 @@ class App extends Component {
               <AddMemory {...props} testProp={this.testAppMethod} />
             )}
           />
-          <Route path="/demo" component={Demo} />
+          {/* <Route path="/demo" component={Demo} /> */}
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

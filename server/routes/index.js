@@ -46,6 +46,25 @@ router.put("/my-profile", isLoggedIn, (req, res, next) => {
     });
 });
 
+router.put("/my-memory", isLoggedIn, (req, res, next) => {
+  console.log("in my new API");
+  console.log("the req.body is:   ", req.body);
+  User.findByIdAndUpdate(
+    req.user._id,
+    { chosenMemory: req.body.chosenMemory },
+    { new: true }
+  )
+    .then(user => {
+      res.json({
+        message: "chosen memory update",
+        userMemory: user
+      });
+    })
+    .catch(error => {
+      console.log("error in putting the chosen memory", error);
+    });
+});
+
 //-----NOTIFICATIONS PUSH API ROUTES_____
 // api that saves subscription data for chrome to the database
 router.post("/save-subscription", isLoggedIn, (req, res) => {
@@ -99,13 +118,17 @@ const sendNotification = (subscription, dataToSend = "") => {
 
 // sends notification to selected subscription endpoint with required info from backend
 router.get("/send-notification", (req, res) => {
+  console.log("hello from send notification route");
   Subscription.find()
     .populate("_owner")
     .then(subscriptions => {
       subscriptions.forEach(sub => {
+        console.log("Each subscription", sub);
         if (sub._owner.chosenMemory) {
+          console.log("If statement", sub._owner.chosenMemory);
           var memoryId = sub._owner.chosenMemory;
           const body = `${baseUrl}/reminder/${memoryId}`;
+          console.log("TCL: body", body);
           sendNotification(sub, body);
         }
         // else {const body = `${baseUrl}/profile`; sendNotification(sub, body); }
