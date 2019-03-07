@@ -57,7 +57,7 @@ export default class MemoryCard extends Component {
       .delete(this.props.memory._id)
       .then(() => {
         console.log('Deleted');
-        alert("Your memory was successfully deleted");
+        alert('Your memory was successfully deleted');
         window.location.reload();
       })
       .catch(err => console.log(err));
@@ -128,7 +128,7 @@ export default class MemoryCard extends Component {
                     style={{ backgroundColor: '#24f0a9', border: 'none' }}
                     onClick={this.handleNotesClick}
                   >
-                    Add Notes
+                    Add Thoughts
                   </Button>
                 </Form>
               </Col>
