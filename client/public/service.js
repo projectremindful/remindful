@@ -1,4 +1,4 @@
-const environmentIsDev = false;
+const environmentIsDev = true;
 // This function encodes public key for chrome push API subscription into an array buffer which is needed by the subscription option
 const urlB64ToUint8Array = base64String => {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -50,6 +50,7 @@ self.addEventListener("activate", async () => {
 // listens for a push event and then calls the method to send a local notification with the information passed with teh push
 // through "event"
 self.addEventListener("push", function(event) {
+  console.log("push event", event);
   if (event.data) {
     showLocalNotification(
       "Your Daily Reminder from Remindful",
@@ -63,6 +64,7 @@ self.addEventListener("push", function(event) {
 
 // method that sends a local notification with the options for the content and other things
 const showLocalNotification = (title, body, swRegistration) => {
+  console.log("showing local notification", body, title);
   const options = {
     body: "Make time for your memory",
     data: {

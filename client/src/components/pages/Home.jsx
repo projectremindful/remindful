@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Jumbotron, Button, Row, Col } from "reactstrap";
+import { Jumbotron, Row, Col } from "reactstrap";
 
 class Home extends Component {
   constructor(props) {
@@ -38,7 +38,11 @@ class Home extends Component {
               </p>
             </Col>
             <Col>
-              <img src={"/images/victoriaharbor.png"} className="homepicture" />
+              <img
+                src={"/images/victoriaharbor.png"}
+                alt="victoria harbour"
+                className="homepicture"
+              />
             </Col>
           </Row>
         </Jumbotron>
@@ -48,6 +52,7 @@ class Home extends Component {
               <img
                 src={"/images/preferenceshome.png"}
                 className="homepicture"
+                alt="home"
               />
             </Col>
             <Col>

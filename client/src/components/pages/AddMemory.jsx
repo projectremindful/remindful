@@ -5,7 +5,7 @@ import {
   Col,
   CustomInput,
   Button,
-  FormFeedback,
+  // FormFeedback,
   Form,
   FormGroup,
   Label,
@@ -117,9 +117,9 @@ class AddMemory extends Component {
                 onChange={e => this.handleChange(e)}
                 invalid={false}
               />
-              <FormFeedback invalid>
+              {/* <FormFeedback invalid>
                 Please give your memory a title
-              </FormFeedback>
+              </FormFeedback> */}
             </Col>
           </FormGroup>
           <FormGroup row>
