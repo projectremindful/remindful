@@ -138,11 +138,20 @@ router.get("/send-notification", (req, res) => {
 });
 
 router.post("/memories", isLoggedIn, (req, res, next) => {
-  let _owner = req.user._id;
-  req.body._owner = _owner;
-  Memory.create(req.body)
+  console.log("DEBUG req.body", req.body);
+  Memory.create({
+    title: req.body.title,
+    date: req.body.date,
+    imgUrl: req.body.imgUrl,
+    _owner: req.user._id,
+    notes: req.body.notes,
+    reflection: req.body.reflection,
+    motivation: req.body.motivation,
+    nostalgia: req.body.nostalgia,
+    viewed: req.body.viewed
+  })
     .then(newMemory => {
-      console.log("Created new memory: ", newMemory, _owner);
+      console.log("Created new memory: ", newMemory);
       res.status(200).json(newMemory);
     })
     .catch(err => next(err));

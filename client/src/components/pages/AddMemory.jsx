@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import $ from "jquery";
 import {
   Col,
   CustomInput,
@@ -11,25 +11,25 @@ import {
   FormGroup,
   Label,
   Input
-} from 'reactstrap';
+} from "reactstrap";
 
 // import the service file since we need it to send (and get) the data to(from) server
-import api from '../../api';
+import api from "../../api";
 
 export default class AddMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      date: '',
-      notes: '',
+      title: "",
+      date: "",
+      notes: "",
       reflection: false,
       motivation: false,
       nostalgia: false,
       viewed: false,
       imgUrl:
-        'https://res.cloudinary.com/fracloudo/image/upload/v1551962224/defaultMemory.jpg',
-      _owner: ''
+        "https://res.cloudinary.com/fracloudo/image/upload/v1551962224/defaultMemory.jpg",
+      _owner: ""
     };
     this.oldNumbers = [-1, -1, -1, -1];
     this.bgImages = [];
@@ -48,21 +48,21 @@ export default class AddMemory extends Component {
 
   // this method handles just the file upload
   handleFileUpload = e => {
-    console.log('The file to be uploaded is: ', e.target.files[0]);
+    console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
     // imgUrl => this name has to be the same as in the model since we pass
     // req.body to .create() method when creating a new memory in '/api/memories/create' POST route
-    uploadData.append('imgUrl', e.target.files[0]);
+    uploadData.append("imgUrl", e.target.files[0]);
     api
       .handleUpload(uploadData)
       .then(response => {
-        console.log('response is: ', response);
+        console.log("response is: ", response);
         // after the console.log we can see that response carries 'secure_url' which we can use to update the state
         this.setState({ imgUrl: response.secure_url });
       })
       .catch(err => {
-        console.log('Error while uploading the file: ', err);
+        console.log("Error while uploading the file: ", err);
       });
   };
 
@@ -72,30 +72,30 @@ export default class AddMemory extends Component {
     api
       .saveNewMemory(this.state)
       .then(res => {
-        console.log('added: ', res);
-        this.props.testProp('...Test from add memory after new memory saved');
+        console.log("added: ", res);
+        this.props.testProp("...Test from add memory after new memory saved");
         setTimeout(
           function() {
-            alert('Image successfully uploaded');
-            this.props.history.push('/memory-gallery');
+            alert("Image successfully uploaded");
+            this.props.history.push("/memory-gallery");
           }.bind(this),
           2000
         );
       })
       .catch(err => {
-        console.log('Error while adding the memory: ', err);
+        console.log("Error while adding the memory: ", err);
       });
   };
 
   progress = () => {
-    console.log('Test executed');
+    console.log("Test executed");
     var current_progress = 0;
     var interval = setInterval(function() {
       current_progress += 10;
-      $('#dynamic')
-        .css('width', current_progress + '%')
-        .attr('aria-valuenow', current_progress)
-        .text(current_progress + '% uploaded');
+      $("#dynamic")
+        .css("width", current_progress + "%")
+        .attr("aria-valuenow", current_progress)
+        .text(current_progress + "% uploaded");
       if (current_progress >= 100) clearInterval(interval);
     }, 100);
   };
@@ -271,7 +271,7 @@ export default class AddMemory extends Component {
                 <Col sm={10}>
                   <CustomInput
                     checked={this.state.reflection}
-                    onChange={e => this.handlePrefChange('reflection')}
+                    onChange={e => this.handlePrefChange("reflection")}
                     type="switch"
                     id="reflection"
                     name="reflection"
@@ -279,7 +279,7 @@ export default class AddMemory extends Component {
                   />
                   <CustomInput
                     checked={this.state.nostalgia}
-                    onChange={e => this.handlePrefChange('nostalgia')}
+                    onChange={e => this.handlePrefChange("nostalgia")}
                     type="switch"
                     id="nostalgia"
                     name="nostalgia"
@@ -287,7 +287,7 @@ export default class AddMemory extends Component {
                   />
                   <CustomInput
                     checked={this.state.motivation}
-                    onChange={e => this.handlePrefChange('motivation')}
+                    onChange={e => this.handlePrefChange("motivation")}
                     type="switch"
                     id="motivation"
                     name="motivation"
@@ -302,9 +302,9 @@ export default class AddMemory extends Component {
               </FormGroup>
               <Button
                 style={{
-                  backgroundColor: '#24f0a9',
-                  color: 'white',
-                  border: 'white'
+                  backgroundColor: "#24f0a9",
+                  color: "white",
+                  border: "white"
                 }}
                 type="submit"
                 onClick={() => this.progress()}
@@ -319,7 +319,7 @@ export default class AddMemory extends Component {
                   aria-valuenow="0"
                   aria-valuemin="0"
                   aria-valuemax="100"
-                  style={{ width: '0%' }}
+                  style={{ width: "0%" }}
                 >
                   <span id="current-progress" />
                 </div>
@@ -334,7 +334,6 @@ export default class AddMemory extends Component {
   componentDidMount() {
     api.getProfile().then(user => {
       this.setState({
-        _id: user._id,
         username: user.username,
         email: user.email,
         profileUrl: user.profileUrl,
@@ -344,7 +343,7 @@ export default class AddMemory extends Component {
     });
 
     setTimeout(() => {
-      this.bgImages = document.querySelectorAll('.mosaic-images img');
+      this.bgImages = document.querySelectorAll(".mosaic-images img");
     }, 100);
 
     var that = this;
@@ -353,7 +352,7 @@ export default class AddMemory extends Component {
       for (var i = 0; i < that.bgImages.length; i++) {
         // this.bgImages[i].style.filter = 'grayscale(100%)';
         // this.bgImages[i].style.filter = 'brightness(50%)';
-        that.bgImages[i].classList.add('gray');
+        that.bgImages[i].classList.add("gray");
       }
     }
 
@@ -415,13 +414,13 @@ export default class AddMemory extends Component {
       var randomImage4 = that.bgImages[randomNumber4];
 
       //console.log(randomImage);
-      randomImage.classList.remove('gray');
+      randomImage.classList.remove("gray");
       randomImage.style.opacity = 1;
-      randomImage2.classList.remove('gray');
+      randomImage2.classList.remove("gray");
       randomImage2.style.opacity = 1;
-      randomImage3.classList.remove('gray');
+      randomImage3.classList.remove("gray");
       randomImage3.style.opacity = 1;
-      randomImage4.classList.remove('gray');
+      randomImage4.classList.remove("gray");
       randomImage4.style.opacity = 1;
     }, 3000);
   }
