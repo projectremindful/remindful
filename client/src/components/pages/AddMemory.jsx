@@ -79,7 +79,7 @@ class AddMemory extends Component {
       });
   };
 
-  test = () => {
+  progress = () => {
     console.log('Test executed');
     var current_progress = 0;
     var interval = setInterval(function() {
@@ -185,7 +185,7 @@ class AddMemory extends Component {
               <Input type="file" onChange={e => this.handleFileUpload(e)} />
             </Col>
           </FormGroup>
-          <Button outline color="info" type="submit" onClick={() => this.test()}>
+          <Button outline color="info" type="submit" onClick={() => this.progress()}>
             Save new memory
           </Button>
           <div className="progress" id="target">
