@@ -32,7 +32,8 @@ class Login extends Component {
       .login(this.state.username, this.state.password)
       .then(result => {
         console.log("LOGIN SUCCESS!", result);
-        this.props.newUser(result.chosenMemory);
+        // this.props.newUser(result.chosenMemory);
+        this.props.testProp("test from Login");
         this.props.history.push("/memory-gallery"); // Redirect to memory gallery page
       })
       .catch(err => this.setState({ message: err.toString() }));

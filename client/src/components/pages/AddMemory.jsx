@@ -69,10 +69,14 @@ class AddMemory extends Component {
       .saveNewMemory(this.state)
       .then(res => {
         console.log("added: ", res);
-        setTimeout(function() {
-          alert("Image successfully uploaded");
-          this.props.history.push("/memory-gallery");
-        }.bind(this), 2000);
+        this.props.testProp("...Test from add memory after new memory saved");
+        setTimeout(
+          function() {
+            alert("Image successfully uploaded");
+            this.props.history.push("/memory-gallery");
+          }.bind(this),
+          2000
+        );
       })
       .catch(err => {
         console.log("Error while adding the memory: ", err);
@@ -80,7 +84,7 @@ class AddMemory extends Component {
   };
 
   progress = () => {
-    console.log('Test executed');
+    console.log("Test executed");
     var current_progress = 0;
     var interval = setInterval(function() {
       current_progress += 10;
@@ -185,7 +189,12 @@ class AddMemory extends Component {
               <Input type="file" onChange={e => this.handleFileUpload(e)} />
             </Col>
           </FormGroup>
-          <Button outline color="info" type="submit" onClick={() => this.progress()}>
+          <Button
+            outline
+            color="info"
+            type="submit"
+            onClick={() => this.progress()}
+          >
             Save new memory
           </Button>
           <div className="progress" id="target">
@@ -196,7 +205,7 @@ class AddMemory extends Component {
               aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="100"
-              style={{width: '0%'}}
+              style={{ width: "0%" }}
             >
               <span id="current-progress" />
             </div>
