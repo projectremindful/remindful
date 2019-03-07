@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import api from '../../api';
+import React, { Component } from "react";
+import api from "../../api";
 import {
   Col,
   Button,
@@ -8,14 +8,14 @@ import {
   Container,
   Label,
   Input
-} from 'reactstrap';
+} from "reactstrap";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
       message: null
     };
   }
@@ -31,8 +31,9 @@ class Login extends Component {
     api
       .login(this.state.username, this.state.password)
       .then(result => {
-        console.log('LOGIN SUCCESS!', result);
-        this.props.history.push('/memory-gallery'); // Redirect to memory gallery page
+        console.log("LOGIN SUCCESS!", result);
+        this.props.newUser(result.chosenMemory);
+        this.props.history.push("/memory-gallery"); // Redirect to memory gallery page
       })
       .catch(err => this.setState({ message: err.toString() }));
   }
@@ -41,8 +42,8 @@ class Login extends Component {
     return (
       <div
         style={{
-          backgroundImage: 'linear-gradient(to bottom, #14343f, #3a8186 100vh)',
-          height: '800px'
+          backgroundImage: "linear-gradient(to bottom, #14343f, #3a8186 100vh)",
+          height: "800px"
         }}
       >
         <Container className="forms">
@@ -60,8 +61,8 @@ class Login extends Component {
                     id="username"
                     placeholder="Your username"
                     value={this.state.username}
-                    onChange={e => this.handleInputChange('username', e)}
-                  />{' '}
+                    onChange={e => this.handleInputChange("username", e)}
+                  />{" "}
                   <br />
                 </Col>
               </FormGroup>
@@ -76,16 +77,16 @@ class Login extends Component {
                     id="password"
                     placeholder="Enter your password"
                     value={this.state.password}
-                    onChange={e => this.handleInputChange('password', e)}
-                  />{' '}
+                    onChange={e => this.handleInputChange("password", e)}
+                  />{" "}
                   <br />
                 </Col>
-                <Form style={{ width: '100%' }}>
+                <Form style={{ width: "100%" }}>
                   <Button
                     style={{
-                      backgroundColor: '#24f0a9',
-                      color: 'white',
-                      border: 'white'
+                      backgroundColor: "#24f0a9",
+                      color: "white",
+                      border: "white"
                     }}
                     onClick={e => this.handleClick(e)}
                   >

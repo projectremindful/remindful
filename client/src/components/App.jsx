@@ -9,28 +9,44 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import AddMemory from "./pages/AddMemory.jsx";
 import NavBar from "./Navbar.jsx";
+import Demo from "./Demo.jsx";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countries: []
+      chosenMemory: null
     };
+    this.updateCurrentUsersChosenMemory = this.updateCurrentUsersChosenMemory.bind(
+      this
+    );
+  }
+
+  updateCurrentUsersChosenMemory(newId) {
+    this.setState({
+      chosenMemory: newId
+    });
   }
 
   render() {
     return (
       <div className="App">
-        <NavBar />
+        <NavBar memId={this.state.chosenMemory} />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
+          <Route
+            path="/login"
+            render={props => (
+              <Login {...props} newUser={this.updateCurrentUsersChosenMemory} />
+            )}
+          />
           <Route path="/logout" component={Logout} />
           <Route path="/profile" component={Profile} />
           <Route path="/memory-gallery" component={MemoryGallery} />
           <Route path="/reminder/:id" component={Reminder} />
           <Route path="/add-memory" component={AddMemory} />
+          <Route path="/demo" component={Demo} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

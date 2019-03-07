@@ -8,7 +8,8 @@ router.post('/upload', uploader.single("imgUrl"), (req, res, next) => {
     console.log('file is: ', req.file)
 
     if (!req.file) {
-      next(new Error('No file uploaded!'));
+      res.json({ secure_url: "https://res.cloudinary.com/fracloudo/image/upload/v1551962224/defaultMemory.jpg" });
+      // next(new Error('No file uploaded!'));
       return;
     }
     // get secure_url from the file object and save it in the 

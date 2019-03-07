@@ -26,7 +26,7 @@ class AddMemory extends Component {
       motivation: false,
       nostalgia: false,
       viewed: false,
-      imgUrl: "",
+      imgUrl: "https://res.cloudinary.com/fracloudo/image/upload/v1551962224/defaultMemory.jpg",
       _owner: ""
     };
   }
@@ -53,7 +53,7 @@ class AddMemory extends Component {
     api
       .handleUpload(uploadData)
       .then(response => {
-        // console.log('response is: ', response);
+        console.log('response is: ', response);
         // after the console.log we can see that response carries 'secure_url' which we can use to update the state
         this.setState({ imgUrl: response.secure_url });
       })
@@ -70,7 +70,7 @@ class AddMemory extends Component {
       .then(res => {
         console.log("added: ", res);
         setTimeout(function() {
-          alert("Image successfully uploaded");
+          alert("Your memory was successfully saved");
           this.props.history.push("/memory-gallery");
         }.bind(this), 2000);
       })

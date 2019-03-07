@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
-import api from '../../api';
-import QuillTextBox from '../QuillTextBox';
-import { Form, Button, Col, Row, Container } from 'reactstrap';
-import Modal from '../Modal';
+import React, { Component } from "react";
+import api from "../../api";
+import QuillTextBox from "../QuillTextBox";
+import { Form, Button, Col, Row, Container } from "reactstrap";
+import Modal from "../Modal";
+import { Link } from "react-router-dom";
 
 export default class Reminder extends Component {
   constructor(props) {
     super(props);
     this.state = {
       memoryId: this.props.match.params.id,
-      imgUrl: '',
-      date: '',
-      notes: '',
-      title: '',
+      imgUrl: "",
+      date: "",
+      notes: "",
+      title: "",
       viewed: false,
       ownerId: null,
       nostalgia: false,
@@ -31,15 +32,15 @@ export default class Reminder extends Component {
 
   handleNotesClick() {
     var updatedNotes = { updatedNotes: this.state.notes };
-    console.log('notes from user', updatedNotes);
+    console.log("notes from user", updatedNotes);
     api
       .updateMemory(this.state.memoryId, updatedNotes)
       .then(res => {
-        console.log('memorynotes updated: ', res);
+        console.log("memorynotes updated: ", res);
         // alert("Profile Picture successfully uploaded");
       })
       .catch(err => {
-        console.log('Error while updating memory notes: ', err);
+        console.log("Error while updating memory notes: ", err);
       });
     // console.log(this.state.notes);
   }
@@ -74,28 +75,54 @@ export default class Reminder extends Component {
   render() {
     console.log(this.state.title);
     return this.state.title === "" ? (
-      <div style={{ padding: "100px" }}>
-        It looks like you don't have any memories! Add a memory to your gallery
-        to start receiving daily reminders of your favourite memories
+      <div
+        style={{
+          margin: "10px",
+          padding: "100px"
+        }}
+      >
+        <h4>
+          You don't have a daily memory because you haven't saved any memories
+          to your gallery yet!!
+        </h4>
+        <Link to="/add-memory">
+          <div className="show-image">
+            <img
+              id="add mem"
+              src="/images/addSymbol.png"
+              alt="add memory"
+              style={{
+                height: "380px",
+                padding: "45px"
+              }}
+            />
+            <input
+              className="hovertitle"
+              type="text"
+              value="Add a memory to your collection"
+              readOnly
+            />
+          </div>
+        </Link>
       </div>
     ) : (
       <div
         style={{
-          margin: '0',
-          padding: '0'
+          margin: "0",
+          padding: "0"
         }}
       >
         <div
           style={{
-            margin: '0 auto',
-            padding: '100px 0px',
-            width: '100%'
+            margin: "0 auto",
+            padding: "100px 0px",
+            width: "100%"
           }}
         >
           <Row style={{ margin: "0" }}>
             <Col sm="12" lg="8">
               <img
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
                 src={this.state.imgUrl}
                 alt="memory"
               />
@@ -106,7 +133,7 @@ export default class Reminder extends Component {
             <Col
               sm="12"
               lg="4"
-              style={{ textAlign: 'center', lineHeight: '1.5' }}
+              style={{ textAlign: "center", lineHeight: "1.5" }}
             >
               <h2>{this.state.title}</h2>
               <p>
@@ -150,6 +177,16 @@ export default class Reminder extends Component {
                 <Button onClick={this.handleNotesClick}>
                   Save your changes
                 </Button>
+                <br />
+              {this.state.successMessage ? (
+              <div>
+                <p style={{ color: '#24f0a9' }}>
+                  Your information has been successfully saved
+                </p>
+              </div>
+              ) : (
+              ' '
+              )}
               </Form>
             </React.Fragment>
           </Modal>
@@ -160,7 +197,7 @@ export default class Reminder extends Component {
 
   componentDidMount() {
     api.getMemory(this.state.memoryId).then(memory => {
-      console.log('memory is:   ', memory);
+      console.log("memory is:   ", memory);
       this.setState({
         imgUrl: memory.imgUrl,
         date: memory.date,
