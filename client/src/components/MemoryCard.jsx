@@ -55,7 +55,11 @@ export default class MemoryCard extends Component {
   delete() {
     api
       .delete(this.props.memory._id)
-      .then(console.log('Deleted'))
+      .then(() => {
+        console.log('Deleted');
+        alert("Your memory was successfully deleted");
+        window.location.reload();
+      })
       .catch(err => console.log(err));
   }
 

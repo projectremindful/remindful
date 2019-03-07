@@ -299,7 +299,7 @@ export default class Profile extends Component {
             {this.state.successMessage ? (
               <div>
                 <p style={{ color: '#24f0a9' }}>
-                  Your information has been succesfully saved
+                  Your information has been successfully saved
                 </p>
                 {/* <Link to="/reminder/:id">Set Reminder</Link> */}
               </div>

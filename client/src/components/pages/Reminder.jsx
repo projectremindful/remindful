@@ -177,6 +177,16 @@ export default class Reminder extends Component {
                 <Button onClick={this.handleNotesClick}>
                   Save your changes
                 </Button>
+                <br />
+              {this.state.successMessage ? (
+              <div>
+                <p style={{ color: '#24f0a9' }}>
+                  Your information has been successfully saved
+                </p>
+              </div>
+              ) : (
+              ' '
+              )}
               </Form>
             </React.Fragment>
           </Modal>

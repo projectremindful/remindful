@@ -70,7 +70,7 @@ class AddMemory extends Component {
       .then(res => {
         console.log("added: ", res);
         setTimeout(function() {
-          alert("Image successfully uploaded");
+          alert("Your memory was successfully saved");
           this.props.history.push("/memory-gallery");
         }.bind(this), 2000);
       })
