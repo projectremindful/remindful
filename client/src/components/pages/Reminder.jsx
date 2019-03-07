@@ -82,8 +82,9 @@ export default class Reminder extends Component {
         }}
       >
         <h4>
-          You don't have a daily memory because you haven't saved any memories
-          to your gallery yet!!
+          <p>You don't have a daily memory because you haven't saved any memories
+          to your gallery yet!</p>
+          <p className="Addmem p-2">Add a memory now!</p>
         </h4>
         <Link to="/add-memory">
           <div className="show-image">

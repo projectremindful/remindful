@@ -146,7 +146,7 @@ class AddMemory extends Component {
                 className="p-2"
                 type="textarea"
                 name="notes"
-                placeholder="Add what you'd like to reflect on in this memory, note you thoughts or memories."
+                placeholder="Add what you'd like to reflect on in this memory, note your thoughts or memories."
                 value={this.state.notes}
                 onChange={e => this.handleChange(e)}
               />
