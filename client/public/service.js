@@ -65,7 +65,6 @@ self.addEventListener("push", function(event) {
 const showLocalNotification = (title, body, swRegistration) => {
   const options = {
     body: "Make time for your memory",
-    icon: "client/public/images/plus-button.png",
     data: {
       dateOfArrival: Date.now(),
       url: body

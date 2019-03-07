@@ -22,7 +22,11 @@ class MemoryGallery extends Component {
   }
 
   render() {
+<<<<<<< HEAD
 
+=======
+    console.log(this.state.memories, "line 25");
+>>>>>>> f956e44492b67270e6dee609d4d448e628f9254d
     return this.state.memories.length > 0 ? (
       <div className="memoryGallery">
         {this.state.memories.map((memory, i) => (
@@ -39,6 +43,7 @@ class MemoryGallery extends Component {
       </div>
     ) : (
       <div style={{ padding: "100px" }}>
+        Loading...
         <div
           style={{
             margin: "10px"
@@ -70,9 +75,17 @@ class MemoryGallery extends Component {
       </div>
     );
   }
+
   componentDidMount() {
     api.getUserMemories().then(memories => {
+<<<<<<< HEAD
       this.setState({ memories, isMounted:true });
+=======
+      this.setState({
+        memories: memories,
+        isloading: false
+      });
+>>>>>>> f956e44492b67270e6dee609d4d448e628f9254d
     });
   }
 }

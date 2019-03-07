@@ -96,7 +96,7 @@ class Signup extends Component {
         <Container className="forms">
           <div className="sl-box">
             <h4 className="p-2">Signup</h4>
-            <div onSubmit={e => this.handleSubmit(e)}>
+            <Form onSubmit={e => this.handleSubmit(e)}>
               <FormGroup row>
                 <Label for="username" sm={2} size="sm">
                   Username
