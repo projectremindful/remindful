@@ -29,6 +29,7 @@ class AddMemory extends Component {
     };
   }
 
+
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -74,6 +75,7 @@ class AddMemory extends Component {
         console.log("Error while adding the memory: ", err);
       });
   };
+
 
   render() {
     console.log(this.state.reflection);
@@ -171,10 +173,17 @@ class AddMemory extends Component {
           <Button outline color="info" type="submit">
             Save new memory
           </Button>
+          <div class="progress">
+            <div class="bar" style="width: 200px; min-width: 2em;">0%</div>
+          </div>
+          <div id="status"></div>
+
+ 
         </Form>
       </div>
     );
   }
 }
+
 
 export default AddMemory;
