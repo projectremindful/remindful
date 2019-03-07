@@ -28,8 +28,10 @@ export default class MemoryCard extends Component {
   handleNotesClick() {
     var updatedNotes = { updatedNotes: this.state.notes };
     console.log('notes from user', updatedNotes);
+    console.log(this.state.memoryId);
+
     api
-      .updateMemory(this.state.memoryId, updatedNotes)
+      .updateMemory(this.props.memory._id, updatedNotes)
       .then(res => {
         console.log('memorynotes updated: ', res);
         // alert("Profile Picture successfully uploaded");
