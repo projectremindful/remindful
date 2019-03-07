@@ -63,7 +63,7 @@ h2 {
   left: 0px;
   width: 100%;
   background-image: linear-gradient(to bottom, #14343f, #3a8186 100vh);
-  height: 800px;
+  height: 780px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -418,8 +418,6 @@ div.show-image input.hovertitle {
   text-align: center;
 }
 
-
-
 .item {
   text-align: center;
 }
@@ -457,15 +455,25 @@ div.show-image input.hovertitle {
   margin-top: 120px;
 }
 
-.sl-box {
+.sl-box,
+.li-box {
   background-color: white;
   border-radius: 5px;
   padding: 10px;
   width: 600px;
-  height: 260px;
+  height: 320px;
   text-align: center;
   line-height: 20px;
   color: black;
+}
+
+.li-box {
+  height: 250px;
+}
+
+.homepicture {
+  width: 750px;
+  height: 445px;
 }
 
 .preferences {
@@ -489,4 +497,21 @@ div.show-image input.hovertitle {
 .progress {
   margin: 10px;
   width: 700px;
+}
+
+.jumbotron {
+  margin-bottom: 0px;
+  padding-top: 35px;
+}
+
+.homefont {
+  color: #2ca5f7;
+}
+
+.ql-toolbar.ql-snow {
+  display: none;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid white;
 }

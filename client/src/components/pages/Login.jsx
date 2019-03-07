@@ -46,7 +46,7 @@ class Login extends Component {
         }}
       >
         <Container className="forms">
-          <div className="sl-box">
+          <div className="li-box">
             <h4 className="p-2">Login</h4>
             <Form onSubmit={e => this.handleSubmit(e)}>
               <FormGroup row>
