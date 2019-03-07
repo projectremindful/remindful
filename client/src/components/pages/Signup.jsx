@@ -144,7 +144,7 @@ class Signup extends Component {
                   />{" "}
                   <br />
                 </Col>
-                <Form style={{ width: "100%" }}>
+                <div style={{ width: "100%" }}>
                   <Button
                     style={{
                       backgroundColor: "#24f0a9",
@@ -155,7 +155,7 @@ class Signup extends Component {
                   >
                     Signup
                   </Button>
-                </Form>
+                </div>
               </FormGroup>
             </Form>
           </div>

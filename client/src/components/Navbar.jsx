@@ -15,7 +15,8 @@ export default class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      chosenMemory: null
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -31,6 +32,7 @@ export default class NavBar extends Component {
   }
 
   render() {
+    var loggedInUserChosenMemory = this.props.memId;
     return (
       <Navbar className="navbar py-0 px-0 pl-3" expand="md" color="#fff" light>
         <NavbarToggler onClick={this.toggle} />
@@ -77,6 +79,13 @@ export default class NavBar extends Component {
                 </NavLink>
               )}
             </NavItem>
+            <NavItem>
+              {api.isLoggedIn() && (
+                <NavLink tag={NLink} to="/add-memory">
+                  Add Memory
+                </NavLink>
+              )}
+            </NavItem>
           </Nav>
           <div className="add-memory">
             {api.isLoggedIn() && (
@@ -84,9 +93,9 @@ export default class NavBar extends Component {
                 <NavLink
                   style={{ marginBottom: "0", color: "white" }}
                   tag={NLink}
-                  to="/add-memory"
+                  to={`/reminder/${loggedInUserChosenMemory}`}
                 >
-                  Add Memory
+                  Daily Memory
                 </NavLink>
               </div>
             )}
@@ -94,5 +103,13 @@ export default class NavBar extends Component {
         </Collapse>
       </Navbar>
     );
+  }
+
+  componentDidMount() {
+    api.getProfile().then(user => {
+      this.setState({
+        chosenMemory: user.chosenMemory
+      });
+    });
   }
 }
