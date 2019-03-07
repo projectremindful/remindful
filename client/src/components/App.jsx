@@ -61,7 +61,11 @@ class App extends Component {
       <div className="App">
         <NavBar memId={this.state.chosenMemory} />
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route
+            path="/"
+            exact
+            render={props => <Home {...props} testProp={this.testAppMethod} />}
+          />
           <Route path="/signup" component={Signup} />
           <Route
             path="/login"
