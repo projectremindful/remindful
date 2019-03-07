@@ -30,6 +30,7 @@ export default class Profile extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handlePrefChange = this.handlePrefChange.bind(this);
     this.oldNumbers = [-1, -1, -1];
+    this.bgImages = [];
   }
 
   handleChange(e) {
@@ -301,7 +302,7 @@ export default class Profile extends Component {
             {this.state.successMessage ? (
               <div>
                 <p style={{ color: "#24f0a9" }}>
-                  Your information has been succesfully saved
+                  Your information has been successfully saved
                 </p>
                 {/* <Link to="/reminder/:id">Set Reminder</Link> */}
               </div>
@@ -332,15 +333,21 @@ export default class Profile extends Component {
         // chosenMemory: user.chosenMemory
       });
     });
-    var bgImages = document.querySelectorAll(".mosaic-images img");
+
+    setTimeout(() => {
+      this.bgImages = document.querySelectorAll(".mosaic-images img");
+    }, 100);
+
+    //const bgImages = document.querySelectorAll('.mosaic-images img');
+    var that = this;
     function setAllToGrayScale() {
-      for (var i = 0; i < bgImages.length; i++) {
-        // bgImages[i].style.filter = 'grayscale(100%)';
-        // bgImages[i].style.filter = 'brightness(50%)';
-        bgImages[i].classList.add("gray");
+      for (var i = 0; i < that.bgImages.length; i++) {
+        // this.bgImages[i].style.filter = 'grayscale(100%)';
+        // this.bgImages[i].style.filter = 'brightness(50%)';
+        that.bgImages[i].classList.add("gray");
       }
     }
-    var that = this;
+
     setInterval(function() {
       setAllToGrayScale();
 
@@ -372,11 +379,11 @@ export default class Profile extends Component {
 
       that.oldNumbers = [randomNumber, randomNumber2, randomNumber3];
 
-      var randomImage = bgImages[randomNumber];
+      var randomImage = that.bgImages[randomNumber];
 
-      var randomImage2 = bgImages[randomNumber2];
+      var randomImage2 = that.bgImages[randomNumber2];
 
-      var randomImage3 = bgImages[randomNumber3];
+      var randomImage3 = that.bgImages[randomNumber3];
 
       //console.log(randomImage);
       randomImage.classList.remove("gray");
