@@ -72,6 +72,20 @@ h2 {
   }
 }
 
+.Logout-image {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background-image: linear-gradient(to bottom, #14343f, #3a8186 100vh);
+  height: 780px;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  p {
+    font-size: 1.2em;
+  }
+}
+
 .App-logo {
   margin-top: -80px;
   animation: pulse 3s;
@@ -159,12 +173,10 @@ h2 {
 }
 
 .logout {
-  font-family: 'Open Sans Condensed', sans-serif;
+  color: white;
   text-align: center;
   line-height: 2em;
-  padding-top: 70px;
-  letter-spacing: 0.5em;
-  text-shadow: 0.5em 0.5em 1em #9cb8b3;
+  padding-top: 100px;
 }
 
 #memImg {
@@ -513,7 +525,7 @@ div.show-image input.hovertitle {
 }
 
 .homefont {
-  color: #2ca5f7;
+  color: black;
 }
 
 // .ql-toolbar.ql-snow {
