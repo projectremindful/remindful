@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import api from '../../api';
+import React, { Component } from "react";
+import api from "../../api";
 import {
   Col,
   Button,
@@ -8,52 +8,52 @@ import {
   Container,
   Label,
   Input
-} from 'reactstrap';
+} from "reactstrap";
 
 class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      name: '',
-      password: '',
+      username: "",
+      name: "",
+      password: "",
       message: null,
-      email: ''
+      email: ""
     };
   }
 
   //--METHODS FOR RGISTERING SERVICE WORKER AND ALLOWING NOTIFICATIONS-----
   // checks that there is a service worker and push API, logs an error if not
   check = () => {
-    if (!('serviceWorker' in navigator)) {
-      throw new Error('No Service Worker support!');
+    if (!("serviceWorker" in navigator)) {
+      throw new Error("No Service Worker support!");
     }
-    if (!('PushManager' in window)) {
-      throw new Error('No Push API Support!');
+    if (!("PushManager" in window)) {
+      throw new Error("No Push API Support!");
     }
   };
 
   // registers service.js as our service worker
   registerServiceWorker = async () => {
-    console.log('registering service worker');
-    const swRegistration = await navigator.serviceWorker.register('service.js');
+    console.log("registering service worker");
+    const swRegistration = await navigator.serviceWorker.register("service.js");
     return swRegistration;
   };
 
   // sends a pop up message asking the user to allow notifications
   requestNotificationPermission = async () => {
-    console.log('requesting permission to send notifications');
+    console.log("requesting permission to send notifications");
     const permission = await window.Notification.requestPermission();
     // value of permission from the user can be 'granted', 'default', 'denied'
-    if (permission !== 'granted') {
-      throw new Error('Permission not granted for Notification');
+    if (permission !== "granted") {
+      throw new Error("Permission not granted for Notification");
     }
-    console.log('permission status is', permission);
+    console.log("permission status is", permission);
   };
 
   // function to call the above three methods on button click by the user
   main = async () => {
-    console.log('main() called on button click');
+    console.log("main() called on button click");
     this.check();
     await this.requestNotificationPermission();
     await this.registerServiceWorker();
@@ -77,10 +77,10 @@ class Signup extends Component {
     api
       .signup(data)
       .then(result => {
-        console.log('SIGNUP SUCCESS!');
-        // running main() only after user is logged in
+        console.log("SIGNUP SUCCESS!");
+        // running main() only after user is logged in - this kicks of subscription for notification
         this.main();
-        this.props.history.push('/memory-gallery'); // Redirect to memory gallery page
+        this.props.history.push("/memory-gallery"); // Redirect to memory gallery page
       })
       .catch(err => this.setState({ message: err.toString() }));
   }
@@ -89,8 +89,8 @@ class Signup extends Component {
     return (
       <div
         style={{
-          backgroundImage: 'linear-gradient(to bottom, #14343f, #3a8186 100vh)',
-          height: '800px'
+          backgroundImage: "linear-gradient(to bottom, #14343f, #3a8186 100vh)",
+          height: "800px"
         }}
       >
         <Container className="forms">
@@ -108,8 +108,8 @@ class Signup extends Component {
                     id="username"
                     placeholder="Your username"
                     value={this.state.username}
-                    onChange={e => this.handleInputChange('username', e)}
-                  />{' '}
+                    onChange={e => this.handleInputChange("username", e)}
+                  />{" "}
                   <br />
                 </Col>
               </FormGroup>
@@ -124,8 +124,8 @@ class Signup extends Component {
                     id="email"
                     placeholder="Your Email"
                     value={this.state.email}
-                    onChange={e => this.handleInputChange('email', e)}
-                  />{' '}
+                    onChange={e => this.handleInputChange("email", e)}
+                  />{" "}
                   <br />
                 </Col>
               </FormGroup>
@@ -140,16 +140,16 @@ class Signup extends Component {
                     id="password"
                     placeholder="Enter your password"
                     value={this.state.password}
-                    onChange={e => this.handleInputChange('password', e)}
-                  />{' '}
+                    onChange={e => this.handleInputChange("password", e)}
+                  />{" "}
                   <br />
                 </Col>
-                <div style={{ width: '100%' }}>
+                <div style={{ width: "100%" }}>
                   <Button
                     style={{
-                      backgroundColor: '#24f0a9',
-                      color: 'white',
-                      border: 'white'
+                      backgroundColor: "#24f0a9",
+                      color: "white",
+                      border: "white"
                     }}
                     onClick={e => this.handleClick(e)}
                   >

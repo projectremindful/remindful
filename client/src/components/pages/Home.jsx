@@ -6,6 +6,7 @@ class Home extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
     return (
       <div>
@@ -82,7 +83,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.testProp("...Test from add memory after new memory saved");
+    this.props.dailyMemory();
   }
 }
 

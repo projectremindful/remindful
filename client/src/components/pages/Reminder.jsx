@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import api from '../../api';
-import QuillTextBox from '../QuillTextBox';
-import { Form, Button, Col, Row, Jumbotron } from 'reactstrap';
-import Modal from '../Modal';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import api from "../../api";
+import QuillTextBox from "../QuillTextBox";
+import { Form, Button, Col, Row, Jumbotron } from "reactstrap";
+import Modal from "../Modal";
+import { Link } from "react-router-dom";
 
 export default class Reminder extends Component {
   constructor(props) {
     super(props);
     this.state = {
       memoryId: this.props.match.params.id,
-      imgUrl: '',
-      date: '',
-      notes: '',
-      title: '',
-      viewed: false,
+      imgUrl: "",
+      date: "",
+      notes: "",
+      title: "",
       ownerId: null,
       nostalgia: false,
       motivation: false,
@@ -23,48 +22,26 @@ export default class Reminder extends Component {
     };
     this.changeText = this.changeText.bind(this);
     this.handleNotesClick = this.handleNotesClick.bind(this);
-    this.handleViewClick = this.handleViewClick.bind(this);
   }
 
+  // handles changes to text in notes box
   changeText(newText) {
     this.setState({ notes: newText });
   }
 
+  // on click updates and saves users notes for that memory
   handleNotesClick() {
     var updatedNotes = { updatedNotes: this.state.notes };
-    console.log('notes from user', updatedNotes);
     api
       .updateMemory(this.state.memoryId, updatedNotes)
       .then(res => {
-        console.log('memorynotes updated: ', res);
+        console.log("memorynotes updated: ", res);
         // alert("Profile Picture successfully uploaded");
       })
       .catch(err => {
-        console.log('Error while updating memory notes: ', err);
+        console.log("Error while updating memory notes: ", err);
       });
-    // console.log(this.state.notes);
   }
-
-  handleViewClick() {
-    this.setState(prevState => ({
-      viewed: !prevState.viewed
-    }));
-  }
-
-  // handleChange(event) {
-  //   const { name, value } = event.target;
-  //   this.setState({ [name]: value });
-  // }
-
-  // handleDateChange = e => {
-  //   console.log("debug:", e.target.value);
-  //   this.setState({ reminderDate: e.target.value });
-  // };
-
-  // scheduleReminder(e) {
-  //   e.preventDefault();
-  //   let reminderDate = this.params.date;
-  // }
 
   toggleModal = () => {
     this.setState({
@@ -74,14 +51,14 @@ export default class Reminder extends Component {
 
   render() {
     console.log(this.state.title);
-    return this.state.title === '' ? (
-      <Jumbotron style={{ height: '920px' }}>
-        <Row style={{ margin: '0' }}>
+    return this.state.title === "" ? (
+      <Jumbotron style={{ height: "920px" }}>
+        <Row style={{ margin: "0" }}>
           <Col sm="12" md={{ size: 6, offset: 3 }}>
             <div
               style={{
-                margin: '10px',
-                padding: '100px'
+                margin: "10px",
+                padding: "100px"
               }}
             >
               <h1 className="">Whoops!</h1>
@@ -97,7 +74,7 @@ export default class Reminder extends Component {
                     src="/images/addmemory.png"
                     alt="add memory"
                     style={{
-                      height: '380px'
+                      height: "380px"
                     }}
                   />
                   <input
@@ -115,22 +92,22 @@ export default class Reminder extends Component {
     ) : (
       <div
         style={{
-          margin: '0',
-          padding: '0',
-          backgroundColor: 'white'
+          margin: "0",
+          padding: "0",
+          backgroundColor: "white"
         }}
       >
         <div
           style={{
-            margin: '0 auto',
-            padding: '100px 0px',
-            width: '100%'
+            margin: "0 auto",
+            padding: "100px 0px",
+            width: "100%"
           }}
         >
-          <Row style={{ margin: '0' }}>
+          <Row style={{ margin: "0" }}>
             <Col sm="12" lg="8">
               <img
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
                 src={this.state.imgUrl}
                 alt="memory"
               />
@@ -141,7 +118,7 @@ export default class Reminder extends Component {
             <Col
               sm="12"
               lg="4"
-              style={{ textAlign: 'center', lineHeight: '1.5' }}
+              style={{ textAlign: "center", lineHeight: "1.5" }}
             >
               <h2>
                 <i>{this.state.title}</i>
@@ -157,18 +134,6 @@ export default class Reminder extends Component {
               <p>What were you thinking about at the time?</p>
               <br />
               <Button onClick={this.toggleModal}>Read your reflections</Button>
-              {/* <p>Viewed: {this.state.viewed ? "true" : "false"}</p>
-            <p>Nostalgia tag: {this.state.nostalgia ? "true" : "false"}</p>
-            <p>Reflection tag: {this.state.reflection ? "true" : "false"}</p>
-            <p>Motivation tag: {this.state.motivation ? "true" : "false"}</p>
-            <Button
-              active={this.state.viewed}
-              outline
-              color={this.state.viewed ? "danger" : "success"}
-              onClick={this.handleViewClick}
-            >
-              I {this.state.viewed ? "won't" : "will"} see this memory again
-            </Button> */}
             </Col>
           </Row>
 
@@ -190,12 +155,12 @@ export default class Reminder extends Component {
                 <br />
                 {this.state.successMessage ? (
                   <div>
-                    <p style={{ color: '#24f0a9' }}>
+                    <p style={{ color: "#24f0a9" }}>
                       Your information has been successfully saved
                     </p>
                   </div>
                 ) : (
-                  ' '
+                  " "
                 )}
               </Form>
             </React.Fragment>
@@ -207,13 +172,11 @@ export default class Reminder extends Component {
 
   componentDidMount() {
     api.getMemory(this.state.memoryId).then(memory => {
-      console.log('memory is:   ', memory);
       this.setState({
         imgUrl: memory.imgUrl,
         date: memory.date,
         notes: memory.notes,
         title: memory.title,
-        viewed: memory.viewed,
         ownerId: memory._owner,
         nostalgia: memory.nostalgia,
         motivation: memory.motivation,
