@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import api from "../../api";
+import React, { Component } from 'react';
+import api from '../../api';
 import {
   Col,
   Button,
@@ -8,14 +8,14 @@ import {
   Container,
   Label,
   Input
-} from "reactstrap";
+} from 'reactstrap';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       message: null
     };
   }
@@ -31,10 +31,10 @@ class Login extends Component {
     api
       .login(this.state.username, this.state.password)
       .then(result => {
-        console.log("LOGIN SUCCESS!", result);
+        console.log('LOGIN SUCCESS!', result);
         // this.props.newUser(result.chosenMemory);
-        this.props.testProp("test from Login");
-        this.props.history.push("/memory-gallery"); // Redirect to memory gallery page
+        this.props.testProp('test from Login');
+        this.props.history.push('/memory-gallery'); // Redirect to memory gallery page
       })
       .catch(err => this.setState({ message: err.toString() }));
   }
@@ -43,57 +43,52 @@ class Login extends Component {
     return (
       <div
         style={{
-          backgroundImage: "linear-gradient(to bottom, #14343f, #3a8186 100vh)",
-          height: "800px"
+          backgroundImage: 'linear-gradient(to bottom, #14343f, #3a8186 100vh)',
+          height: '800px'
         }}
       >
         <Container className="forms">
           <div className="li-box">
-            <h4 className="p-2">Login</h4>
+            <h2 className="p-2">Login</h2>
             <Form onSubmit={e => this.handleSubmit(e)}>
               <FormGroup row>
-                <Label for="username" sm={2} size="sm">
-                  Username
-                </Label>
-                <Col sm={10}>
+                <Col sm="12" md={{ size: 6, offset: 3 }}>
                   <Input
                     type="text"
                     name="username"
                     id="username"
-                    placeholder="Your username"
+                    placeholder="Username"
                     value={this.state.username}
-                    onChange={e => this.handleInputChange("username", e)}
-                  />{" "}
-                  <br />
+                    onChange={e => this.handleInputChange('username', e)}
+                  />{' '}
                 </Col>
               </FormGroup>
               <FormGroup row>
-                <Label for="password" sm={2} size="sm">
-                  Password
-                </Label>
-                <Col sm={10}>
+                <Col sm="12" md={{ size: 6, offset: 3 }}>
                   <Input
                     type="password"
                     name="password"
                     id="password"
                     placeholder="Enter your password"
                     value={this.state.password}
-                    onChange={e => this.handleInputChange("password", e)}
-                  />{" "}
-                  <br />
+                    onChange={e => this.handleInputChange('password', e)}
+                  />{' '}
                 </Col>
-                <Form style={{ width: "100%" }}>
+              </FormGroup>
+              <FormGroup row>
+                <Col sm="12" md={{ size: 6, offset: 3 }}>
                   <Button
                     style={{
-                      backgroundColor: "#24f0a9",
-                      color: "white",
-                      border: "white"
+                      backgroundColor: '#24f0a9',
+                      color: 'white',
+                      border: 'white',
+                      width: '275px'
                     }}
                     onClick={e => this.handleClick(e)}
                   >
                     Login
                   </Button>
-                </Form>
+                </Col>
               </FormGroup>
             </Form>
           </div>
