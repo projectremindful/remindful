@@ -9,56 +9,54 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import AddMemory from "./pages/AddMemory.jsx";
 import NavBar from "./Navbar.jsx";
-// import Demo from "./Demo.jsx";
 import api from "../api";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chosenMemory: null
+      dailyMemory: null
     };
-    this.updateCurrentUsersChosenMemory = this.updateCurrentUsersChosenMemory.bind(
-      this
-    );
-    this.testAppMethod = this.testAppMethod.bind(this);
+    this.updateUsersDailyMemory = this.updateUsersDailyMemory.bind(this);
+    this.usersDailyMemory = this.usersDailyMemory.bind(this);
   }
-
-  updateCurrentUsersChosenMemory(newId) {
+  // so daily memory is updated and available from the highest level.
+  updateUsersDailyMemory(newId) {
     this.setState({
-      chosenMemory: newId
+      dailyMemory: newId
     });
   }
 
-  testAppMethod(info) {
+  usersDailyMemory() {
+    // get all the users memories and filter to an array with tags matching the users preference
     api.getUserMemories().then(memories => {
       var filteredMemories = memories.filter(memory => {
         var pref = memory._owner.preference;
         return memory[pref];
       });
+      // if the user has not memories at all keep state at null
       if (memories.length === 0) {
         this.setState({
-          chosenMemory: null
+          dailyMemory: null
         });
+        // if the user has not meemories that match their preference - pick a random one from all their memories
       } else if (filteredMemories.length === 0) {
         var randOne = Math.floor(Math.random() * memories.length);
-        var chosenMem = memories[randOne]._id;
+        var dailyMem = memories[randOne]._id;
         this.setState({
-          chosenMemory: chosenMem
+          dailyMemory: dailyMem
         });
+        // otherwise - take a random memory from the filtered memories
       } else {
         var rand = Math.floor(Math.random() * filteredMemories.length);
-        var chosenMemory = filteredMemories[rand]._id;
+        var dailyMemory = filteredMemories[rand]._id;
         this.setState({
-          chosenMemory: chosenMemory
+          dailyMemory: dailyMemory
         });
       }
-      console.log(
-        "CHOSEN MEMORY IN THE APP STATE:   ",
-        this.state.chosenMemory
-      );
-      var chosenUserMemory = { chosenMemory: this.state.chosenMemory };
-      api.updateUserMemory(chosenUserMemory).then(res => {
+      // then save the daily memory id to the User's data object
+      var usersDailyMemory = { dailyMemory: this.state.dailyMemory };
+      api.updateUserMemory(usersDailyMemory).then(res => {
         console.log("in the update user api", res);
       });
     });
@@ -67,23 +65,27 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavBar memId={this.state.chosenMemory} />
+        <NavBar dailyMemoryId={this.state.dailyMemory} />
         <Switch>
           <Route
             path="/"
             exact
-            render={props => <Home {...props} testProp={this.testAppMethod} />}
+            render={props => (
+              <Home {...props} dailyMemory={this.usersDailyMemory} />
+            )}
           />
           <Route path="/signup" component={Signup} />
           <Route
             path="/login"
-            render={props => <Login {...props} testProp={this.testAppMethod} />}
+            render={props => (
+              <Login {...props} dailyMemory={this.usersDailyMemory} />
+            )}
           />
           <Route path="/logout" component={Logout} />
           <Route
             path="/profile"
             render={props => (
-              <Profile {...props} testProp={this.testAppMethod} />
+              <Profile {...props} dailyMemory={this.usersDailyMemory} />
             )}
           />
           <Route path="/memory-gallery" component={MemoryGallery} />
@@ -91,10 +93,9 @@ class App extends Component {
           <Route
             path="/add-memory"
             render={props => (
-              <AddMemory {...props} testProp={this.testAppMethod} />
+              <AddMemory {...props} dailyMemory={this.usersDailyMemory} />
             )}
           />
-          {/* <Route path="/demo" component={Demo} /> */}
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

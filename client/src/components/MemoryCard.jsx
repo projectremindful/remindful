@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import api from '../api';
-import QuillTextBox from '../components/QuillTextBox';
-import { Form, Col, Row, Button } from 'reactstrap';
-import Modal from './Modal.js';
+import React, { Component } from "react";
+import api from "../api";
+import QuillTextBox from "../components/QuillTextBox";
+import { Form, Col, Row, Button } from "reactstrap";
+import Modal from "./Modal.js";
 
 export default class MemoryCard extends Component {
   constructor(props) {
@@ -11,9 +11,9 @@ export default class MemoryCard extends Component {
     this.delete = this.delete.bind(this);
     this.state = {
       showModal: false,
-      notes: '',
-      date: '',
-      title: ''
+      notes: "",
+      date: "",
+      title: ""
     };
 
     this.changeText = this.changeText.bind(this);
@@ -27,17 +27,17 @@ export default class MemoryCard extends Component {
 
   handleNotesClick() {
     var updatedNotes = { updatedNotes: this.state.notes };
-    console.log('notes from user', updatedNotes);
+    console.log("notes from user", updatedNotes);
     console.log(this.state.memoryId);
 
     api
       .updateMemory(this.props.memory._id, updatedNotes)
       .then(res => {
-        console.log('memorynotes updated: ', res);
+        console.log("memorynotes updated: ", res);
         // alert("Profile Picture successfully uploaded");
       })
       .catch(err => {
-        console.log('Error while updating memory notes: ', err);
+        console.log("Error while updating memory notes: ", err);
       });
     // console.log(this.state.notes);
   }
@@ -58,8 +58,8 @@ export default class MemoryCard extends Component {
     api
       .delete(this.props.memory._id)
       .then(() => {
-        console.log('Deleted');
-        alert('Your memory was successfully deleted');
+        console.log("Deleted");
+        alert("Your memory was successfully deleted");
         window.location.reload();
       })
       .catch(err => console.log(err));
@@ -73,7 +73,7 @@ export default class MemoryCard extends Component {
     return (
       <div
         style={{
-          margin: '10px'
+          margin: "10px"
         }}
       >
         <div className="show-image">
@@ -83,19 +83,19 @@ export default class MemoryCard extends Component {
             onClick={this.toggleModal}
             alt=""
             style={{
-              height: '380px'
+              height: "380px"
             }}
           />
           <input
             className="hovertitle"
             type="text"
-            value={this.props.memory.title + ' - ' + this.props.memory.date}
+            value={this.props.memory.title + " - " + this.props.memory.date}
             onClick={() => this.delete()}
           />
         </div>
         <Modal show={this.state.showModal} closeCallback={this.toggleModal}>
           <React.Fragment>
-            <Row style={{ margin: '0' }}>
+            <Row style={{ margin: "0" }}>
               <Col sm="12" lg="8">
                 <img
                   src={this.props.memory.imgUrl}
@@ -106,7 +106,7 @@ export default class MemoryCard extends Component {
               <Col
                 sm="12"
                 lg="4"
-                style={{ textAlign: 'center', lineHeight: '1.5' }}
+                style={{ textAlign: "center", lineHeight: "1.5" }}
               >
                 <br />
                 <h2>
@@ -123,7 +123,7 @@ export default class MemoryCard extends Component {
                   />
                   <br />
                   <Button
-                    style={{ backgroundColor: '#24f0a9', border: 'none' }}
+                    style={{ backgroundColor: "#24f0a9", border: "none" }}
                     onClick={this.handleNotesClick}
                   >
                     Add Thoughts
@@ -138,18 +138,13 @@ export default class MemoryCard extends Component {
               value="Delete"
               onClick={() => this.delete()}
             />
-            {/* <Link variant="outline-info" to="/reminder/:id">
-              Set Reminder
-            </Link> */}
           </React.Fragment>
         </Modal>
       </div>
     );
   }
   componentDidMount() {
-    console.log('Trying to get the memory', this.props.memory._id);
     api.getMemory(this.props.memory._id).then(memory => {
-      console.log('memory is:   ', memory);
       this.setState({
         imgUrl: memory.imgUrl,
         date: memory.date,
@@ -162,13 +157,5 @@ export default class MemoryCard extends Component {
         reflection: memory.reflection
       });
     });
-  }
-
-  componentWillUnmount() {
-    console.log(this.state.viewed);
-    // can saveupdate the memory here too to save the view to the database but
-    // this involves editing the api method and call that also updates the notes.
-    // reminderDate: "...",
-    // reminderWeekday: "..."
   }
 }

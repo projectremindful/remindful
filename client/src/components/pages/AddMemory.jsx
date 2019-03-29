@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import ReactDOM from 'react-dom';
 import $ from "jquery";
 import {
   Col,
@@ -12,8 +11,6 @@ import {
   Label,
   Input
 } from "reactstrap";
-
-// import the service file since we need it to send (and get) the data to(from) server
 import api from "../../api";
 
 export default class AddMemory extends Component {
@@ -35,12 +32,14 @@ export default class AddMemory extends Component {
     this.bgImages = [];
   }
 
+  // changes in the text input
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  handlePrefChange(name) {
+  // changes to the memory tags
+  handleTagChange(name) {
     this.setState(prevState => ({
       [name]: !prevState[name]
     }));
@@ -73,7 +72,7 @@ export default class AddMemory extends Component {
       .saveNewMemory(this.state)
       .then(res => {
         console.log("added: ", res);
-        this.props.testProp("...Test from add memory after new memory saved");
+        this.props.dailyMemory();
         setTimeout(
           function() {
             alert("Image successfully uploaded");
@@ -87,6 +86,7 @@ export default class AddMemory extends Component {
       });
   };
 
+  // showing progress bar for fileupload
   progress = () => {
     console.log("Test executed");
     var current_progress = 0;
@@ -101,7 +101,6 @@ export default class AddMemory extends Component {
   };
 
   render() {
-    console.log(this.state.reflection);
     return (
       <div>
         <div className="box-gallery">
@@ -271,7 +270,7 @@ export default class AddMemory extends Component {
                 <Col sm={10}>
                   <CustomInput
                     checked={this.state.reflection}
-                    onChange={e => this.handlePrefChange("reflection")}
+                    onChange={e => this.handleTagChange("reflection")}
                     type="switch"
                     id="reflection"
                     name="reflection"
@@ -279,7 +278,7 @@ export default class AddMemory extends Component {
                   />
                   <CustomInput
                     checked={this.state.nostalgia}
-                    onChange={e => this.handlePrefChange("nostalgia")}
+                    onChange={e => this.handleTagChange("nostalgia")}
                     type="switch"
                     id="nostalgia"
                     name="nostalgia"
@@ -287,7 +286,7 @@ export default class AddMemory extends Component {
                   />
                   <CustomInput
                     checked={this.state.motivation}
-                    onChange={e => this.handlePrefChange("motivation")}
+                    onChange={e => this.handleTagChange("motivation")}
                     type="switch"
                     id="motivation"
                     name="motivation"
@@ -332,16 +331,7 @@ export default class AddMemory extends Component {
   }
 
   componentDidMount() {
-    api.getProfile().then(user => {
-      this.setState({
-        username: user.username,
-        email: user.email,
-        profileUrl: user.profileUrl,
-        preference: user.preference
-        // chosenMemory: user.chosenMemory
-      });
-    });
-
+    // flashing images behind form
     setTimeout(() => {
       this.bgImages = document.querySelectorAll(".mosaic-images img");
     }, 100);

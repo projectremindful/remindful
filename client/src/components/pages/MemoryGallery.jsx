@@ -12,14 +12,12 @@ class MemoryGallery extends Component {
       isMounted: false
     };
   }
+
+  // selected memory opens over the top of the gallery
   selectMemoryCard(memoryId) {
     this.setState({
       selectedMemoryId: memoryId
     });
-  }
-
-  handleClick() {
-    console.log("clicked");
   }
 
   render() {
@@ -41,7 +39,6 @@ class MemoryGallery extends Component {
       </div>
     ) : (
       <div style={{ padding: "100px" }}>
-        Loading...
         <div style={{ margin: "10px" }}>
           <h4>
             {" "}
@@ -74,7 +71,6 @@ class MemoryGallery extends Component {
     api.getUserMemories().then(memories => {
       this.setState({
         memories: memories,
-        isloading: false,
         isMounted: true
       });
     });
